@@ -1,0 +1,98 @@
+package com.tunombre.agustispeaks
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
+import com.tunombre.agustispeaks.navigation.NavGraph
+import com.tunombre.agustispeaks.phrase.LocalPhraseController
+import com.tunombre.agustispeaks.phrase.PhraseController
+import com.tunombre.agustispeaks.tts.LocalTtsManager
+import com.tunombre.agustispeaks.tts.TtsManager
+import com.tunombre.agustispeaks.ui.AppViewModel
+import com.tunombre.agustispeaks.ui.LocalAppViewModel
+import com.tunombre.agustispeaks.ui.LocalAvatarConfig
+import com.tunombre.agustispeaks.ui.LocalUserSettings
+import com.tunombre.agustispeaks.ui.theme.AgustiSpeaksTheme
+
+class MainActivity : ComponentActivity() {
+
+    private lateinit var ttsManager: TtsManager
+
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        ttsManager = TtsManager(applicationContext)
+
+        setContent {
+            val windowSizeClass = calculateWindowSizeClass(this)
+            val navController = rememberNavController()
+            val phraseController: PhraseController = viewModel()
+            val appViewModel: AppViewModel = viewModel()
+
+            val settings by appViewModel.userSettings.collectAsStateWithLifecycle()
+            val avatarConfig by appViewModel.avatarConfig.collectAsStateWithLifecycle()
+            val ttsState by ttsManager.state.collectAsStateWithLifecycle()
+
+            // Aplica la configuración de voz cuando cambia (o cuando el TTS queda listo).
+            LaunchedEffect(
+                ttsState.isReady,
+                settings.voicePitch,
+                settings.voiceRate,
+                settings.voiceVolume,
+                settings.voiceId
+            ) {
+                if (ttsState.isReady) {
+                    ttsManager.applySettings(
+                        pitch = settings.voicePitch,
+                        rate = settings.voiceRate,
+                        volume = settings.voiceVolume,
+                        voiceId = settings.voiceId
+                    )
+                }
+            }
+
+            CompositionLocalProvider(
+                LocalTtsManager provides ttsManager,
+                LocalPhraseController provides phraseController,
+                LocalAppViewModel provides appViewModel,
+                LocalUserSettings provides settings,
+                LocalAvatarConfig provides avatarConfig
+            ) {
+                AgustiSpeaksTheme(
+                    darkTheme = settings.darkMode,
+                    highContrast = settings.highContrast
+                ) {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        NavGraph(
+                            navController = navController,
+                            windowSizeClass = windowSizeClass
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ttsManager.shutdown()
+    }
+}

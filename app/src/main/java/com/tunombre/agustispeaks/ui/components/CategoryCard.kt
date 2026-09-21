@@ -1,0 +1,85 @@
+package com.tunombre.agustispeaks.ui.components
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import com.tunombre.agustispeaks.data.model.Category
+import com.tunombre.agustispeaks.ui.icons.appIcon
+import com.tunombre.agustispeaks.ui.util.hexToColor
+
+/**
+ * Tarjeta de categoría: icono grande + nombre, sobre el color de la categoría.
+ * Al tocarla se abre el detalle de esa categoría.
+ */
+@Composable
+fun CategoryCard(
+    category: Category,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val container = hexToColor(category.colorHex)
+    val content = if (container.luminance() > 0.5f) Color(0xFF1B1B1B) else Color(0xFFFFFFFF)
+
+    Surface(
+        onClick = onClick,
+        shape = MaterialTheme.shapes.large,
+        color = container,
+        contentColor = content,
+        tonalElevation = 2.dp,
+        shadowElevation = 3.dp,
+        // Algo más alta que ancha respecto de antes: los nombres de categoría
+        // son largos ("Partes del cuerpo") y necesitan dos renglones.
+        modifier = modifier.aspectRatio(1.15f)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 8.dp, vertical = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
+        ) {
+            // Mismo criterio que en el pictograma: el nombre se mide primero y
+            // el icono ocupa el espacio que queda, nunca al revés.
+            BoxWithConstraints(
+                modifier = Modifier.weight(1f).fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                val side = minOf(maxWidth, maxHeight)
+                if (side > 14.dp) {
+                    Icon(
+                        imageVector = appIcon(category.icon),
+                        contentDescription = null,
+                        modifier = Modifier.size(side)
+                    )
+                }
+            }
+            Text(
+                text = category.name,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}

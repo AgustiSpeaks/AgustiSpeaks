@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">AgustiSpeaks</string>
+
+    <!-- Barra tipo chat -->
+    <string name="speaker_label">Tú</string>
+    <string name="phrase_hint">Toca un pictograma para empezar a hablar…</string>
+    <string name="cd_speak_phrase">Repetir la frase completa</string>
+    <string name="cd_say_phrase">Decir la frase y ver la animación</string>
+    <string name="cd_clear_phrase">Borrar la frase</string>
+    <string name="cd_back">Volver</string>
+
+    <!-- Pantallas -->
+    <string name="place_selection_title">¿Dónde estás?</string>
+    <string name="board_title">Tablero</string>
+    <string name="recents_title">Recientes</string>
+    <string name="settings_title">Ajustes</string>
+
+    <string name="cd_open_recents">Abrir recientes</string>
+    <string name="cd_open_settings">Abrir ajustes</string>
+    <string name="cd_clear_recents">Borrar recientes</string>
+    <string name="recents_empty">Todavía no dijiste ninguna frase</string>
+
+    <string name="screen_under_construction">Pantalla en construcción</string>
+
+    <string name="place_selection_subtitle">Elige el lugar donde estás</string>
+
+    <string name="tab_words">Palabras</string>
+    <string name="tab_categories">Categorías</string>
+</resources>

@@ -1,0 +1,14 @@
+# Los finales de línea se normalizan a LF dentro del repositorio y se entregan
+# en el formato de cada plataforma al trabajar. Sin esto, el mismo archivo puede
+# tener hash distinto en dos máquinas, y la tesis cita hashes y commits.
+* text=auto
+
+# Estos dos son ejecutables y su final de línea no es negociable.
+*.bat  text eol=crlf
+gradlew text eol=lf
+
+# Binarios: que git no intente tocarlos.
+*.jar binary
+*.png binary
+*.webp binary
+*.gif binary

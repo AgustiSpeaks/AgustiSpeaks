@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Tema mínimo que se aplica a la ventana antes de que cargue Compose.
+      El sistema de diseño real (Material 3) vive en ui/theme/Theme.kt.
+    -->
+    <style name="Theme.AgustiSpeaks" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/app_window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+# Con barra al principio solo se ignora el build de la raíz, y el pesado es
+# `app/build`: miles de archivos generados, más el catálogo volcado. Sin barra
+# al principio y con barra al final, cubre cualquier módulo, presente o futuro.
+/build
+build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.hprof
+# Caché de sesión del compilador de Kotlin 2.x, en la raíz del proyecto.
+.kotlin
