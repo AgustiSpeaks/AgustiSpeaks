@@ -28,14 +28,25 @@ regenerara con las 88 acciones. Esa prueba **todavía no se corrió**. Consecuen
 - `PoseCatalogDumpTest` tiene que ser la primera prueba que corras, antes que
   cualquier otra del plan.
 
-### 0.2 No hay repositorio git
+### 0.2 El historial de git arranca hoy, no antes
 
-No existe `.git` en `C:\Users\Felip\AgustiSpeaks` ni por encima. No hay historial,
-no hay commits, no hay forma de reconstruir qué versión tenía qué cifra.
+Cuando escribí este documento no existía `.git` en el proyecto. **Se inicializó el
+2026-09-20**, después de esa lectura, con git 2.55.0:
 
-Esto afecta directamente a dos cosas del plan: la pregunta de 279 contra 291
-(sección 4 de este documento) y la columna "commit" de la bitácora del Apéndice G,
-que va a tener que ser otra cosa.
+| | |
+|---|---|
+| Commit inicial | `a8f137e00bddaec073e5d5a102545592fd963acb` |
+| Rama | `main` |
+| Autor | FelipeD05M \<felipeandresdume@gmail.com\> |
+| Archivos versionados | 88 |
+
+Lo que esto **sí** resuelve: de acá en adelante cada medición puede citarse contra
+un commit, y la columna "commit" de la bitácora del Apéndice G tiene contenido real.
+
+Lo que **no** resuelve: el historial no se inventa hacia atrás. Todo el desarrollo
+anterior a hoy —incluido el refactor del catálogo— queda comprimido en ese único
+commit inicial. La pregunta de 279 contra 291 (sección 4) sigue sin poder
+responderse por historial, y la respuesta de esa sección no cambia.
 
 ### 0.3 No existe `ValidacionTest.kt`, ni `docs/`, ni `androidTest/`
 
@@ -257,9 +268,10 @@ trabajo de mover las otras 114 no se hizo.
 
 ### 4.1 Lo que no se puede determinar
 
-**No hay git en el proyecto.** No puedo reconstruir qué versión tenía 279 y cuál
-291 a partir del historial, porque no hay historial. Lo dejo dicho tal cual, que es
-lo que pediste.
+**El historial de git empieza hoy** (ver sección 0.2). No puedo reconstruir qué
+versión tenía 279 y cuál 291, porque no existe historial anterior al commit
+inicial: todo el desarrollo previo entró comprimido en un solo commit. Lo dejo
+dicho tal cual, que es lo que pediste.
 
 ### 4.2 Lo que sí encontré, y qué vale como evidencia
 
@@ -467,4 +479,4 @@ tipeo en un JSON.
 | Versión exacta de Material 3 | `gradlew app:dependencies` en la Terminal de Android Studio |
 | Fotogramas del catálogo de 88 acciones | `PoseCatalogDumpTest` (Fase 2) |
 | Tamaño en bytes del catálogo actual | idem |
-| Cuál versión tenía 279 fotogramas | **no determinable**: no hay git |
+| Cuál versión tenía 279 fotogramas | **no determinable**: el historial arranca hoy |
