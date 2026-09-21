@@ -1,0 +1,1218 @@
+[
+  {
+    "id": "idle",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0 },
+      { "t": 0, "eyeClose": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.22 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.22 },
+      { "t": 0.8999, "ease": "lineal", "eyeClose": 0 },
+      { "t": 1, "eyeClose": 1 }
+    ]
+  },
+  {
+    "id": "talk",
+    "loopMillis": 1400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "jaw": 0.25, "armSwing": 0, "armL": "SWING", "armR": "SWING", "fx": "SPEECH" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.125, "ease": "entrada", "jaw": 0.85 },
+      { "t": 0.25, "bob": 0.12, "armSwing": 0.2 },
+      { "t": 0.25, "ease": "salida", "jaw": 0.25 },
+      { "t": 0.375, "ease": "entrada", "jaw": 0.85 },
+      { "t": 0.5, "ease": "salida", "jaw": 0.25 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.625, "ease": "entrada", "jaw": 0.85 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.12, "armSwing": -0.2 },
+      { "t": 0.75, "ease": "salida", "jaw": 0.25 },
+      { "t": 0.875, "ease": "entrada", "jaw": 0.85 }
+    ]
+  },
+  {
+    "id": "want",
+    "loopMillis": 1500,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0, "reach": 0.5, "fxPulse": 0.82, "armR": "REACH_FWD", "fx": "ARROW_OUT" },
+      { "t": 0, "ease": "salida", "jaw": 0 },
+      { "t": 0.125, "ease": "entrada", "jaw": 0.35 },
+      { "t": 0.25, "ease": "salida", "jaw": 0 },
+      { "t": 0.375, "ease": "entrada", "jaw": 0.35 },
+      { "t": 0.5, "lean": 0.16, "reach": 1, "fxPulse": 1 },
+      { "t": 0.5, "ease": "salida", "jaw": 0 },
+      { "t": 0.625, "ease": "entrada", "jaw": 0.35 },
+      { "t": 0.75, "ease": "salida", "jaw": 0 },
+      { "t": 0.875, "ease": "entrada", "jaw": 0.35 }
+    ]
+  },
+  {
+    "id": "more",
+    "loopMillis": 1400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "reach": 0.3, "fxPulse": 0.82, "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "expression": "HAPPY", "fx": "PLUS" },
+      { "t": 0.5, "reach": 0.95, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "less",
+    "loopMillis": 1400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "reach": 0.95, "fxPulse": 0.82, "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "fx": "MINUS" },
+      { "t": 0.5, "reach": 0.3, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "give",
+    "loopMillis": 1700,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0, "reach": 0.45, "fxPulse": 0.82, "armR": "REACH_FWD", "fx": "ARROW_OUT" },
+      { "t": 0.5, "lean": 0.2, "reach": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "take",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0, "reach": 1, "fxPulse": 0.82, "armR": "REACH_FWD", "fx": "ARROW_IN" },
+      { "t": 0.5, "lean": -0.16, "reach": 0, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "eat",
+    "loopMillis": 1500,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "comer",
+    "fotogramas": []
+  },
+  {
+    "id": "drink",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 0, "reach": 0.35, "fxPulse": 0.82, "armR": "TO_TARGET", "prop": "CUP", "handTarget": "MOUTH" },
+      { "t": 0.5, "headTilt": -16, "reach": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "go",
+    "loopMillis": 1000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "legSwing": 0, "armSwing": 0, "stance": "WALK", "armL": "SWING", "armR": "SWING", "fx": "SPEED" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.5 },
+      { "t": 0.25, "lean": 0.07, "legSwing": 1, "armSwing": -1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.5, "lean": -0.07, "legSwing": -1, "armSwing": 1 }
+    ]
+  },
+  {
+    "id": "run",
+    "loopMillis": 650,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "legSwing": 0, "armSwing": 0, "stance": "RUN", "armL": "SWING", "armR": "SWING", "expression": "HAPPY", "fx": "SPEED" },
+      { "t": 0, "jaw": 0.45, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.85 },
+      { "t": 0.25, "lean": 0.12, "legSwing": 1, "armSwing": -1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.85, "lean": -0.12, "legSwing": -1, "armSwing": 1 }
+    ]
+  },
+  {
+    "id": "jump",
+    "loopMillis": 750,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "bob": 0, "fxPulse": 0.82, "stance": "JUMP", "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "fx": "JUMP_ARC" },
+      { "t": 0, "ease": "entrada", "crouch": 1 },
+      { "t": 0.03711, "ease": "lineal", "crouch": 0.96212 },
+      { "t": 0.05298, "ease": "lineal", "crouch": 0.92315 },
+      { "t": 0.07568, "ease": "lineal", "crouch": 0.84467 },
+      { "t": 0.0918, "ease": "lineal", "crouch": 0.77351 },
+      { "t": 0.1084, "ease": "lineal", "crouch": 0.68764 },
+      { "t": 0.13135, "ease": "lineal", "crouch": 0.54969 },
+      { "t": 0.15552, "ease": "lineal", "crouch": 0.38315 },
+      { "t": 0.17505, "ease": "lineal", "crouch": 0.2352 },
+      { "t": 0.20142, "ease": "lineal", "bob": 0 },
+      { "t": 0.20142, "crouch": 0.02076 },
+      { "t": 0.20166, "crouch": 0 },
+      { "t": 0.29395, "ease": "lineal", "bob": 0.62988 },
+      { "t": 0.32739, "ease": "lineal", "bob": 0.84407 },
+      { "t": 0.35669, "ease": "lineal", "bob": 1.01339 },
+      { "t": 0.37891, "ease": "lineal", "bob": 1.12667 },
+      { "t": 0.40015, "ease": "lineal", "bob": 1.22051 },
+      { "t": 0.43018, "ease": "salida", "bob": 1.32583 },
+      { "t": 0.5, "ease": "entrada", "bob": 1.43 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.56958, "ease": "lineal", "bob": 1.32654 },
+      { "t": 0.59961, "ease": "lineal", "bob": 1.2215 },
+      { "t": 0.62085, "ease": "lineal", "bob": 1.12783 },
+      { "t": 0.64307, "ease": "lineal", "bob": 1.01471 },
+      { "t": 0.67261, "ease": "lineal", "bob": 0.84407 },
+      { "t": 0.70605, "ease": "lineal", "bob": 0.62988 },
+      { "t": 0.79834, "crouch": 0 },
+      { "t": 0.79858, "bob": 0 },
+      { "t": 0.79858, "ease": "lineal", "crouch": 0.02076 },
+      { "t": 0.82495, "ease": "lineal", "crouch": 0.2352 },
+      { "t": 0.84448, "ease": "lineal", "crouch": 0.38315 },
+      { "t": 0.86865, "ease": "lineal", "crouch": 0.54969 },
+      { "t": 0.8916, "ease": "lineal", "crouch": 0.68764 },
+      { "t": 0.9082, "ease": "lineal", "crouch": 0.77351 },
+      { "t": 0.92432, "ease": "lineal", "crouch": 0.84467 },
+      { "t": 0.94702, "ease": "lineal", "crouch": 0.92315 },
+      { "t": 0.96289, "ease": "salida", "crouch": 0.96212 }
+    ]
+  },
+  {
+    "id": "dance",
+    "loopMillis": 1000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "headTilt": 0, "armSwing": 0, "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "fx": "MUSIC" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.125, "lean": 0.4 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.6 },
+      { "t": 0.25, "headTilt": 8, "armSwing": 1 },
+      { "t": 0.375, "lean": -0.4 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.625, "lean": 0.4 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.6, "headTilt": -8, "armSwing": -1 },
+      { "t": 0.875, "ease": "entrada", "lean": -0.4 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "sit",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "stance": "SIT", "prop": "CHAIR" },
+      { "t": 0, "crouch": 1, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.04 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.04 }
+    ]
+  },
+  {
+    "id": "stand",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0 },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.12 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.12 }
+    ]
+  },
+  {
+    "id": "sleep",
+    "loopMillis": 3800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "stance": "LIE", "prop": "BED", "sleeping": true },
+      { "t": 0, "eyeClose": 1, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.06 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.06 }
+    ]
+  },
+  {
+    "id": "tired",
+    "loopMillis": 2800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "eyeClose": 0.55, "expression": "SAD" },
+      { "t": 0, "headTilt": 14, "crouch": 0.12, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.1, "eyeClose": 0.9 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.1, "eyeClose": 0.2 }
+    ]
+  },
+  {
+    "id": "play",
+    "loopMillis": 900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0.25, "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "prop": "BALL", "fx": "SPARKLE" },
+      { "t": 0, "reach": 0.6, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 1 },
+      { "t": 0.5, "ease": "salida", "bob": 0.25 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 1 }
+    ]
+  },
+  {
+    "id": "look",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0.12, "reach": 1, "fxPulse": 0.82, "armR": "POINT_FWD", "expression": "SURPRISED", "fx": "TARGET" },
+      { "t": 0, "ease": "salida", "headTilt": 0 },
+      { "t": 0.25, "headTilt": 9 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -9 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "point",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0.14, "reach": 1, "fxPulse": 0.82, "armR": "POINT_FWD", "fx": "TARGET" },
+      { "t": 0, "ease": "salida", "headTilt": 0 },
+      { "t": 0.25, "headTilt": 6 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -6 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "read",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 12, "eyeClose": 0.3, "reach": 0.75, "fxPulse": 0.82, "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "prop": "BOOK" },
+      { "t": 0.5, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "scribble",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "dibujar",
+    "fotogramas": []
+  },
+  {
+    "id": "listen",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "escuchar",
+    "fotogramas": []
+  },
+  {
+    "id": "sing",
+    "loopMillis": 1200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "headTilt": 0, "jaw": 0.4, "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "fx": "MUSIC" },
+      { "t": 0, "reach": 0.7, "fxPulse": 0.82 },
+      { "t": 0.25, "headTilt": 8 },
+      { "t": 0.25, "ease": "entrada", "jaw": 1 },
+      { "t": 0.5, "ease": "salida", "jaw": 0.4 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -8, "jaw": 1 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "wash_hands",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "bob": 0, "headTilt": 9, "crouch": 0.12, "reach": 0.18, "fxPulse": 0.82, "armL": "RUB", "armR": "RUB", "prop": "SINK", "fx": "BUBBLES" },
+      { "t": 0.16675, "bob": 0.05, "reach": 0.82 },
+      { "t": 0.33325, "bob": 0, "reach": 0.18 },
+      { "t": 0.5, "bob": 0.05, "reach": 0.82, "fxPulse": 1 },
+      { "t": 0.66675, "bob": 0, "reach": 0.18 },
+      { "t": 0.83325, "bob": 0.05, "reach": 0.82 }
+    ]
+  },
+  {
+    "id": "brush_teeth",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "jaw": 0.35, "reach": 0.95, "fxPulse": 0.82, "armR": "TO_TARGET", "prop": "TOOTHBRUSH", "handTarget": "MOUTH" },
+      { "t": 0.16675, "jaw": 0.63 },
+      { "t": 0.33325, "jaw": 0.35 },
+      { "t": 0.5, "jaw": 0.63, "fxPulse": 1 },
+      { "t": 0.66675, "jaw": 0.35 },
+      { "t": 0.83325, "jaw": 0.63 }
+    ]
+  },
+  {
+    "id": "bathe",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "reach": 0.7, "fxPulse": 0.82, "armL": "TO_TARGET", "armR": "TO_TARGET", "expression": "HAPPY", "prop": "SHOWER", "fx": "BUBBLES", "handTarget": "HEAD" },
+      { "t": 0.16675, "reach": 0.8 },
+      { "t": 0.33325, "reach": 0.7 },
+      { "t": 0.5, "reach": 0.8, "fxPulse": 1 },
+      { "t": 0.66675, "reach": 0.7 },
+      { "t": 0.83325, "reach": 0.8 }
+    ]
+  },
+  {
+    "id": "comb",
+    "loopMillis": 1400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "headTilt": 0, "reach": 0.75, "armR": "TO_TARGET", "prop": "COMB", "handTarget": "HAIR" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "headTilt": -4, "reach": 1 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": 4, "reach": 0.5 }
+    ]
+  },
+  {
+    "id": "toilet",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "headTilt": 0, "stance": "SIT", "expression": "NEUTRAL", "prop": "TOILET" },
+      { "t": 0, "crouch": 0.9, "fxPulse": 0.82 },
+      { "t": 0.25, "headTilt": 5 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -5 }
+    ]
+  },
+  {
+    "id": "help",
+    "loopMillis": 1100,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "armL": "WAVE", "armR": "WAVE", "expression": "SAD", "fx": "EXCLAIM" },
+      { "t": 0, "reach": 0.6, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.2 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.2 }
+    ]
+  },
+  {
+    "id": "stop",
+    "loopMillis": 2200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": -0.16, "reach": 1, "fxPulse": 0.82, "armR": "PALM_OUT", "expression": "NEUTRAL", "fx": "STOP_SIGN" },
+      { "t": 0.5, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "wait",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "armR": "FINGER_UP", "expression": "NEUTRAL", "fx": "CLOCK" },
+      { "t": 0, "reach": 0.7, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.06, "headTilt": 4 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.06, "headTilt": -4 }
+    ]
+  },
+  {
+    "id": "tap",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0, "headTilt": 3, "reach": 0.62, "fxPulse": 0.82, "armR": "POINT_FWD", "expression": "NEUTRAL" },
+      { "t": 0.25, "lean": 0.08, "reach": 1 },
+      { "t": 0.5, "lean": 0, "reach": 0.62, "fxPulse": 1 },
+      { "t": 0.75, "lean": 0.08, "reach": 1 }
+    ]
+  },
+  {
+    "id": "search",
+    "loopMillis": 2200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "lean": 0, "headTilt": 0, "armR": "TO_TARGET", "expression": "SURPRISED", "fx": "QUESTION", "handTarget": "FOREHEAD" },
+      { "t": 0, "reach": 0.95, "fxPulse": 0.82 },
+      { "t": 0.25, "lean": 0.16, "headTilt": 18 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "lean": -0.16, "headTilt": -18 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "hug",
+    "loopMillis": 1900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "headTilt": 0, "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "expression": "HAPPY", "fx": "HEART" },
+      { "t": 0, "eyeClose": 0.4, "reach": 0.75, "fxPulse": 0.82 },
+      { "t": 0.25, "headTilt": 9 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -9 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "kiss",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 0, "eyeClose": 0.5, "reach": 0, "fxPulse": 0.82, "armR": "TO_TARGET", "expression": "HAPPY", "fx": "HEART", "handTarget": "MOUTH" },
+      { "t": 0.5, "headTilt": 6, "reach": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "hello",
+    "loopMillis": 900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "reach": 0.5, "armR": "WAVE", "expression": "HAPPY" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.1 },
+      { "t": 0.25, "headTilt": 5, "reach": 1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.1, "headTilt": -5, "reach": 0 }
+    ]
+  },
+  {
+    "id": "bye",
+    "loopMillis": 900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "reach": 0.5, "armR": "WAVE", "expression": "HAPPY" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.1 },
+      { "t": 0.25, "headTilt": 5, "reach": 1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.1, "headTilt": -5, "reach": 0 }
+    ]
+  },
+  {
+    "id": "thanks",
+    "loopMillis": 2200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 0, "eyeClose": 0, "crouch": 0, "reach": 0, "fxPulse": 0.82, "armR": "TO_TARGET", "expression": "HAPPY", "fx": "HEART", "handTarget": "CHEST" },
+      { "t": 0.5, "headTilt": 16, "eyeClose": 0.5, "crouch": 0.1, "reach": 0.75, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "sorry",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 0, "eyeClose": 0.4, "crouch": 0, "reach": 0.7, "fxPulse": 0.82, "armR": "TO_TARGET", "expression": "SAD", "handTarget": "CHEST" },
+      { "t": 0.5, "headTilt": 16, "crouch": 0.15, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "please",
+    "loopMillis": 2200,
+    "prioridad": 1,
+    "palabras": [],
+    "raices": ["por favor"],
+    "fotogramas": [
+      { "t": 0, "headTilt": 0, "eyeClose": 0.35, "crouch": 0, "reach": 0.95, "fxPulse": 0.82, "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "expression": "SAD" },
+      { "t": 0.5, "headTilt": 12, "crouch": 0.12, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "good",
+    "loopMillis": 1500,
+    "prioridad": 2,
+    "palabras": ["bien"],
+    "raices": ["estoy bien", "muy bien", "todo bien"],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0.25, "armL": "THUMB_UP", "armR": "THUMB_UP", "expression": "HAPPY", "fx": "SPARKLE" },
+      { "t": 0, "reach": 1, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.85 },
+      { "t": 0.5, "ease": "salida", "bob": 0.25 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.85 }
+    ]
+  },
+  {
+    "id": "bad",
+    "loopMillis": 2600,
+    "prioridad": 3,
+    "palabras": ["mal"],
+    "raices": ["estoy mal", "me siento mal"],
+    "fotogramas": [
+      { "t": 0, "bob": 0, "headTilt": 12, "tears": 0, "crouch": 0.32, "reach": 1, "fxPulse": 0.82, "armL": "THUMB_DOWN", "armR": "THUMB_DOWN", "expression": "SAD" },
+      { "t": 0.5, "bob": -0.12, "tears": 0.25, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "ask",
+    "loopMillis": 2000,
+    "prioridad": 0,
+    "palabras": [],
+    "raices": ["como estas", "como te sientes", "como andas", "como te va", "que tal"],
+    "fotogramas": [
+      { "t": 0, "bob": 0, "reach": 0.55, "fxPulse": 0.82, "armL": "PALM_OUT", "armR": "PALM_OUT", "expression": "SURPRISED", "fx": "QUESTION" },
+      { "t": 0, "ease": "salida", "headTilt": 0 },
+      { "t": 0.25, "headTilt": 12 },
+      { "t": 0.5, "bob": 0.14, "reach": 0.9, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -12 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "yes",
+    "loopMillis": 1200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": -7, "reach": 1, "fxPulse": 0.82, "armR": "THUMB_UP", "expression": "HAPPY", "fx": "CHECK" },
+      { "t": 0.5, "headTilt": 11, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "no",
+    "loopMillis": 1000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "lean": 0, "headTilt": 0, "armR": "THUMB_DOWN", "fx": "CROSS" },
+      { "t": 0, "reach": 1, "fxPulse": 0.82 },
+      { "t": 0.25, "lean": 0.42, "headTilt": -7 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "lean": -0.42, "headTilt": 7 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "open",
+    "loopMillis": 1500,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0, "reach": 0.88, "propPhase": 0, "fxPulse": 0.82, "armR": "REACH_FWD", "prop": "DOOR", "fx": "ARROW_OUT" },
+      { "t": 0.5, "lean": 0.1, "reach": 1, "propPhase": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "close",
+    "loopMillis": 1500,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": 0, "reach": 1, "propPhase": 1, "fxPulse": 0.82, "armR": "REACH_FWD", "prop": "DOOR", "fx": "ARROW_IN" },
+      { "t": 0.5, "lean": -0.08, "reach": 0.88, "propPhase": 0, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "hurt",
+    "loopMillis": 1300,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "usaParteDelCuerpo": true,
+    "procedural": "dolor",
+    "fotogramas": []
+  },
+  {
+    "id": "touch_part",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "usaParteDelCuerpo": true,
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "headTilt": 0, "armR": "POINT_AT", "expression": "NEUTRAL", "handTarget": "HEAD", "highlight": "HEAD" },
+      { "t": 0, "reach": 0.6, "fxPulse": 0.82 },
+      { "t": 0.25, "headTilt": 4 },
+      { "t": 0.5, "reach": 0.75, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -4 }
+    ]
+  },
+  {
+    "id": "cold",
+    "loopMillis": 900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "frio",
+    "fotogramas": []
+  },
+  {
+    "id": "hot",
+    "loopMillis": 900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "headTilt": 0, "reach": 0.35, "armR": "WAVE", "expression": "SAD", "fx": "SWEAT" },
+      { "t": 0, "jaw": 0.3, "fxPulse": 0.82 },
+      { "t": 0.25, "headTilt": 8, "reach": 1 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -8, "reach": -0.3 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "fever",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "eyeClose": 0.45, "crouch": 0.1, "reach": 1, "fxPulse": 0.82, "armR": "TO_TARGET", "expression": "HURT", "prop": "THERMOMETER", "fx": "SWEAT", "handTarget": "FOREHEAD" },
+      { "t": 0.5, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "sick",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "descompuesto",
+    "fotogramas": []
+  },
+  {
+    "id": "medicine",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "remedio",
+    "fotogramas": []
+  },
+  {
+    "id": "injection",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "eyeClose": 0.5, "reach": 1, "fxPulse": 0.82, "armR": "TO_TARGET", "expression": "HURT", "prop": "SYRINGE", "handTarget": "ARM", "highlight": "ARM" },
+      { "t": 0.5, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "happy",
+    "loopMillis": 1000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0.2, "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "fx": "SPARKLE" },
+      { "t": 0, "reach": 0.65, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 1 },
+      { "t": 0.5, "ease": "salida", "bob": 0.2 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 1 }
+    ]
+  },
+  {
+    "id": "laugh",
+    "loopMillis": 900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "jaw": 0.45, "armR": "TO_TARGET", "expression": "HAPPY", "fx": "SPARKLE", "handTarget": "BELLY" },
+      { "t": 0, "headTilt": -10, "reach": 0.7, "fxPulse": 0.82 },
+      { "t": 0.125, "ease": "entrada", "jaw": 1 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.8 },
+      { "t": 0.25, "ease": "salida", "jaw": 0.45 },
+      { "t": 0.375, "ease": "entrada", "jaw": 1 },
+      { "t": 0.5, "ease": "salida", "bob": 0, "jaw": 0.45 },
+      { "t": 0.5, "headTilt": -15, "fxPulse": 1 },
+      { "t": 0.625, "ease": "entrada", "jaw": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.8 },
+      { "t": 0.75, "ease": "salida", "jaw": 0.45 },
+      { "t": 0.875, "ease": "entrada", "jaw": 1 }
+    ]
+  },
+  {
+    "id": "sad",
+    "loopMillis": 3000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "bob": 0, "headTilt": 12, "tears": 0, "crouch": 0.28, "fxPulse": 0.82, "expression": "SAD" },
+      { "t": 0.5, "bob": -0.14, "tears": 0.5, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "cry",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 10, "jaw": 0.3, "tears": 0, "crouch": 0.3, "reach": 0.72, "fxPulse": 0.82, "armL": "TO_TARGET", "armR": "TO_TARGET", "expression": "SAD", "handTarget": "EYE" },
+      { "t": 0.5, "tears": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "angry",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "armL": "ON_HIP", "armR": "ON_HIP", "expression": "ANGRY", "fx": "ANGER" },
+      { "t": 0, "lean": 0.1, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.05, "headTilt": 2 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.05, "headTilt": -2 }
+    ]
+  },
+  {
+    "id": "nervous",
+    "loopMillis": 1400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "nervioso",
+    "fotogramas": []
+  },
+  {
+    "id": "scared",
+    "loopMillis": 650,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "miedo",
+    "fotogramas": []
+  },
+  {
+    "id": "bored",
+    "loopMillis": 3400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 16, "eyeClose": 0.5, "crouch": 0.12, "reach": 1, "fxPulse": 0.82, "armR": "TO_TARGET", "handTarget": "CHEEK" },
+      { "t": 0.5, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "calm",
+    "loopMillis": 3000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "expression": "HAPPY", "fx": "SPARKLE" },
+      { "t": 0, "eyeClose": 0.45, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.18 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.18 }
+    ]
+  },
+  {
+    "id": "surprised",
+    "loopMillis": 1500,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "armR": "TO_TARGET", "expression": "SURPRISED", "fx": "EXCLAIM", "handTarget": "MOUTH" },
+      { "t": 0, "jaw": 0.5, "reach": 0.75, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.12 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.12 }
+    ]
+  },
+  {
+    "id": "dress",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "usaParteDelCuerpo": true,
+    "fotogramas": [
+      { "t": 0, "headTilt": -5, "reach": 0.3, "fxPulse": 0.82, "armL": "TO_TARGET", "armR": "TO_TARGET", "expression": "HAPPY", "prop": "SHIRT", "handTarget": "CHEST" },
+      { "t": 0.5, "reach": 0.78, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "come",
+    "loopMillis": 1300,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "armR": "REACH_FWD", "expression": "HAPPY", "fx": "ARROW_IN" },
+      { "t": 0, "lean": 0, "reach": 1, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.08, "headTilt": 5 },
+      { "t": 0.5, "lean": -0.12, "reach": 0.3, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.08, "headTilt": -5 }
+    ]
+  },
+  {
+    "id": "done",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "bob": 0, "lean": 0, "headTilt": 0, "reach": 0.25, "fxPulse": 0.82, "armL": "PALM_OUT", "armR": "PALM_OUT", "expression": "HAPPY", "fx": "CHECK" },
+      { "t": 0.5, "bob": 0.12, "lean": -0.08, "headTilt": -6, "reach": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "pay",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "armR": "REACH_FWD", "expression": "HAPPY", "prop": "MONEY", "fx": "ARROW_OUT" },
+      { "t": 0, "lean": 0, "reach": 0.4, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.06, "headTilt": 4 },
+      { "t": 0.5, "lean": 0.18, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.06, "headTilt": -4 }
+    ]
+  },
+  {
+    "id": "shop",
+    "loopMillis": 1400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "legSwing": 0, "stance": "WALK", "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "expression": "HAPPY", "prop": "CART" },
+      { "t": 0, "lean": 0.14, "reach": 0.92, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.35 },
+      { "t": 0.25, "legSwing": 1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.35, "legSwing": -1 }
+    ]
+  },
+  {
+    "id": "carry",
+    "loopMillis": 1200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "legSwing": 0, "armSwing": 0, "stance": "WALK", "armL": "SWING", "expression": "HAPPY", "prop": "BAG" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.45 },
+      { "t": 0.25, "lean": 0.05, "legSwing": 1, "armSwing": -1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.45, "lean": -0.05, "legSwing": -1, "armSwing": 1 }
+    ]
+  },
+  {
+    "id": "toys",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "armL": "TO_TARGET", "armR": "TO_TARGET", "expression": "HAPPY", "prop": "TOYS", "fx": "SPARKLE", "handTarget": "FOOT" },
+      { "t": 0, "headTilt": 14, "crouch": 0.72, "reach": 0.5, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.05 },
+      { "t": 0.5, "reach": 0.68, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.05 }
+    ]
+  },
+  {
+    "id": "blocks",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 12, "crouch": 0.58, "reach": 0.4, "fxPulse": 0.82, "armR": "TO_TARGET", "expression": "HAPPY", "prop": "BLOCKS", "handTarget": "BELLY" },
+      { "t": 0.5, "reach": 0.9, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "cradle",
+    "loopMillis": 2600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "headTilt": 0, "armL": "HOLD_BOTH", "armR": "HOLD_BOTH", "expression": "HAPPY", "prop": "DOLL", "fx": "HEART" },
+      { "t": 0, "eyeClose": 0.35, "reach": 0.55, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.08, "lean": 0.16, "headTilt": 10 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.08, "lean": -0.16, "headTilt": -10 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "swing",
+    "loopMillis": 2200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "headTilt": 0, "stance": "SIT", "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "prop": "SWING", "fx": "SPARKLE" },
+      { "t": 0, "crouch": 0.85, "reach": 0.5, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.14 },
+      { "t": 0.25, "lean": 0.34, "headTilt": -12 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.14, "lean": -0.34, "headTilt": 12 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "slide",
+    "loopMillis": 1600,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "lean": -0.24, "headTilt": -8, "jaw": 0.35, "crouch": 0.9, "reach": 0.75, "fxPulse": 0.82, "stance": "SIT", "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "prop": "SLIDE", "fx": "SPEED" },
+      { "t": 0.5, "jaw": 0.55, "reach": 1, "fxPulse": 1 }
+    ]
+  },
+  {
+    "id": "show",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "armR": "WAVE", "expression": "HAPPY", "fx": "TARGET" },
+      { "t": 0, "lean": -0.06, "headTilt": -9, "reach": 0.55, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.07 },
+      { "t": 0.5, "headTilt": -14, "reach": 0.8, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.07 }
+    ]
+  },
+  {
+    "id": "write",
+    "loopMillis": 2200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "headTilt": 17, "eyeClose": 0.3, "crouch": 1, "fxPulse": 0.82, "stance": "SIT", "armR": "TO_TARGET", "expression": "NEUTRAL", "prop": "DESK", "handTarget": "BELLY" },
+      { "t": 0, "ease": "salida", "reach": 0.78 },
+      { "t": 0.04175, "reach": 0.92 },
+      { "t": 0.125, "reach": 0.64 },
+      { "t": 0.20825, "reach": 0.92 },
+      { "t": 0.29175, "reach": 0.64 },
+      { "t": 0.375, "reach": 0.92 },
+      { "t": 0.45825, "reach": 0.64 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.54175, "reach": 0.92 },
+      { "t": 0.625, "reach": 0.64 },
+      { "t": 0.70825, "reach": 0.92 },
+      { "t": 0.79175, "reach": 0.64 },
+      { "t": 0.875, "reach": 0.92 },
+      { "t": 0.95825, "ease": "entrada", "reach": 0.64 }
+    ]
+  },
+  {
+    "id": "now",
+    "loopMillis": 1800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "armR": "POINT_FWD", "expression": "NEUTRAL", "prop": "CLOCK", "fx": "EXCLAIM" },
+      { "t": 0, "lean": 0.14, "headTilt": 6, "reach": 1, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.09 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.09 }
+    ]
+  },
+  {
+    "id": "later",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "despues",
+    "fotogramas": []
+  },
+  {
+    "id": "before",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "procedural": "antes",
+    "fotogramas": []
+  },
+  {
+    "id": "day",
+    "loopMillis": 2000,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0.18, "armL": "WAVE", "armR": "WAVE", "expression": "HAPPY", "prop": "SUN", "fx": "SPARKLE" },
+      { "t": 0, "headTilt": -6, "reach": 0.7, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.4 },
+      { "t": 0.5, "ease": "salida", "bob": 0.18 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.4 }
+    ]
+  },
+  {
+    "id": "night",
+    "loopMillis": 3200,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "expression": "NEUTRAL", "prop": "MOON" },
+      { "t": 0, "headTilt": 12, "jaw": 0, "eyeClose": 0.55, "crouch": 0.1, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.1 },
+      { "t": 0.5, "jaw": 0.3, "eyeClose": 0.8, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.1 }
+    ]
+  },
+  {
+    "id": "rain",
+    "loopMillis": 2400,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "lean": 0, "armL": "TO_TARGET", "armR": "TO_TARGET", "expression": "SAD", "prop": "RAIN", "handTarget": "HEAD" },
+      { "t": 0, "headTilt": 8, "crouch": 0.26, "reach": 0.66, "fxPulse": 0.82 },
+      { "t": 0.25, "lean": 0.06 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "lean": -0.06 }
+    ]
+  },
+  {
+    "id": "cloudy",
+    "loopMillis": 2800,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "armR": "POINT_FWD", "expression": "NEUTRAL", "prop": "CLOUDY" },
+      { "t": 0, "lean": -0.08, "headTilt": -16, "reach": 0.35, "fxPulse": 0.82 },
+      { "t": 0.25, "bob": 0.1 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": -0.1 }
+    ]
+  },
+  {
+    "id": "with",
+    "loopMillis": 1900,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "headTilt": 0, "armR": "WAVE", "expression": "HAPPY", "prop": "MOM", "fx": "HEART" },
+      { "t": 0, "lean": 0.1, "reach": 0.45, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.1 },
+      { "t": 0.25, "headTilt": 7 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "reach": 1, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.1, "headTilt": -7 },
+      { "t": 1, "headTilt": 0 }
+    ]
+  },
+  {
+    "id": "go_to",
+    "loopMillis": 1100,
+    "prioridad": 100,
+    "palabras": [],
+    "raices": [],
+    "fotogramas": [
+      { "t": 0, "ease": "salida", "bob": 0, "lean": 0, "legSwing": 0, "armSwing": 0, "stance": "WALK", "armL": "SWING", "armR": "SWING", "expression": "HAPPY", "prop": "HOUSE", "fx": "ARROW_OUT" },
+      { "t": 0, "fxPulse": 0.82 },
+      { "t": 0.25, "ease": "entrada", "bob": 0.5 },
+      { "t": 0.25, "lean": 0.07, "legSwing": 1, "armSwing": -1 },
+      { "t": 0.5, "ease": "salida", "bob": 0 },
+      { "t": 0.5, "fxPulse": 1 },
+      { "t": 0.75, "ease": "entrada", "bob": 0.5, "lean": -0.07, "legSwing": -1, "armSwing": 1 }
+    ]
+  }
+]
