@@ -80,38 +80,48 @@ object SeedData {
     /*  Lugares                                                              */
     /* --------------------------------------------------------------------- */
 
+    /**
+     * Un lugar expone un subconjunto de categorías. **"lugares" va en todos**:
+     * es el vocabulario de destinos, y querer estar en otra parte es algo que se
+     * necesita decir justamente desde donde uno está. Restringir desde dónde se
+     * puede pedir "quiero ir a casa" no ahorra nada y cierra una puerta.
+     *
+     * Hasta ahora esa categoría no figuraba en ningún lugar, así que sus diez
+     * pictogramas existían en la semilla y eran inalcanzables en el tablero. Lo
+     * encontró la prueba de inventario, contando lugares por categoría.
+     */
     val places: List<Place> = listOf(
         Place(
             "colegio", "Colegio", "school", "#A8D8EA",
-            listOf("acciones", "sentimientos", "social", "familia", "escuela", "juego", "bebidas", "cuerpo")
+            listOf("acciones", "sentimientos", "social", "familia", "escuela", "juego", "bebidas", "cuerpo", "lugares")
         ),
         Place(
             "living", "Living", "weekend", "#C7CEEA",
-            listOf("acciones", "sentimientos", "social", "familia", "juego", "bebidas", "tiempo")
+            listOf("acciones", "sentimientos", "social", "familia", "juego", "bebidas", "tiempo", "lugares")
         ),
         Place(
             "cocina", "Cocina", "restaurant", "#FFD9A8",
-            listOf("alimentos", "bebidas", "acciones", "sentimientos", "social")
+            listOf("alimentos", "bebidas", "acciones", "sentimientos", "social", "lugares")
         ),
         Place(
             "bano", "Baño", "bathtub", "#B5EAD7",
-            listOf("cuerpo", "higiene", "ropa", "acciones", "sentimientos")
+            listOf("cuerpo", "higiene", "ropa", "acciones", "sentimientos", "lugares")
         ),
         Place(
             "patio", "Patio", "park", "#D0E8C5",
-            listOf("acciones", "sentimientos", "social", "familia", "juego", "tiempo", "cuerpo")
+            listOf("acciones", "sentimientos", "social", "familia", "juego", "tiempo", "cuerpo", "lugares")
         ),
         Place(
             "dormitorio", "Dormitorio", "bed", "#E2C6F0",
-            listOf("acciones", "sentimientos", "cuerpo", "ropa", "juego", "tiempo")
+            listOf("acciones", "sentimientos", "cuerpo", "ropa", "juego", "tiempo", "lugares")
         ),
         Place(
             "hospital", "Hospital", "local_hospital", "#FFB3BA",
-            listOf("cuerpo", "dolor", "sentimientos", "acciones", "familia", "higiene")
+            listOf("cuerpo", "dolor", "sentimientos", "acciones", "familia", "higiene", "lugares")
         ),
         Place(
             "tienda", "Tienda", "shopping_cart", "#F0DAB1",
-            listOf("compras", "alimentos", "bebidas", "ropa", "acciones", "sentimientos", "social")
+            listOf("compras", "alimentos", "bebidas", "ropa", "acciones", "sentimientos", "social", "lugares")
         )
     )
 
