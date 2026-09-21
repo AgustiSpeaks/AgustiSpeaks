@@ -52,6 +52,14 @@ android {
     }
 }
 
+// La salida de las pruebas de tesis se copia tal cual al informe, y lleva
+// acentos, eñes y algún símbolo matemático. Sin fijar la codificación, el JDK
+// toma la del sistema y en Windows eso puede escupir "Ã³" en vez de "ó": una
+// tabla ilegible para pegar, y distinta según la máquina que la corra.
+tasks.withType<Test>().configureEach {
+    defaultCharacterEncoding = "UTF-8"
+}
+
 dependencies {
     // Core / lifecycle
     implementation(libs.androidx.core.ktx)

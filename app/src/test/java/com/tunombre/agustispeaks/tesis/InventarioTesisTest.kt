@@ -42,40 +42,40 @@ class InventarioTesisTest {
      * honesta vale bastante más que una que nadie revisa.
      */
     private val motivos: Map<String, String> = mapOf(
-        "dolor" to "temblor rapido: 8 ciclos por bucle (senal `fast`)",
-        "descompuesto" to "temblor rapido: 8 ciclos por bucle (senal `fast`)",
-        "frio" to "tiriton: 16 ciclos por bucle (senal `shiver`)",
-        "nervioso" to "tiriton: 16 ciclos por bucle (senal `shiver`)",
-        "miedo" to "tiriton: 16 ciclos por bucle (senal `shiver`)",
-        "comer" to "masticacion: 7 ciclos rectificados (senal `chew`)",
+        "dolor" to "temblor rápido: 8 ciclos por bucle (señal `fast`)",
+        "descompuesto" to "temblor rápido: 8 ciclos por bucle (señal `fast`)",
+        "frio" to "tiritón: 16 ciclos por bucle (señal `shiver`)",
+        "nervioso" to "tiritón: 16 ciclos por bucle (señal `shiver`)",
+        "miedo" to "tiritón: 16 ciclos por bucle (señal `shiver`)",
+        "comer" to "masticación: 7 ciclos rectificados (señal `chew`)",
         "dibujar" to "trazo: 9 ciclos por bucle (sin 18πt)",
         "escuchar" to "diente de sierra: la fase salta en el borde del bucle",
         "despues" to "diente de sierra: la fase salta en el borde del bucle",
         "antes" to "diente de sierra: la fase salta en el borde del bucle",
-        "remedio" to "mandibula que salta entre dos valores fijos, no interpolable"
+        "remedio" to "mandíbula que salta entre dos valores fijos, no interpolable"
     )
 
     @Test
     fun inventario() {
         assertTrue(
-            "No existe ${asset.absolutePath}. Corre PoseCatalogDumpTest primero.",
+            "No existe ${asset.absolutePath}. Corré PoseCatalogDumpTest primero.",
             asset.exists()
         )
         assertTrue(
-            "No se encontro ${fuenteResolvedor.absolutePath}.",
+            "No se encontró ${fuenteResolvedor.absolutePath}.",
             fuenteResolvedor.exists()
         )
 
         val leido = AnimationParser.parse(asset.readText())
         assertTrue(
-            "El catalogo tiene problemas de lectura: ${leido.problemas}",
+            "El catálogo tiene problemas de lectura: ${leido.problemas}",
             leido.problemas.isEmpty()
         )
         val registros = leido.records
 
-        linea("APENDICE E - INVENTARIO DEL MOTOR Y CATALOGO DE ACCIONES")
-        linea("AgustiSpeaks - generado por InventarioTesisTest")
-        linea("Catalogo: src/main/assets/animaciones.json")
+        linea("APÉNDICE E — INVENTARIO DEL MOTOR Y CATÁLOGO DE ACCIONES")
+        linea("AgustiSpeaks · generado por InventarioTesisTest")
+        linea("Catálogo: src/main/assets/animaciones.json")
         linea("")
 
         catalogo(registros)
@@ -86,11 +86,11 @@ class InventarioTesisTest {
         tablaDeAcciones(registros)
 
         linea("")
-        linea("Fin del apendice E.")
+        linea("Fin del apéndice E.")
     }
 
     /* ------------------------------------------------------------------ */
-    /*  1. Catalogo                                                        */
+    /*  1. Catálogo                                                        */
     /* ------------------------------------------------------------------ */
 
     private fun catalogo(registros: List<AnimationRecord>) {
@@ -98,27 +98,27 @@ class InventarioTesisTest {
         val fotogramasPorAccion = declarativas.map { it.fotogramas.size }
         val total = registros.sumOf { it.fotogramas.size }
 
-        titulo("1. CATALOGO DE ANIMACIONES")
+        titulo("1. CATÁLOGO DE ANIMACIONES")
         dato("Acciones en el motor (enum AvatarAction)", AvatarAction.entries.size)
-        dato("Registros en el catalogo", registros.size)
+        dato("Registros en el catálogo", registros.size)
         dato("  declarativas (fotogramas)", declarativas.size)
         dato("  procedurales (generador Kotlin)", registros.size - declarativas.size)
         linea("")
         dato("Fotogramas declarados, total", total)
-        dato("  minimo por accion declarativa", fotogramasPorAccion.minOrNull() ?: 0)
-        dato("  promedio por accion declarativa", promedio(fotogramasPorAccion))
-        dato("  maximo por accion declarativa", fotogramasPorAccion.maxOrNull() ?: 0)
+        dato("  mínimo por acción declarativa", fotogramasPorAccion.minOrNull() ?: 0)
+        dato("  promedio por acción declarativa", promedio(fotogramasPorAccion))
+        dato("  máximo por acción declarativa", fotogramasPorAccion.maxOrNull() ?: 0)
         linea("")
-        dato("Tamano del catalogo, en bytes", miles(asset.length()))
+        dato("Tamaño del catálogo, en bytes", miles(asset.length()))
         dato("Bytes por fotograma", division(asset.length(), total))
 
-        // Un registro por accion, sin sobrantes ni faltantes. Si esto se rompe,
-        // el catalogo y el motor dejaron de estar en correspondencia y ninguna
+        // Un registro por acción, sin sobrantes ni faltantes. Si esto se rompe,
+        // el catálogo y el motor dejaron de estar en correspondencia y ninguna
         // otra cifra de este informe significa lo que dice.
         val ids = registros.map { it.id }.toSet()
         val esperados = AvatarAction.entries.map { it.name.lowercase() }.toSet()
-        assertEquals("Acciones sin registro en el catalogo", emptySet<String>(), esperados - ids)
-        assertEquals("Registros que no corresponden a ninguna accion", emptySet<String>(), ids - esperados)
+        assertEquals("Acciones sin registro en el catálogo", emptySet<String>(), esperados - ids)
+        assertEquals("Registros que no corresponden a ninguna acción", emptySet<String>(), ids - esperados)
     }
 
     /* ------------------------------------------------------------------ */
@@ -134,7 +134,7 @@ class InventarioTesisTest {
         linea("movimiento vive en Kotlin.")
         linea("")
         linea(
-            "ACCION".padEnd(14) + "GENERADOR".padEnd(14) +
+            "ACCIÓN".padEnd(14) + "GENERADOR".padEnd(14) +
                 "MOTIVO POR EL QUE NO SE DECLARA"
         )
         linea("-".repeat(78))
@@ -142,7 +142,7 @@ class InventarioTesisTest {
             val nombre = r.procedural.orEmpty()
             val motivo = motivos[nombre]
             assertTrue(
-                "La accion procedural '$nombre' no tiene motivo documentado en " +
+                "La acción procedural '$nombre' no tiene motivo documentado en " +
                     "InventarioTesisTest.motivos",
                 motivo != null
             )
@@ -151,9 +151,9 @@ class InventarioTesisTest {
         linea("-".repeat(78))
         dato("Total de acciones procedurales", conGenerador.size)
 
-        // El catalogo y la tabla de generadores tienen que decir lo mismo.
+        // El catálogo y la tabla de generadores tienen que decir lo mismo.
         assertEquals(
-            "El catalogo y ProceduralPoses no coinciden",
+            "El catálogo y ProceduralPoses no coinciden",
             ProceduralPoses.names(),
             conGenerador.mapNotNull { it.procedural }.toSet()
         )
@@ -183,12 +183,12 @@ class InventarioTesisTest {
 
         titulo("4. VOCABULARIO")
         dato("Lugares", SeedData.places.size)
-        dato("Categorias tematicas", SeedData.categories.size)
-        dato("Palabras nucleo (visibles en todo lugar)", nucleo.size)
-        dato("Pictogramas tematicos", tematicos.size)
+        dato("Categorías temáticas", SeedData.categories.size)
+        dato("Palabras núcleo (visibles en todo lugar)", nucleo.size)
+        dato("Pictogramas temáticos", tematicos.size)
         dato("TOTAL de pictogramas distintos", nucleo.size + tematicos.size)
         linea("")
-        linea("CATEGORIA".padEnd(22) + "PICTOGRAMAS".padStart(12) + "LUGARES".padStart(10))
+        linea("CATEGORÍA".padEnd(22) + "PICTOGRAMAS".padStart(12) + "LUGARES".padStart(10))
         linea("-".repeat(44))
         for (c in SeedData.categories) {
             val cuantos = tematicos.count { it.categoryId == c.id }
@@ -196,13 +196,31 @@ class InventarioTesisTest {
             linea(c.name.padEnd(22) + cuantos.toString().padStart(12) + lugares.toString().padStart(10))
         }
         linea("-".repeat(44))
-        linea("nucleo".padEnd(22) + nucleo.size.toString().padStart(12) + "todos".padStart(10))
+        linea("núcleo".padEnd(22) + nucleo.size.toString().padStart(12) + "todos".padStart(10))
         linea("-".repeat(44))
         linea("TOTAL".padEnd(22) + (nucleo.size + tematicos.size).toString().padStart(12))
         linea("")
-        linea("Nota: un pictograma tematico aparece en todo lugar cuya lista de")
-        linea("categorias incluya la suya, asi que el mismo pictograma se muestra en")
+        linea("Nota: un pictograma temático aparece en todo lugar cuya lista de")
+        linea("categorías incluya la suya, así que el mismo pictograma se muestra en")
         linea("varios lugares. El TOTAL cuenta pictogramas distintos, no apariciones.")
+
+        // Una categoría que ningún lugar expone es vocabulario muerto: sus
+        // pictogramas existen en la semilla y no hay forma de tocarlos en el
+        // tablero. Le pasó esto a "lugares" y estuvo así hasta que este mismo
+        // conteo lo sacó a la luz. La afirmación vale la pena sostenerla:
+        // declarar una palabra y poder decirla no son lo mismo.
+        val huerfanas = SeedData.categories
+            .filter { c -> SeedData.places.none { c.id in it.categoryIds } }
+            .map { it.id }
+        assertEquals(
+            "Categorías que ningún lugar expone: sus pictogramas son inalcanzables",
+            emptyList<String>(), huerfanas
+        )
+
+        val vacias = SeedData.categories
+            .filter { c -> tematicos.none { it.categoryId == c.id } }
+            .map { it.id }
+        assertEquals("Categorías sin ningún pictograma", emptyList<String>(), vacias)
     }
 
     /* ------------------------------------------------------------------ */
@@ -214,7 +232,7 @@ class InventarioTesisTest {
             it.palabras.isNotEmpty() || it.raices.isNotEmpty()
         }
 
-        // Se cuentan leyendo el codigo fuente como texto. Es la unica forma de
+        // Se cuentan leyendo el código fuente como texto. Es la única forma de
         // que la cifra siga siendo cierta cuando alguien agregue una regla: un
         // conteo a mano envejece sin avisar.
         val texto = fuenteResolvedor.readText()
@@ -224,16 +242,16 @@ class InventarioTesisTest {
         val enCodigo = sitios - respaldo
 
         titulo("5. REGLAS DE DISPARO")
-        linea("Una regla es una rama que mapea una frase a una accion. Se cuentan")
+        linea("Una regla es una rama que mapea una frase a una acción. Se cuentan")
         linea("los `return R(...)` de ActionResolver.resolve(), sin el respaldo final.")
         linea("")
-        dato("Reglas en el catalogo (animaciones.json)", enCatalogo)
-        dato("Reglas en codigo (ActionResolver)", enCodigo)
-        dato("  de ellas, duplicadas en el catalogo", enCatalogo)
+        dato("Reglas en el catálogo (animaciones.json)", enCatalogo)
+        dato("Reglas en código (ActionResolver)", enCodigo)
+        dato("  de ellas, duplicadas en el catálogo", enCatalogo)
         dato("Reglas distintas en total", enCodigo)
-        dato("Migradas al catalogo, en por ciento", porciento(enCatalogo, enCodigo))
+        dato("Migradas al catálogo, en por ciento", porciento(enCatalogo, enCodigo))
         linea("")
-        linea("Tablas auxiliares: no eligen la accion sino el matiz.")
+        linea("Tablas auxiliares: no eligen la acción sino el matiz.")
         dato("  alimento nombrado (foodProp)", ramas(texto, "private fun foodProp", "private fun garment", "->\\s*Prop\\."))
         dato("  prenda nombrada (garment)", ramas(texto, "private fun garment", "private fun bodyPart", "->\\s*Prop\\."))
         dato("  parte del cuerpo (bodyPart)", ramas(texto, "private fun bodyPart", "private fun normalize", "->\\s*BodyPart\\."))
@@ -251,11 +269,11 @@ class InventarioTesisTest {
     private fun tablaDeAcciones(registros: List<AnimationRecord>) {
         val porId = registros.associateBy { it.id }
 
-        titulo("6. CATALOGO COMPLETO DE ACCIONES")
-        linea("En el orden en que estan declaradas en el enum AvatarAction.")
+        titulo("6. CATÁLOGO COMPLETO DE ACCIONES")
+        linea("En el orden en que están declaradas en el enum AvatarAction.")
         linea("")
         linea(
-            "#".padStart(3) + "  " + "ACCION".padEnd(14) + "BUCLE(ms)".padStart(10) +
+            "#".padStart(3) + "  " + "ACCIÓN".padEnd(14) + "BUCLE(ms)".padStart(10) +
                 "  " + "TIPO".padEnd(13) + "FOTOGRAMAS".padStart(11)
         )
         linea("-".repeat(56))
@@ -277,9 +295,9 @@ class InventarioTesisTest {
                 registros.sumOf { it.fotogramas.size }.toString().padStart(11)
         )
         linea("")
-        linea("Bucle: duracion de una vuelta completa de la animacion.")
-        linea("Las procedurales llevan 0 fotogramas por definicion: su movimiento")
-        linea("es una funcion, no una lista de instantes.")
+        linea("Bucle: duración de una vuelta completa de la animación.")
+        linea("Las procedurales llevan 0 fotogramas por definición: su movimiento")
+        linea("es una función, no una lista de instantes.")
     }
 
     /* ------------------------------------------------------------------ */
