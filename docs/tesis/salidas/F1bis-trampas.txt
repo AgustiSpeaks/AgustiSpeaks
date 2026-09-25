@@ -1,0 +1,31 @@
+APÉNDICE F.1 (bis) — PARES TRAMPA
+AgustiSpeaks · generado por CorpusResolvedorTest
+Criterio: colisión léxica 0 casos
+
+Cada par tiene que resolverse a dos acciones DISTINTAS. Que colapsen
+en una sola es una colisión: dos significados con la misma animación.
+
+  Estoy triste → SAD   |   Quiero té → DRINK   [OK]
+      "te" es subcadena de "triste"
+  ¿Cómo estás? → ASK   |   Quiero comer → EAT   [OK]
+      sin tildes, "cómo" y "como" son la misma palabra
+  Ya está → DONE   |   Ahora → NOW   [OK]
+      "ya" como disparador de ahora robaría "ya está"
+  Buenas tardes → HELLO   |   Más tarde → LATER   [OK]
+      "tarde" es saludo y es momento del día
+  Buenos días → HELLO   |   Es de día → DAY   [OK]
+      el saludo lleva la s; el concepto va en singular
+  El bebé → CRADLE   |   Quiero beber → DRINK   [OK]
+      "bebe" vive dentro de "beber"
+  Pararme → STAND   |   Parar → STOP   [OK]
+      levantarse y detenerse comparten la raíz
+  No toques → NO   |   Quiero tocar → TAP   [OK]
+      la negación tiene que ganarle al verbo que niega
+  Yo → TOUCH_PART   |   Yo quiero agua → DRINK   [OK]
+      el pronombre solo significa algo cuando está solo
+  Mi cabeza → TOUCH_PART   |   Mi mochila → DRESS   [OK]
+      "mi" no puede decidir por sí mismo
+
+  Pares evaluados.........................         10
+  Colisiones léxicas......................          0
+  Separan pero no dan lo esperado.........          0

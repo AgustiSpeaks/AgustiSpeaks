@@ -6,6 +6,7 @@ import com.tunombre.agustispeaks.avatar.BodyPart
 import com.tunombre.agustispeaks.avatar.Prop
 import com.tunombre.agustispeaks.avatar.ResolvedAction
 import com.tunombre.agustispeaks.avatar.avatarPoseFor
+import com.tunombre.agustispeaks.tesis.Apendice
 import org.junit.Assert.fail
 import org.junit.Test
 import java.io.File
@@ -26,10 +27,14 @@ import kotlin.math.abs
  *
  * ### Mide en fases distintas de las que generaron el catálogo
  *
- * El volcado se armó muestreando en t = k/32. Verificar en esos mismos puntos
+ * El volcado se armó muestreando en t = k/4096. Verificar en esos mismos puntos
  * no probaría nada: son justamente los valores que quedaron escritos, así que
  * coincidirían por construcción y el error entre medio quedaría sin mirar.
- * Acá la grilla son 501 fases corridas 0.37 de paso, que no toca ningún k/32.
+ *
+ * Acá la grilla son 501 fases corridas 0.37 de paso. Que no toque ningún k/4096
+ * no es una esperanza: (k + 0.37)/501 = j/4096 exigiría 4096k + 1515.52 = 501j,
+ * y un entero no tiene parte decimal. La independencia de las dos grillas está
+ * garantizada por aritmética, no por elegir números que parecen distintos.
  *
  * ### Qué tolera y qué no
  *
@@ -45,6 +50,8 @@ import kotlin.math.abs
  * seguridad en un adorno.
  */
 class PoseCatalogParityTest {
+
+    private val ap = Apendice("G1-equivalencia")
 
     private val muestras = 501
     private fun fase(k: Int) = (k + 0.37f) / muestras
@@ -67,10 +74,15 @@ class PoseCatalogParityTest {
         val catalogo = cargarCatalogo()
         val fallas = mutableListOf<Falla>()
         val medidas = mutableListOf<Falla>()
+        // En orden de evaluación, para que el apéndice salga determinista. Hace
+        // falta aparte de `medidas` porque un caso que no desvía en ningún campo
+        // no deja ninguna medida, y es justamente el que hay que poder mostrar.
+        val etiquetas = mutableListOf<String>()
 
         for (accion in AvatarAction.entries) {
             for (caso in casos(accion)) {
                 val etiqueta = etiqueta(caso)
+                etiquetas += etiqueta
                 val animacion = catalogo.byId(catalogIdOf(caso))
                 if (animacion == null) {
                     fallas += Falla(etiqueta, "registro", "no está en el catálogo", 1f, 0f)
@@ -92,7 +104,8 @@ class PoseCatalogParityTest {
         }
 
         fallas += medidas.filter { it.error > it.tolerancia }
-        informe(medidas, fallas)
+        informe(etiquetas, medidas, fallas)
+        ap.guardar()
 
         if (fallas.isNotEmpty()) {
             fail(
@@ -222,35 +235,85 @@ class PoseCatalogParityTest {
 
     /* ---------------- informe ---------------- */
 
-    private fun informe(medidas: List<Falla>, fallas: List<Falla>) {
-        println("Fases comparadas por acción: $muestras (grilla corrida, ninguna coincide con k/32)")
-        println("Tolerancia: 1% del recorrido del campo, piso $piso")
-        println()
+    /**
+     * Apéndice G.1 de la tesis. Una fila por caso, con el desvío peor expresado
+     * como porcentaje de la tolerancia que ese campo tiene.
+     *
+     * El porcentaje del margen dice más que el error crudo. Un error de 0.004 es
+     * enorme en un campo que se mueve entre 0 y 0.05, e irrelevante en uno que
+     * recorre treinta grados. La tolerancia ya incorpora esa diferencia, así que
+     * medir contra ella es lo único que permite comparar acciones entre sí.
+     */
+    private fun informe(etiquetas: List<String>, medidas: List<Falla>, fallas: List<Falla>) {
+        val porCaso = medidas.groupBy { it.caso }
+        val exactos = etiquetas.count { porCaso[it].orEmpty().all { f -> f.error == 0f } }
 
-        println("Los diez campos con menos aire:")
-        println("  %-26s %-11s %9s %9s %7s".format(Locale.US, "caso", "campo", "error", "tolera", "usa"))
-        medidas.sortedByDescending { it.margen }.take(10).forEach {
-            println(
-                "  %-26s %-11s %9s %9s %6.1f%%".format(
-                    Locale.US, it.caso, it.campo, num(it.error), num(it.tolerancia), it.margen * 100f
+        ap.linea("APÉNDICE G.1 — EQUIVALENCIA DEL CATÁLOGO CONTRA EL MOTOR")
+        ap.linea("AgustiSpeaks · generado por PoseCatalogParityTest")
+        ap.linea()
+        dato("Acciones del motor", AvatarAction.entries.size)
+        dato("Casos comparados", etiquetas.size)
+        dato("Fases por caso", muestras)
+        dato("Comparaciones de pose", etiquetas.size * muestras)
+        dato("Casos con error exactamente cero", exactos)
+        dato("Casos con algún desvío medible", etiquetas.size - exactos)
+        dato("Desvíos fuera de tolerancia", fallas.size)
+        ap.linea()
+        ap.linea("  Grilla corrida 0.37 de paso: ninguna fase coincide con las que")
+        ap.linea("  generaron el catálogo. Verificar en los puntos de generación")
+        ap.linea("  no probaría nada, porque coincidirían por construcción.")
+        ap.linea("  Tolerancia: 1% del recorrido del campo en esa acción, piso $piso.")
+        ap.linea("  Los campos discretos no toleran nada.")
+        ap.linea()
+
+        // Los desvíos van ANTES de la tabla de 97 filas. Si la consola recorta,
+        // lo que se pierde es la tabla y no el diagnóstico.
+        if (fallas.isEmpty()) {
+            ap.linea(
+                "Sin desvíos: el catálogo reproduce el motor en los " +
+                    "${etiquetas.size} casos de las ${AvatarAction.entries.size} acciones."
+            )
+        } else {
+            ap.linea("=".repeat(72))
+            ap.linea("DESVÍOS FUERA DE TOLERANCIA (${fallas.size})")
+            ap.linea("=".repeat(72))
+            fallas.sortedByDescending { it.margen }.forEach {
+                ap.linea("  ${it.caso} / ${it.campo}: error ${num(it.error)}, tolera ${num(it.tolerancia)}")
+                ap.linea("      ${it.detalle}")
+            }
+            ap.linea()
+            ap.linea("Cada uno de estos registros necesita más fotogramas clave.")
+            ap.linea("La tolerancia no se toca: subirla convierte la red en un adorno.")
+        }
+        ap.linea()
+
+        ap.linea("=".repeat(72))
+        ap.linea("DESVÍO POR CASO")
+        ap.linea("=".repeat(72))
+        ap.linea("  %-28s %9s %9s %10s  %s".format(Locale.US, "caso", "error", "tolera", "del margen", "exacto"))
+        ap.linea("  " + "-".repeat(68))
+
+        for (etiqueta in etiquetas) {
+            val filas = porCaso[etiqueta].orEmpty()
+            val peor = filas.maxByOrNull { it.margen }
+            val exacto = filas.all { it.error == 0f }
+
+            if (peor == null) {
+                ap.linea("  %-28s %9s %9s %10s  %s".format(Locale.US, etiqueta, "-", "-", "-", "sí"))
+                continue
+            }
+            ap.linea(
+                "  %-28s %9s %9s %9.2f%%  %s".format(
+                    Locale.US, etiqueta, num(peor.error), num(peor.tolerancia),
+                    peor.margen * 100f, if (exacto) "sí" else "no"
                 )
             )
         }
-        println()
-
-        if (fallas.isEmpty()) {
-            println("Sin desvíos. El catálogo reproduce el motor en las 66 acciones.")
-            return
-        }
-
-        println("DESVÍOS (${fallas.size}):")
-        fallas.sortedByDescending { it.margen }.forEach {
-            println("  ${it.caso} / ${it.campo}: error ${num(it.error)}, tolera ${num(it.tolerancia)}")
-            println("      ${it.detalle}")
-        }
-        println()
-        println("Cada uno de estos registros necesita más fotogramas clave.")
+        ap.linea("  " + "-".repeat(68))
     }
+
+    private fun dato(etiqueta: String, valor: Any) =
+        ap.linea("  " + etiqueta.padEnd(36, '.') + " " + valor.toString().padStart(10))
 
     private fun num(v: Float): String = String.format(Locale.US, "%.5f", v)
 }

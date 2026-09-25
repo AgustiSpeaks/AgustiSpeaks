@@ -1,0 +1,228 @@
+APÉNDICE E — INVENTARIO DEL MOTOR Y CATÁLOGO DE ACCIONES
+AgustiSpeaks · generado por InventarioTesisTest
+Catálogo: src/main/assets/animaciones.json
+
+
+==============================================================================
+1. CATÁLOGO DE ANIMACIONES
+==============================================================================
+  Acciones en el motor (enum AvatarAction)......       88
+  Registros en el catálogo......................       88
+    declarativas (fotogramas)...................       76
+    procedurales (generador Kotlin).............       12
+
+  Fotogramas declarados, total..................      419
+    mínimo por acción declarativa...............        2
+    promedio por acción declarativa.............     5.51
+    máximo por acción declarativa...............       38
+
+  Tamaño del catálogo, en bytes.................   40.048
+  Bytes por fotograma...........................     95.6
+
+==============================================================================
+2. ACCIONES PROCEDURALES Y SU MOTIVO
+==============================================================================
+Son las que no se pueden describir con una cantidad razonable de
+fotogramas. El registro solo lleva el nombre del generador; el
+movimiento vive en Kotlin.
+
+ACCIÓN        GENERADOR     MOTIVO POR EL QUE NO SE DECLARA
+------------------------------------------------------------------------------
+before        antes         diente de sierra: la fase salta en el borde del bucle
+cold          frio          tiritón: 16 ciclos por bucle (señal `shiver`)
+dress         vestirse      la pose se bifurca según la prenda: erguido o agachado
+eat           comer         masticación: 7 ciclos rectificados (señal `chew`)
+hurt          dolor         temblor rápido: 8 ciclos por bucle (señal `fast`)
+later         despues       diente de sierra: la fase salta en el borde del bucle
+listen        escuchar      diente de sierra: la fase salta en el borde del bucle
+medicine      remedio       mandíbula que salta entre dos valores fijos, no interpolable
+nervous       nervioso      tiritón: 16 ciclos por bucle (señal `shiver`)
+scared        miedo         tiritón: 16 ciclos por bucle (señal `shiver`)
+scribble      dibujar       trazo: 9 ciclos por bucle (sin 18πt)
+sick          descompuesto  temblor rápido: 8 ciclos por bucle (señal `fast`)
+------------------------------------------------------------------------------
+  Total de acciones procedurales................       12
+
+==============================================================================
+3. OBJETOS (PROPS)
+==============================================================================
+  Objetos distintos.............................       87
+
+  APPLE             AUNT              BABY              BACKPACK
+  BAG               BALL              BANANA            BANDAGE
+  BASKET            BED               BLOCKS            BOOK
+  BOOK_HELD         BREAD             BROTHER           CAKE
+  CAR               CART              CART_STILL        CHAIR
+  CHEESE            CHICKEN           CLOCK             CLOUDY
+  COCOA             COMB              COOKIE            CUP
+  DAD               DESK              DOLL              DOOR
+  EGG               FOOD              FRIEND            GRANDMA
+  GRANDPA           HAT               HORN              HOSPITAL
+  HOUSE             ICE_CREAM         JACKET            JUICE
+  KITCHEN           MEAT              MILK              MOM
+  MONEY             MOON              NOODLES           NOTE
+  NOTEBOOK          PAJAMAS           PANTS             PARK
+  PENCIL            PENCIL_HELD       PIZZA             RAIN
+  RICE              SCHOOL            SHIRT             SHOES
+  SHOP              SHOWER            SINK              SISTER
+  SLIDE             SOAP              SOCKS             SOUP
+  SPOON             SUN               SWING             SYRINGE
+  TABLE             TEA               TEACHER           THERMOMETER
+  TOILET            TOOTHBRUSH        TOWEL             TOYS
+  UNCLE             WATER             YOGURT
+
+==============================================================================
+4. VOCABULARIO
+==============================================================================
+  Lugares.......................................        8
+  Categorías temáticas..........................       15
+  Palabras núcleo (visibles en todo lugar)......       25
+  Pictogramas temáticos.........................      145
+  TOTAL de pictogramas distintos................      170
+
+CATEGORÍA              PICTOGRAMAS   LUGARES
+--------------------------------------------
+Alimentos                       14         2
+Bebidas                          5         4
+Acciones                        12         8
+Sentimientos                     9         8
+Dolor                           12         1
+Partes del cuerpo               12         5
+Ropa                             8         3
+Higiene                          8         2
+Tiempo                           9         3
+Familia                          9         4
+Juego                           10         4
+Lugares                         10         8
+Escuela                         11         1
+Compras                          6         1
+Social                          10         5
+--------------------------------------------
+núcleo                          25     todos
+--------------------------------------------
+TOTAL                          170
+
+Nota: un pictograma temático aparece en todo lugar cuya lista de
+categorías incluya la suya, así que el mismo pictograma se muestra en
+varios lugares. El TOTAL cuenta pictogramas distintos, no apariciones.
+
+==============================================================================
+5. REGLAS DE DISPARO
+==============================================================================
+Una regla es una rama que mapea una frase a una acción. Se cuentan
+los `return R(...)` de ActionResolver.resolve(), sin el respaldo final.
+
+  Reglas en el catálogo (animaciones.json)......        4
+  Reglas en código (ActionResolver).............      121
+    de ellas, duplicadas en el catálogo.........        4
+  Reglas distintas en total.....................      121
+  Migradas al catálogo, en por ciento...........    3.3 %
+
+Tablas auxiliares: no eligen la acción sino el matiz.
+    alimento nombrado (foodProp)................       15
+    prenda nombrada (garment)...................        7
+    parte del cuerpo (bodyPart).................       17
+
+==============================================================================
+6. CATÁLOGO COMPLETO DE ACCIONES
+==============================================================================
+En el orden en que están declaradas en el enum AvatarAction.
+
+  #  ACCIÓN         BUCLE(ms)  TIPO          FOTOGRAMAS
+--------------------------------------------------------
+  1  IDLE                2600  declarativa            7
+  2  TALK                1400  declarativa           12
+  3  WANT                1500  declarativa           10
+  4  MORE                1400  declarativa            2
+  5  LESS                1400  declarativa            2
+  6  GIVE                1700  declarativa            2
+  7  TAKE                1600  declarativa            2
+  8  EAT                 1500  procedural             0
+  9  DRINK               1800  declarativa            2
+ 10  GO                  1000  declarativa            7
+ 11  RUN                  650  declarativa            7
+ 12  JUMP                 750  declarativa           38
+ 13  DANCE               1000  declarativa           12
+ 14  SIT                 2600  declarativa            5
+ 15  STAND               1800  declarativa            5
+ 16  SLEEP               3800  declarativa            5
+ 17  TIRED               2800  declarativa            5
+ 18  PLAY                 900  declarativa            6
+ 19  LOOK                2000  declarativa            6
+ 20  POINT               2000  declarativa            6
+ 21  READ                2600  declarativa            2
+ 22  SCRIBBLE            1600  procedural             0
+ 23  LISTEN              2400  procedural             0
+ 24  SING                1200  declarativa            8
+ 25  WASH_HANDS          2400  declarativa            6
+ 26  BRUSH_TEETH         2000  declarativa            6
+ 27  BATHE               2400  declarativa            6
+ 28  COMB                1400  declarativa            5
+ 29  TOILET              2600  declarativa            5
+ 30  HELP                1100  declarativa            5
+ 31  STOP                2200  declarativa            2
+ 32  WAIT                2400  declarativa            5
+ 33  TAP                 1600  declarativa            4
+ 34  SEARCH              2200  declarativa            6
+ 35  HUG                 1900  declarativa            6
+ 36  KISS                1600  declarativa            2
+ 37  HELLO                900  declarativa            7
+ 38  BYE                  900  declarativa            7
+ 39  THANKS              2200  declarativa            2
+ 40  SORRY               2400  declarativa            2
+ 41  PLEASE              2200  declarativa            2
+ 42  GOOD                1500  declarativa            6
+ 43  BAD                 2600  declarativa            2
+ 44  ASK                 2000  declarativa            6
+ 45  YES                 1200  declarativa            2
+ 46  NO                  1000  declarativa            6
+ 47  OPEN                1500  declarativa            2
+ 48  CLOSE               1500  declarativa            2
+ 49  HURT                1300  procedural             0
+ 50  TOUCH_PART          2400  declarativa            5
+ 51  COLD                 900  procedural             0
+ 52  HOT                  900  declarativa            6
+ 53  FEVER               2600  declarativa            2
+ 54  SICK                2400  procedural             0
+ 55  MEDICINE            1800  procedural             0
+ 56  INJECTION           2000  declarativa            2
+ 57  HAPPY               1000  declarativa            6
+ 58  LAUGH                900  declarativa           12
+ 59  SAD                 3000  declarativa            2
+ 60  CRY                 2600  declarativa            2
+ 61  ANGRY               1600  declarativa            5
+ 62  NERVOUS             1400  procedural             0
+ 63  SCARED               650  procedural             0
+ 64  BORED               3400  declarativa            2
+ 65  CALM                3000  declarativa            5
+ 66  SURPRISED           1500  declarativa            5
+ 67  DRESS               1800  procedural             0
+ 68  COME                1300  declarativa            5
+ 69  DONE                1600  declarativa            2
+ 70  PAY                 1600  declarativa            5
+ 71  SHOP                1400  declarativa            7
+ 72  CARRY               1200  declarativa            7
+ 73  TOYS                1800  declarativa            5
+ 74  BLOCKS              2000  declarativa            2
+ 75  CRADLE              2600  declarativa            6
+ 76  SWING               2200  declarativa            8
+ 77  SLIDE               1600  declarativa            2
+ 78  SHOW                1800  declarativa            5
+ 79  WRITE               2200  declarativa           15
+ 80  NOW                 1800  declarativa            5
+ 81  LATER               2000  procedural             0
+ 82  BEFORE              2000  procedural             0
+ 83  DAY                 2000  declarativa            6
+ 84  NIGHT               3200  declarativa            5
+ 85  RAIN                2400  declarativa            5
+ 86  CLOUDY              2800  declarativa            5
+ 87  WITH                1900  declarativa            8
+ 88  GO_TO               1100  declarativa            7
+--------------------------------------------------------
+     TOTAL                                          419
+
+Bucle: duración de una vuelta completa de la animación.
+Las procedurales llevan 0 fotogramas por definición: su movimiento
+es una función, no una lista de instantes.
+
+Fin del apéndice E.

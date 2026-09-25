@@ -15,7 +15,7 @@ import kotlin.math.sin
 /**
  * Generador del catálogo inicial. No verifica nada: su producto es el archivo.
  *
- * Recorre las 66 acciones, llama al `avatarPoseFor` que ya funciona y escribe el
+ * Recorre todas las acciones, llama al `avatarPoseFor` que ya funciona y escribe el
  * JSON equivalente de cada una. El catálogo sale derivado del código que anda,
  * no transcrito a mano, que es donde se cuelan los errores.
  *
@@ -23,7 +23,7 @@ import kotlin.math.sin
  * `gradlew :app:testDebugUnitTest --tests "*PoseCatalogDumpTest*"`.
  * El resultado queda en `app/build/animaciones.json`.
  *
- * ### Por qué 33 fases y no 9
+ * ### Por qué una grilla densa y no nueve fases
  *
  * Con nueve fases (t = 0, 0.125 … 1) la señal `fast`, que son ocho ciclos por
  * bucle, cae siempre en un múltiplo exacto de 2π, y el seno de un múltiplo de

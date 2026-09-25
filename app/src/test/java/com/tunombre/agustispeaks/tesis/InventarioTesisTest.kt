@@ -28,6 +28,8 @@ import java.util.Locale
  */
 class InventarioTesisTest {
 
+    private val ap = Apendice("E-inventario")
+
     private val asset = File("src/main/assets/animaciones.json")
     private val fuenteResolvedor =
         File("src/main/java/com/tunombre/agustispeaks/avatar/ActionResolver.kt")
@@ -52,11 +54,21 @@ class InventarioTesisTest {
         "escuchar" to "diente de sierra: la fase salta en el borde del bucle",
         "despues" to "diente de sierra: la fase salta en el borde del bucle",
         "antes" to "diente de sierra: la fase salta en el borde del bucle",
-        "remedio" to "mandíbula que salta entre dos valores fijos, no interpolable"
+        "remedio" to "mandíbula que salta entre dos valores fijos, no interpolable",
+        "vestirse" to "la pose se bifurca según la prenda: erguido o agachado"
     )
 
+    // El `finally` no es adorno: varias aserciones viven dentro de las
+    // secciones, así que sin él un fallo a mitad de camino se llevaría el
+    // archivo del apéndice, que es justo lo que hay que poder leer.
     @Test
-    fun inventario() {
+    fun inventario() = try {
+        medir()
+    } finally {
+        ap.guardar()
+    }
+
+    private fun medir() {
         assertTrue(
             "No existe ${asset.absolutePath}. Corré PoseCatalogDumpTest primero.",
             asset.exists()
@@ -304,7 +316,7 @@ class InventarioTesisTest {
     /*  Formato                                                            */
     /* ------------------------------------------------------------------ */
 
-    private fun linea(s: String) = println(s)
+    private fun linea(s: String) = ap.linea(s)
 
     private fun titulo(s: String) {
         linea("")

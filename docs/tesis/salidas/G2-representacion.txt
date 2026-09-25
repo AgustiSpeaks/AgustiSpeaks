@@ -1,0 +1,360 @@
+APÉNDICE G.2 — COBERTURA DE REPRESENTACIÓN
+AgustiSpeaks · generado por CoberturaRepresentacionTest
+
+  Acciones evaluadas......................           88
+  Fases por acción........................         1030
+    dentro del ciclo......................         1024
+    fuera del intervalo [0, 1]............            6
+  Poses evaluadas.........................        90640
+  Campos revisados por pose...............           12
+  Comprobaciones..........................      1087680
+
+  Excepciones.............................            0
+  Valores no finitos......................            0
+  Valores fuera de rango..................          328
+  loopMillis no positivos.................            0
+  TOTAL de problemas......................          328
+
+========================================================================
+RECORRIDO REAL DE CADA CAMPO, SOBRE LAS 88 ACCIONES
+========================================================================
+No es un criterio: documenta cuánto del rango declarado se usa.
+
+CAMPO         DECLARADO          MÍNIMO     MÁXIMO
+--------------------------------------------------
+bob           [-1, 1]           -0.2200     1.0000
+lean          [-1, 1]           -0.4200     0.4200
+headTilt      sin tope         -18.0000    18.0000
+jaw           [0, 1]             0.0000     1.0000
+tears         [0, 1]             0.0000     1.0000
+eyeClose      [0, 1]             0.0000     1.0000
+crouch        [0, 1]             0.0000     1.0000
+legSwing      [-1, 1]           -1.0000     1.0000
+armSwing      [-1, 1]           -1.0000     1.0000
+reach         [0, 1]            -0.3000     1.0000
+propPhase     [0, 1]             0.0000     1.0000
+fxPulse       [0, 1]             0.8200     1.0000
+--------------------------------------------------
+
+========================================================================
+PROBLEMAS (328)
+========================================================================
+  HOT           reach = -0.0031 fuera de [0.0, 1.0] en t=0.5914
+  HOT           reach = -0.0064 fuera de [0.0, 1.0] en t=0.5924
+  HOT           reach = -0.0098 fuera de [0.0, 1.0] en t=0.5934
+  HOT           reach = -0.0131 fuera de [0.0, 1.0] en t=0.5943
+  HOT           reach = -0.0164 fuera de [0.0, 1.0] en t=0.5953
+  HOT           reach = -0.0197 fuera de [0.0, 1.0] en t=0.5963
+  HOT           reach = -0.0230 fuera de [0.0, 1.0] en t=0.5973
+  HOT           reach = -0.0262 fuera de [0.0, 1.0] en t=0.5982
+  HOT           reach = -0.0295 fuera de [0.0, 1.0] en t=0.5992
+  HOT           reach = -0.0327 fuera de [0.0, 1.0] en t=0.6002
+  HOT           reach = -0.0359 fuera de [0.0, 1.0] en t=0.6012
+  HOT           reach = -0.0391 fuera de [0.0, 1.0] en t=0.6022
+  HOT           reach = -0.0423 fuera de [0.0, 1.0] en t=0.6031
+  HOT           reach = -0.0455 fuera de [0.0, 1.0] en t=0.6041
+  HOT           reach = -0.0487 fuera de [0.0, 1.0] en t=0.6051
+  HOT           reach = -0.0518 fuera de [0.0, 1.0] en t=0.6061
+  HOT           reach = -0.0549 fuera de [0.0, 1.0] en t=0.6070
+  HOT           reach = -0.0580 fuera de [0.0, 1.0] en t=0.6080
+  HOT           reach = -0.0611 fuera de [0.0, 1.0] en t=0.6090
+  HOT           reach = -0.0642 fuera de [0.0, 1.0] en t=0.6100
+  HOT           reach = -0.0673 fuera de [0.0, 1.0] en t=0.6109
+  HOT           reach = -0.0704 fuera de [0.0, 1.0] en t=0.6119
+  HOT           reach = -0.0734 fuera de [0.0, 1.0] en t=0.6129
+  HOT           reach = -0.0764 fuera de [0.0, 1.0] en t=0.6139
+  HOT           reach = -0.0794 fuera de [0.0, 1.0] en t=0.6149
+  HOT           reach = -0.0824 fuera de [0.0, 1.0] en t=0.6158
+  HOT           reach = -0.0854 fuera de [0.0, 1.0] en t=0.6168
+  HOT           reach = -0.0883 fuera de [0.0, 1.0] en t=0.6178
+  HOT           reach = -0.0913 fuera de [0.0, 1.0] en t=0.6188
+  HOT           reach = -0.0942 fuera de [0.0, 1.0] en t=0.6197
+  HOT           reach = -0.0971 fuera de [0.0, 1.0] en t=0.6207
+  HOT           reach = -0.1000 fuera de [0.0, 1.0] en t=0.6217
+  HOT           reach = -0.1029 fuera de [0.0, 1.0] en t=0.6227
+  HOT           reach = -0.1057 fuera de [0.0, 1.0] en t=0.6237
+  HOT           reach = -0.1086 fuera de [0.0, 1.0] en t=0.6246
+  HOT           reach = -0.1114 fuera de [0.0, 1.0] en t=0.6256
+  HOT           reach = -0.1142 fuera de [0.0, 1.0] en t=0.6266
+  HOT           reach = -0.1170 fuera de [0.0, 1.0] en t=0.6276
+  HOT           reach = -0.1197 fuera de [0.0, 1.0] en t=0.6285
+  HOT           reach = -0.1225 fuera de [0.0, 1.0] en t=0.6295
+  HOT           reach = -0.1252 fuera de [0.0, 1.0] en t=0.6305
+  HOT           reach = -0.1279 fuera de [0.0, 1.0] en t=0.6315
+  HOT           reach = -0.1306 fuera de [0.0, 1.0] en t=0.6325
+  HOT           reach = -0.1333 fuera de [0.0, 1.0] en t=0.6334
+  HOT           reach = -0.1360 fuera de [0.0, 1.0] en t=0.6344
+  HOT           reach = -0.1386 fuera de [0.0, 1.0] en t=0.6354
+  HOT           reach = -0.1412 fuera de [0.0, 1.0] en t=0.6364
+  HOT           reach = -0.1438 fuera de [0.0, 1.0] en t=0.6373
+  HOT           reach = -0.1464 fuera de [0.0, 1.0] en t=0.6383
+  HOT           reach = -0.1490 fuera de [0.0, 1.0] en t=0.6393
+  HOT           reach = -0.1515 fuera de [0.0, 1.0] en t=0.6403
+  HOT           reach = -0.1541 fuera de [0.0, 1.0] en t=0.6413
+  HOT           reach = -0.1566 fuera de [0.0, 1.0] en t=0.6422
+  HOT           reach = -0.1591 fuera de [0.0, 1.0] en t=0.6432
+  HOT           reach = -0.1616 fuera de [0.0, 1.0] en t=0.6442
+  HOT           reach = -0.1640 fuera de [0.0, 1.0] en t=0.6452
+  HOT           reach = -0.1664 fuera de [0.0, 1.0] en t=0.6461
+  HOT           reach = -0.1689 fuera de [0.0, 1.0] en t=0.6471
+  HOT           reach = -0.1712 fuera de [0.0, 1.0] en t=0.6481
+  HOT           reach = -0.1736 fuera de [0.0, 1.0] en t=0.6491
+  HOT           reach = -0.1760 fuera de [0.0, 1.0] en t=0.6500
+  HOT           reach = -0.1783 fuera de [0.0, 1.0] en t=0.6510
+  HOT           reach = -0.1806 fuera de [0.0, 1.0] en t=0.6520
+  HOT           reach = -0.1829 fuera de [0.0, 1.0] en t=0.6530
+  HOT           reach = -0.1852 fuera de [0.0, 1.0] en t=0.6540
+  HOT           reach = -0.1875 fuera de [0.0, 1.0] en t=0.6549
+  HOT           reach = -0.1897 fuera de [0.0, 1.0] en t=0.6559
+  HOT           reach = -0.1919 fuera de [0.0, 1.0] en t=0.6569
+  HOT           reach = -0.1941 fuera de [0.0, 1.0] en t=0.6579
+  HOT           reach = -0.1963 fuera de [0.0, 1.0] en t=0.6588
+  HOT           reach = -0.1984 fuera de [0.0, 1.0] en t=0.6598
+  HOT           reach = -0.2006 fuera de [0.0, 1.0] en t=0.6608
+  HOT           reach = -0.2027 fuera de [0.0, 1.0] en t=0.6618
+  HOT           reach = -0.2048 fuera de [0.0, 1.0] en t=0.6628
+  HOT           reach = -0.2068 fuera de [0.0, 1.0] en t=0.6637
+  HOT           reach = -0.2089 fuera de [0.0, 1.0] en t=0.6647
+  HOT           reach = -0.2109 fuera de [0.0, 1.0] en t=0.6657
+  HOT           reach = -0.2129 fuera de [0.0, 1.0] en t=0.6667
+  HOT           reach = -0.2149 fuera de [0.0, 1.0] en t=0.6676
+  HOT           reach = -0.2169 fuera de [0.0, 1.0] en t=0.6686
+  HOT           reach = -0.2188 fuera de [0.0, 1.0] en t=0.6696
+  HOT           reach = -0.2207 fuera de [0.0, 1.0] en t=0.6706
+  HOT           reach = -0.2226 fuera de [0.0, 1.0] en t=0.6716
+  HOT           reach = -0.2245 fuera de [0.0, 1.0] en t=0.6725
+  HOT           reach = -0.2264 fuera de [0.0, 1.0] en t=0.6735
+  HOT           reach = -0.2282 fuera de [0.0, 1.0] en t=0.6745
+  HOT           reach = -0.2300 fuera de [0.0, 1.0] en t=0.6755
+  HOT           reach = -0.2318 fuera de [0.0, 1.0] en t=0.6764
+  HOT           reach = -0.2336 fuera de [0.0, 1.0] en t=0.6774
+  HOT           reach = -0.2353 fuera de [0.0, 1.0] en t=0.6784
+  HOT           reach = -0.2370 fuera de [0.0, 1.0] en t=0.6794
+  HOT           reach = -0.2387 fuera de [0.0, 1.0] en t=0.6804
+  HOT           reach = -0.2404 fuera de [0.0, 1.0] en t=0.6813
+  HOT           reach = -0.2421 fuera de [0.0, 1.0] en t=0.6823
+  HOT           reach = -0.2437 fuera de [0.0, 1.0] en t=0.6833
+  HOT           reach = -0.2453 fuera de [0.0, 1.0] en t=0.6843
+  HOT           reach = -0.2469 fuera de [0.0, 1.0] en t=0.6852
+  HOT           reach = -0.2485 fuera de [0.0, 1.0] en t=0.6862
+  HOT           reach = -0.2500 fuera de [0.0, 1.0] en t=0.6872
+  HOT           reach = -0.2516 fuera de [0.0, 1.0] en t=0.6882
+  HOT           reach = -0.2531 fuera de [0.0, 1.0] en t=0.6891
+  HOT           reach = -0.2545 fuera de [0.0, 1.0] en t=0.6901
+  HOT           reach = -0.2560 fuera de [0.0, 1.0] en t=0.6911
+  HOT           reach = -0.2574 fuera de [0.0, 1.0] en t=0.6921
+  HOT           reach = -0.2588 fuera de [0.0, 1.0] en t=0.6931
+  HOT           reach = -0.2602 fuera de [0.0, 1.0] en t=0.6940
+  HOT           reach = -0.2616 fuera de [0.0, 1.0] en t=0.6950
+  HOT           reach = -0.2629 fuera de [0.0, 1.0] en t=0.6960
+  HOT           reach = -0.2643 fuera de [0.0, 1.0] en t=0.6970
+  HOT           reach = -0.2655 fuera de [0.0, 1.0] en t=0.6979
+  HOT           reach = -0.2668 fuera de [0.0, 1.0] en t=0.6989
+  HOT           reach = -0.2681 fuera de [0.0, 1.0] en t=0.6999
+  HOT           reach = -0.2693 fuera de [0.0, 1.0] en t=0.7009
+  HOT           reach = -0.2705 fuera de [0.0, 1.0] en t=0.7019
+  HOT           reach = -0.2717 fuera de [0.0, 1.0] en t=0.7028
+  HOT           reach = -0.2728 fuera de [0.0, 1.0] en t=0.7038
+  HOT           reach = -0.2740 fuera de [0.0, 1.0] en t=0.7048
+  HOT           reach = -0.2751 fuera de [0.0, 1.0] en t=0.7058
+  HOT           reach = -0.2761 fuera de [0.0, 1.0] en t=0.7067
+  HOT           reach = -0.2772 fuera de [0.0, 1.0] en t=0.7077
+  HOT           reach = -0.2782 fuera de [0.0, 1.0] en t=0.7087
+  HOT           reach = -0.2793 fuera de [0.0, 1.0] en t=0.7097
+  HOT           reach = -0.2802 fuera de [0.0, 1.0] en t=0.7107
+  HOT           reach = -0.2812 fuera de [0.0, 1.0] en t=0.7116
+  HOT           reach = -0.2821 fuera de [0.0, 1.0] en t=0.7126
+  HOT           reach = -0.2831 fuera de [0.0, 1.0] en t=0.7136
+  HOT           reach = -0.2840 fuera de [0.0, 1.0] en t=0.7146
+  HOT           reach = -0.2848 fuera de [0.0, 1.0] en t=0.7155
+  HOT           reach = -0.2857 fuera de [0.0, 1.0] en t=0.7165
+  HOT           reach = -0.2865 fuera de [0.0, 1.0] en t=0.7175
+  HOT           reach = -0.2873 fuera de [0.0, 1.0] en t=0.7185
+  HOT           reach = -0.2881 fuera de [0.0, 1.0] en t=0.7195
+  HOT           reach = -0.2888 fuera de [0.0, 1.0] en t=0.7204
+  HOT           reach = -0.2895 fuera de [0.0, 1.0] en t=0.7214
+  HOT           reach = -0.2902 fuera de [0.0, 1.0] en t=0.7224
+  HOT           reach = -0.2909 fuera de [0.0, 1.0] en t=0.7234
+  HOT           reach = -0.2916 fuera de [0.0, 1.0] en t=0.7243
+  HOT           reach = -0.2922 fuera de [0.0, 1.0] en t=0.7253
+  HOT           reach = -0.2928 fuera de [0.0, 1.0] en t=0.7263
+  HOT           reach = -0.2934 fuera de [0.0, 1.0] en t=0.7273
+  HOT           reach = -0.2939 fuera de [0.0, 1.0] en t=0.7283
+  HOT           reach = -0.2945 fuera de [0.0, 1.0] en t=0.7292
+  HOT           reach = -0.2950 fuera de [0.0, 1.0] en t=0.7302
+  HOT           reach = -0.2955 fuera de [0.0, 1.0] en t=0.7312
+  HOT           reach = -0.2959 fuera de [0.0, 1.0] en t=0.7322
+  HOT           reach = -0.2964 fuera de [0.0, 1.0] en t=0.7331
+  HOT           reach = -0.2968 fuera de [0.0, 1.0] en t=0.7341
+  HOT           reach = -0.2972 fuera de [0.0, 1.0] en t=0.7351
+  HOT           reach = -0.2975 fuera de [0.0, 1.0] en t=0.7361
+  HOT           reach = -0.2978 fuera de [0.0, 1.0] en t=0.7370
+  HOT           reach = -0.2982 fuera de [0.0, 1.0] en t=0.7380
+  HOT           reach = -0.2984 fuera de [0.0, 1.0] en t=0.7390
+  HOT           reach = -0.2987 fuera de [0.0, 1.0] en t=0.7400
+  HOT           reach = -0.2990 fuera de [0.0, 1.0] en t=0.7410
+  HOT           reach = -0.2992 fuera de [0.0, 1.0] en t=0.7419
+  HOT           reach = -0.2994 fuera de [0.0, 1.0] en t=0.7429
+  HOT           reach = -0.2995 fuera de [0.0, 1.0] en t=0.7439
+  HOT           reach = -0.2997 fuera de [0.0, 1.0] en t=0.7449
+  HOT           reach = -0.2998 fuera de [0.0, 1.0] en t=0.7458
+  HOT           reach = -0.2999 fuera de [0.0, 1.0] en t=0.7468
+  HOT           reach = -0.3000 fuera de [0.0, 1.0] en t=0.7488
+  HOT           reach = -0.2996 fuera de [0.0, 1.0] en t=0.7556
+  HOT           reach = -0.2993 fuera de [0.0, 1.0] en t=0.7576
+  HOT           reach = -0.2991 fuera de [0.0, 1.0] en t=0.7586
+  HOT           reach = -0.2988 fuera de [0.0, 1.0] en t=0.7595
+  HOT           reach = -0.2986 fuera de [0.0, 1.0] en t=0.7605
+  HOT           reach = -0.2983 fuera de [0.0, 1.0] en t=0.7615
+  HOT           reach = -0.2980 fuera de [0.0, 1.0] en t=0.7625
+  HOT           reach = -0.2977 fuera de [0.0, 1.0] en t=0.7634
+  HOT           reach = -0.2973 fuera de [0.0, 1.0] en t=0.7644
+  HOT           reach = -0.2970 fuera de [0.0, 1.0] en t=0.7654
+  HOT           reach = -0.2966 fuera de [0.0, 1.0] en t=0.7664
+  HOT           reach = -0.2961 fuera de [0.0, 1.0] en t=0.7674
+  HOT           reach = -0.2957 fuera de [0.0, 1.0] en t=0.7683
+  HOT           reach = -0.2952 fuera de [0.0, 1.0] en t=0.7693
+  HOT           reach = -0.2947 fuera de [0.0, 1.0] en t=0.7703
+  HOT           reach = -0.2942 fuera de [0.0, 1.0] en t=0.7713
+  HOT           reach = -0.2937 fuera de [0.0, 1.0] en t=0.7722
+  HOT           reach = -0.2931 fuera de [0.0, 1.0] en t=0.7732
+  HOT           reach = -0.2925 fuera de [0.0, 1.0] en t=0.7742
+  HOT           reach = -0.2919 fuera de [0.0, 1.0] en t=0.7752
+  HOT           reach = -0.2912 fuera de [0.0, 1.0] en t=0.7761
+  HOT           reach = -0.2906 fuera de [0.0, 1.0] en t=0.7771
+  HOT           reach = -0.2899 fuera de [0.0, 1.0] en t=0.7781
+  HOT           reach = -0.2892 fuera de [0.0, 1.0] en t=0.7791
+  HOT           reach = -0.2884 fuera de [0.0, 1.0] en t=0.7801
+  HOT           reach = -0.2877 fuera de [0.0, 1.0] en t=0.7810
+  HOT           reach = -0.2869 fuera de [0.0, 1.0] en t=0.7820
+  HOT           reach = -0.2861 fuera de [0.0, 1.0] en t=0.7830
+  HOT           reach = -0.2853 fuera de [0.0, 1.0] en t=0.7840
+  HOT           reach = -0.2844 fuera de [0.0, 1.0] en t=0.7849
+  HOT           reach = -0.2835 fuera de [0.0, 1.0] en t=0.7859
+  HOT           reach = -0.2826 fuera de [0.0, 1.0] en t=0.7869
+  HOT           reach = -0.2817 fuera de [0.0, 1.0] en t=0.7879
+  HOT           reach = -0.2807 fuera de [0.0, 1.0] en t=0.7889
+  HOT           reach = -0.2797 fuera de [0.0, 1.0] en t=0.7898
+  HOT           reach = -0.2787 fuera de [0.0, 1.0] en t=0.7908
+  HOT           reach = -0.2777 fuera de [0.0, 1.0] en t=0.7918
+  HOT           reach = -0.2767 fuera de [0.0, 1.0] en t=0.7928
+  HOT           reach = -0.2756 fuera de [0.0, 1.0] en t=0.7937
+  HOT           reach = -0.2745 fuera de [0.0, 1.0] en t=0.7947
+  HOT           reach = -0.2734 fuera de [0.0, 1.0] en t=0.7957
+  HOT           reach = -0.2722 fuera de [0.0, 1.0] en t=0.7967
+  HOT           reach = -0.2711 fuera de [0.0, 1.0] en t=0.7977
+  HOT           reach = -0.2699 fuera de [0.0, 1.0] en t=0.7986
+  HOT           reach = -0.2687 fuera de [0.0, 1.0] en t=0.7996
+  HOT           reach = -0.2674 fuera de [0.0, 1.0] en t=0.8006
+  HOT           reach = -0.2662 fuera de [0.0, 1.0] en t=0.8016
+  HOT           reach = -0.2649 fuera de [0.0, 1.0] en t=0.8025
+  HOT           reach = -0.2636 fuera de [0.0, 1.0] en t=0.8035
+  HOT           reach = -0.2623 fuera de [0.0, 1.0] en t=0.8045
+  HOT           reach = -0.2609 fuera de [0.0, 1.0] en t=0.8055
+  HOT           reach = -0.2595 fuera de [0.0, 1.0] en t=0.8065
+  HOT           reach = -0.2581 fuera de [0.0, 1.0] en t=0.8074
+  HOT           reach = -0.2567 fuera de [0.0, 1.0] en t=0.8084
+  HOT           reach = -0.2553 fuera de [0.0, 1.0] en t=0.8094
+  HOT           reach = -0.2538 fuera de [0.0, 1.0] en t=0.8104
+  HOT           reach = -0.2523 fuera de [0.0, 1.0] en t=0.8113
+  HOT           reach = -0.2508 fuera de [0.0, 1.0] en t=0.8123
+  HOT           reach = -0.2493 fuera de [0.0, 1.0] en t=0.8133
+  HOT           reach = -0.2477 fuera de [0.0, 1.0] en t=0.8143
+  HOT           reach = -0.2461 fuera de [0.0, 1.0] en t=0.8152
+  HOT           reach = -0.2445 fuera de [0.0, 1.0] en t=0.8162
+  HOT           reach = -0.2429 fuera de [0.0, 1.0] en t=0.8172
+  HOT           reach = -0.2413 fuera de [0.0, 1.0] en t=0.8182
+  HOT           reach = -0.2396 fuera de [0.0, 1.0] en t=0.8192
+  HOT           reach = -0.2379 fuera de [0.0, 1.0] en t=0.8201
+  HOT           reach = -0.2362 fuera de [0.0, 1.0] en t=0.8211
+  HOT           reach = -0.2344 fuera de [0.0, 1.0] en t=0.8221
+  HOT           reach = -0.2327 fuera de [0.0, 1.0] en t=0.8231
+  HOT           reach = -0.2309 fuera de [0.0, 1.0] en t=0.8240
+  HOT           reach = -0.2291 fuera de [0.0, 1.0] en t=0.8250
+  HOT           reach = -0.2273 fuera de [0.0, 1.0] en t=0.8260
+  HOT           reach = -0.2254 fuera de [0.0, 1.0] en t=0.8270
+  HOT           reach = -0.2236 fuera de [0.0, 1.0] en t=0.8280
+  HOT           reach = -0.2217 fuera de [0.0, 1.0] en t=0.8289
+  HOT           reach = -0.2198 fuera de [0.0, 1.0] en t=0.8299
+  HOT           reach = -0.2178 fuera de [0.0, 1.0] en t=0.8309
+  HOT           reach = -0.2159 fuera de [0.0, 1.0] en t=0.8319
+  HOT           reach = -0.2139 fuera de [0.0, 1.0] en t=0.8328
+  HOT           reach = -0.2119 fuera de [0.0, 1.0] en t=0.8338
+  HOT           reach = -0.2099 fuera de [0.0, 1.0] en t=0.8348
+  HOT           reach = -0.2079 fuera de [0.0, 1.0] en t=0.8358
+  HOT           reach = -0.2058 fuera de [0.0, 1.0] en t=0.8368
+  HOT           reach = -0.2037 fuera de [0.0, 1.0] en t=0.8377
+  HOT           reach = -0.2016 fuera de [0.0, 1.0] en t=0.8387
+  HOT           reach = -0.1995 fuera de [0.0, 1.0] en t=0.8397
+  HOT           reach = -0.1974 fuera de [0.0, 1.0] en t=0.8407
+  HOT           reach = -0.1952 fuera de [0.0, 1.0] en t=0.8416
+  HOT           reach = -0.1930 fuera de [0.0, 1.0] en t=0.8426
+  HOT           reach = -0.1908 fuera de [0.0, 1.0] en t=0.8436
+  HOT           reach = -0.1886 fuera de [0.0, 1.0] en t=0.8446
+  HOT           reach = -0.1863 fuera de [0.0, 1.0] en t=0.8456
+  HOT           reach = -0.1841 fuera de [0.0, 1.0] en t=0.8465
+  HOT           reach = -0.1818 fuera de [0.0, 1.0] en t=0.8475
+  HOT           reach = -0.1795 fuera de [0.0, 1.0] en t=0.8485
+  HOT           reach = -0.1771 fuera de [0.0, 1.0] en t=0.8495
+  HOT           reach = -0.1748 fuera de [0.0, 1.0] en t=0.8504
+  HOT           reach = -0.1724 fuera de [0.0, 1.0] en t=0.8514
+  HOT           reach = -0.1701 fuera de [0.0, 1.0] en t=0.8524
+  HOT           reach = -0.1676 fuera de [0.0, 1.0] en t=0.8534
+  HOT           reach = -0.1652 fuera de [0.0, 1.0] en t=0.8543
+  HOT           reach = -0.1628 fuera de [0.0, 1.0] en t=0.8553
+  HOT           reach = -0.1603 fuera de [0.0, 1.0] en t=0.8563
+  HOT           reach = -0.1578 fuera de [0.0, 1.0] en t=0.8573
+  HOT           reach = -0.1553 fuera de [0.0, 1.0] en t=0.8583
+  HOT           reach = -0.1528 fuera de [0.0, 1.0] en t=0.8592
+  HOT           reach = -0.1503 fuera de [0.0, 1.0] en t=0.8602
+  HOT           reach = -0.1477 fuera de [0.0, 1.0] en t=0.8612
+  HOT           reach = -0.1451 fuera de [0.0, 1.0] en t=0.8622
+  HOT           reach = -0.1425 fuera de [0.0, 1.0] en t=0.8631
+  HOT           reach = -0.1399 fuera de [0.0, 1.0] en t=0.8641
+  HOT           reach = -0.1373 fuera de [0.0, 1.0] en t=0.8651
+  HOT           reach = -0.1346 fuera de [0.0, 1.0] en t=0.8661
+  HOT           reach = -0.1320 fuera de [0.0, 1.0] en t=0.8671
+  HOT           reach = -0.1293 fuera de [0.0, 1.0] en t=0.8680
+  HOT           reach = -0.1266 fuera de [0.0, 1.0] en t=0.8690
+  HOT           reach = -0.1239 fuera de [0.0, 1.0] en t=0.8700
+  HOT           reach = -0.1211 fuera de [0.0, 1.0] en t=0.8710
+  HOT           reach = -0.1184 fuera de [0.0, 1.0] en t=0.8719
+  HOT           reach = -0.1156 fuera de [0.0, 1.0] en t=0.8729
+  HOT           reach = -0.1128 fuera de [0.0, 1.0] en t=0.8739
+  HOT           reach = -0.1100 fuera de [0.0, 1.0] en t=0.8749
+  HOT           reach = -0.1071 fuera de [0.0, 1.0] en t=0.8759
+  HOT           reach = -0.1043 fuera de [0.0, 1.0] en t=0.8768
+  HOT           reach = -0.1014 fuera de [0.0, 1.0] en t=0.8778
+  HOT           reach = -0.0986 fuera de [0.0, 1.0] en t=0.8788
+  HOT           reach = -0.0957 fuera de [0.0, 1.0] en t=0.8798
+  HOT           reach = -0.0927 fuera de [0.0, 1.0] en t=0.8807
+  HOT           reach = -0.0898 fuera de [0.0, 1.0] en t=0.8817
+  HOT           reach = -0.0869 fuera de [0.0, 1.0] en t=0.8827
+  HOT           reach = -0.0839 fuera de [0.0, 1.0] en t=0.8837
+  HOT           reach = -0.0809 fuera de [0.0, 1.0] en t=0.8847
+  HOT           reach = -0.0779 fuera de [0.0, 1.0] en t=0.8856
+  HOT           reach = -0.0749 fuera de [0.0, 1.0] en t=0.8866
+  HOT           reach = -0.0719 fuera de [0.0, 1.0] en t=0.8876
+  HOT           reach = -0.0688 fuera de [0.0, 1.0] en t=0.8886
+  HOT           reach = -0.0658 fuera de [0.0, 1.0] en t=0.8895
+  HOT           reach = -0.0627 fuera de [0.0, 1.0] en t=0.8905
+  HOT           reach = -0.0596 fuera de [0.0, 1.0] en t=0.8915
+  HOT           reach = -0.0565 fuera de [0.0, 1.0] en t=0.8925
+  HOT           reach = -0.0534 fuera de [0.0, 1.0] en t=0.8935
+  HOT           reach = -0.0502 fuera de [0.0, 1.0] en t=0.8944
+  HOT           reach = -0.0471 fuera de [0.0, 1.0] en t=0.8954
+  HOT           reach = -0.0439 fuera de [0.0, 1.0] en t=0.8964
+  HOT           reach = -0.0407 fuera de [0.0, 1.0] en t=0.8974
+  HOT           reach = -0.0375 fuera de [0.0, 1.0] en t=0.8983
+  HOT           reach = -0.0343 fuera de [0.0, 1.0] en t=0.8993
+  HOT           reach = -0.0311 fuera de [0.0, 1.0] en t=0.9003
+  HOT           reach = -0.0278 fuera de [0.0, 1.0] en t=0.9013
+  HOT           reach = -0.0246 fuera de [0.0, 1.0] en t=0.9022
+  HOT           reach = -0.0213 fuera de [0.0, 1.0] en t=0.9032
+  HOT           reach = -0.0180 fuera de [0.0, 1.0] en t=0.9042
+  HOT           reach = -0.0147 fuera de [0.0, 1.0] en t=0.9052
+  HOT           reach = -0.0114 fuera de [0.0, 1.0] en t=0.9062
+  HOT           reach = -0.0081 fuera de [0.0, 1.0] en t=0.9071
+  HOT           reach = -0.0048 fuera de [0.0, 1.0] en t=0.9081
+  HOT           reach = -0.0014 fuera de [0.0, 1.0] en t=0.9091
+  HOT           reach = -0.2682 fuera de [0.0, 1.0] en t=-0.3000
