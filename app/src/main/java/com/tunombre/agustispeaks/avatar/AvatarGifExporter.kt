@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.FileProvider
 import com.tunombre.agustispeaks.avatar.catalog.AvatarCatalog
 import com.tunombre.agustispeaks.data.model.AvatarConfig
+import com.tunombre.agustispeaks.validacion.Validacion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.BufferedOutputStream
@@ -50,6 +51,9 @@ object AvatarGifExporter {
         BufferedOutputStream(FileOutputStream(file)).use { out ->
             GifEncoder.encode(out, W, H, pixels, delayCs)
         }
+        // Medición de tesis. Va después del `use`, con el flujo ya cerrado: antes
+        // de eso el tamaño del archivo todavía no está completo.
+        Validacion.gifExportado(file.length(), FRAMES)
         FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
     }
 

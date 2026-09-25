@@ -43,6 +43,11 @@ android {
 
     buildFeatures {
         compose = true
+        // Desde AGP 8 hay que pedirlo: sin esto no existe `BuildConfig.DEBUG`,
+        // que es la compuerta automática de la instrumentación de medición
+        // (ver `validacion/Validacion.kt`). Una constante a mano sola no
+        // alcanzaría: protege solo si alguien se acuerda de bajarla.
+        buildConfig = true
     }
 
     packaging {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.speech.tts.Voice
+import com.tunombre.agustispeaks.validacion.Validacion
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,6 +48,9 @@ class TtsManager(context: Context) {
     private val progressListener = object : UtteranceProgressListener() {
         override fun onStart(utteranceId: String?) {
             _state.value = _state.value.copy(isSpeaking = true)
+            // Medición de tesis. Este es el instante en que empieza a salir
+            // sonido, que es el otro extremo de la latencia. Ver `Validacion`.
+            Validacion.vozIniciada()
         }
 
         override fun onDone(utteranceId: String?) {

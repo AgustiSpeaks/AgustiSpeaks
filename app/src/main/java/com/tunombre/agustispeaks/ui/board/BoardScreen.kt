@@ -38,6 +38,7 @@ import com.tunombre.agustispeaks.R
 import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.phrase.LocalPhraseController
 import com.tunombre.agustispeaks.tts.LocalTtsManager
+import com.tunombre.agustispeaks.validacion.Validacion
 import com.tunombre.agustispeaks.ui.LocalAppViewModel
 import com.tunombre.agustispeaks.ui.components.CategoryCard
 import com.tunombre.agustispeaks.ui.components.PhrasePanel
@@ -72,6 +73,9 @@ fun BoardScreen(
 
     fun onTapPictogram(pictogram: Pictogram) {
         val phrase = phraseController.addWord(pictogram.text)
+        // Medición de tesis: arranca el cronómetro de la latencia. Ver
+        // `Validacion`; en builds de release no hace nada.
+        Validacion.pulsacion(phrase)
         tts.speak(phrase)
         appVm.recordPhrase(phrase)
     }
