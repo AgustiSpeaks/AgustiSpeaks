@@ -44,6 +44,10 @@ fun DrawScope.drawAvatarFigure(config: AvatarConfig, pose: AvatarPose) {
 
     /* Sombra en el piso: queda quieta aunque el avatar rebote o salte. */
     run {
+        // El recorte de abajo es el que importa: `bob` negativo es hundirse
+        // (tristeza), y sin el piso en 0 la sombra se agrandaría en vez de
+        // quedarse quieta. El tope de arriba ya no recorta nada, porque ningún
+        // `bob` pasa de 1; se queda como red por si alguno vuelve a pasarse.
         val lift = pose.bob.coerceIn(0f, 1f)
         val sw2 = W * 0.30f * (1f - 0.35f * lift)
         drawOval(
@@ -379,7 +383,9 @@ private fun DrawScope.drawProp(
             drawCircle(OUTLINE, k * 0.11f, Offset(hand.x + k * 0.06f, hand.y - k * 0.10f), style = Stroke(k * 0.05f))
         }
 
-        Prop.CART -> {
+        // Los dos carritos comparten la caja y se separan solo en la manija:
+        // empujado, llega hasta la mano; nombrado, queda parado solo.
+        Prop.CART, Prop.CART_STILL -> {
             val cc = cx + W * 0.21f
             val techo = hip - H * 0.05f
             val alto = H * 0.11f
@@ -392,7 +398,11 @@ private fun DrawScope.drawProp(
                 drawLine(OUTLINE, Offset(x, techo + k * 0.06f), Offset(x, techo + alto - k * 0.06f), k * 0.05f)
             }
             drawRoundRect(OUTLINE, esquina, tam, CornerRadius(k * 0.10f), style = Stroke(k * 0.08f))
-            drawLine(Color(0xFF607D8B), Offset(cc - k * 0.80f, techo), hand, k * 0.14f, cap = StrokeCap.Round)
+            val puno = Offset(cc - k * 0.80f, techo)
+            val destino =
+                if (prop == Prop.CART) hand
+                else Offset(puno.x - k * 0.30f, puno.y - k * 0.55f)
+            drawLine(Color(0xFF607D8B), puno, destino, k * 0.14f, cap = StrokeCap.Round)
             drawCircle(OUTLINE, k * 0.17f, Offset(cc - k * 0.45f, techo + alto + k * 0.17f))
             drawCircle(OUTLINE, k * 0.17f, Offset(cc + k * 0.45f, techo + alto + k * 0.17f))
         }
@@ -464,6 +474,32 @@ private fun DrawScope.drawProp(
                     style = Stroke(k * 0.045f)
                 )
             }
+        }
+
+        /**
+         * Libro cerrado, en alto. Es el gemelo del cuaderno, y se distingue por
+         * el lomo en vez de la espiral y por el canto de las hojas. [Prop.BOOK]
+         * es el libro ABIERTO: sirve para leer, no para nombrarlo.
+         */
+        Prop.BOOK_HELD -> {
+            val esquina = Offset(hand.x - k * 0.48f, hand.y - k * 0.72f)
+            val tam = Size(k * 0.96f, k * 1.34f)
+            drawRoundRect(Color(0xFFEF9A9A), esquina, tam, CornerRadius(k * 0.07f))
+            // Canto de las hojas, del lado opuesto al lomo.
+            drawRoundRect(
+                Color(0xFFFFF8E1),
+                Offset(esquina.x + tam.width - k * 0.17f, esquina.y + k * 0.07f),
+                Size(k * 0.13f, tam.height - k * 0.14f),
+                CornerRadius(k * 0.04f)
+            )
+            // Lomo: la banda que lo separa del cuaderno de un vistazo.
+            drawRoundRect(
+                Color(0xFFC62828),
+                Offset(esquina.x + k * 0.04f, esquina.y + k * 0.05f),
+                Size(k * 0.17f, tam.height - k * 0.10f),
+                CornerRadius(k * 0.05f)
+            )
+            drawRoundRect(OUTLINE, esquina, tam, CornerRadius(k * 0.07f), style = Stroke(k * 0.07f))
         }
 
         // Lápiz solo, en alto. Sin hoja: acá se nombra el objeto, no se usa.

@@ -132,7 +132,20 @@ fun avatarPoseFor(r: ResolvedAction, t: Float): AvatarPose {
 
         AvatarAction.GO -> walk(false)
         AvatarAction.RUN -> walk(true)
-        AvatarAction.JUMP -> AvatarPose(stance = Stance.JUMP, crouch = if (up < 0.35f) 1f - up * 2.8f else 0f, bob = if (up >= 0.35f) (up - 0.35f) * 2.2f else 0f, armL = ArmPose.WAVE, armR = ArmPose.WAVE, expression = Expression.HAPPY, fx = Fx.JUMP_ARC)
+        // `bob` es la fracción del ascenso ya recorrida, de 0 a 1. El factor
+        // era 2.2, que lo llevaba hasta 1.43 y se salía del rango que declara
+        // `AvatarPose`. No era inocuo: la figura sube por el valor crudo
+        // (`dy = -bob * H * 0.04`) y la sombra lo recortaba en 1, así que en lo
+        // alto del salto la figura seguía subiendo y la sombra dejaba de
+        // achicarse. Dividir por 0.65 normaliza el tramo y además dice qué
+        // significa el número.
+        AvatarAction.JUMP -> AvatarPose(
+            stance = Stance.JUMP,
+            crouch = if (up < 0.35f) 1f - up * 2.8f else 0f,
+            bob = if (up >= 0.35f) (up - 0.35f) / 0.65f else 0f,
+            armL = ArmPose.WAVE, armR = ArmPose.WAVE,
+            expression = Expression.HAPPY, fx = Fx.JUMP_ARC
+        )
         AvatarAction.DANCE -> AvatarPose(bob = abs(w) * 0.6f, lean = 0.4f * w2, headTilt = 8f * w, armL = ArmPose.WAVE, armR = ArmPose.WAVE, armSwing = w, expression = Expression.HAPPY, fx = Fx.MUSIC)
         // Con silla e inodoro detrás, "sentarse" y "baño" dejan de ser la misma pose.
         AvatarAction.SIT -> AvatarPose(stance = Stance.SIT, crouch = 1f, bob = 0.04f * w, prop = Prop.CHAIR)

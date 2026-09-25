@@ -42,6 +42,22 @@ object ProceduralPoses {
      *   ninguna cantidad de fotogramas lo describe. Es el mismo `if` que ya
      *   hacía procedural a comer; que estuviera de este lado fue un descuido
      *   que encontró el test de paridad.
+     * - una pose que **se bifurca según la prenda**: vestirse. Con un gorro o
+     *   una remera el cuerpo queda erguido; con zapatos o pantalón se agacha, y
+     *   `crouch`, `headTilt` y `lean` toman formas completamente distintas. Un
+     *   registro tiene una sola pista por campo, así que no puede llevar las dos
+     *   ramas a la vez.
+     *
+     * Vestirse es la más interesante de las once, y por eso vale anotarlo acá:
+     * **es una animación simple que igual no se puede declarar.** No la saca del
+     * catálogo la cantidad de movimiento sino la naturaleza de su parámetro: la
+     * parte del cuerpo es categórica, no continua, y el intérprete solo sabe
+     * interpolar. La frontera entre datos y código no la marca la complejidad;
+     * la marca si lo que hace variar a la pose es un número o una categoría.
+     *
+     * La alternativa sería partirla en dos registros —vestirse arriba y
+     * vestirse abajo— y que el resolvedor elija cuál. Eso la devolvería al
+     * catálogo, a costa de que una acción pase a tener dos ids.
      */
     val byAction: Map<AvatarAction, String> = mapOf(
         AvatarAction.HURT to "dolor",
@@ -54,7 +70,8 @@ object ProceduralPoses {
         AvatarAction.LISTEN to "escuchar",
         AvatarAction.MEDICINE to "remedio",
         AvatarAction.LATER to "despues",
-        AvatarAction.BEFORE to "antes"
+        AvatarAction.BEFORE to "antes",
+        AvatarAction.DRESS to "vestirse"
     )
 
     private val byName: Map<String, AvatarAction> =

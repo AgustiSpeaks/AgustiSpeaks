@@ -68,9 +68,16 @@ enum class Prop {
     MONEY, CART, BAG, BASKET, BACKPACK, TABLE,
     /**
      * Objetos que se muestran en la mano, sin usarlos. [PENCIL] en cambio es el
-     * equipo de dibujar: hoja apoyada y lápiz trazando.
+     * equipo de dibujar: hoja apoyada y lápiz trazando, y [BOOK] es el libro
+     * abierto de leer.
      */
-    NOTEBOOK, PENCIL_HELD,
+    NOTEBOOK, PENCIL_HELD, BOOK_HELD,
+    /**
+     * El carrito solo, quieto, sin nadie empujándolo. Hace falta aparte de
+     * [CART] porque a ese la manija le llega hasta la mano: sirve para "estoy
+     * comprando" y no para "esto es un carrito".
+     */
+    CART_STILL,
     /** Escritorio armado: mesa, cuaderno apoyado y lápiz escribiendo. */
     DESK,
     /** Reloj junto a la cabeza. `propPhase` es la vuelta de las agujas. */

@@ -73,11 +73,17 @@ object ActionResolver {
         /* 3.7) Compras y escuela: objetos que se llevan o se usan. Van antes de
                 los verbos porque son sustantivos y nadie se los disputa. */
         when {
-            has(t, "pagar", "pago") || w(t, "plata", "dinero", "moneda", "monedas", "billete") ->
-                return R(AvatarAction.PAY, prop = Prop.MONEY)
-            has(t, "comprar", "compro", "compra") ||
-                w(t, "carrito", "changuito", "supermercado") ->
+            // En cada pareja el VERBO va primero: si la frase trae los dos
+            // ("pagar con la plata"), gana la acción, no el objeto nombrado.
+            has(t, "pagar", "pago") -> return R(AvatarAction.PAY, prop = Prop.MONEY)
+            w(t, "plata", "dinero", "moneda", "monedas", "billete") ->
+                return R(AvatarAction.SHOW, prop = Prop.MONEY)
+            has(t, "comprar", "compro", "compra") || w(t, "supermercado") ->
                 return R(AvatarAction.SHOP, prop = Prop.CART)
+            // El carrito quieto y el avatar señalándolo. Un carrito no se
+            // levanta con la mano, así que acá "mostrar" es señalar.
+            w(t, "carrito", "changuito") ->
+                return R(AvatarAction.POINT, prop = Prop.CART_STILL)
             w(t, "bolsa", "bolsas") -> return R(AvatarAction.CARRY, prop = Prop.BAG)
             w(t, "canasta", "canasto") -> return R(AvatarAction.CARRY, prop = Prop.BASKET)
             // Ponerse la mochila es vestirse, con la espalda como destino.
@@ -89,6 +95,10 @@ object ActionResolver {
             w(t, "cuaderno", "cuadernos") -> return R(AvatarAction.SHOW, prop = Prop.NOTEBOOK)
             w(t, "lapiz", "lapices", "lapicera", "birome") ->
                 return R(AvatarAction.SHOW, prop = Prop.PENCIL_HELD)
+            // "Libro" nombra; "leer" es la acción, y queda en la sección 4 con
+            // el libro abierto. Que los dos cayeran en LEER los volvía la misma
+            // imagen, que es el mismo error que ya tenían lápiz y cuaderno.
+            w(t, "libro", "libros") -> return R(AvatarAction.SHOW, prop = Prop.BOOK_HELD)
             has(t, "escribir", "escribo", "escribe") ->
                 return R(AvatarAction.WRITE, prop = Prop.DESK)
             w(t, "mesa", "escritorio", "pupitre") -> return R(AvatarAction.SIT, prop = Prop.TABLE)
@@ -180,7 +190,9 @@ object ActionResolver {
             has(t, "dormir", "duermo", "acostar", "descansar") || w(t, "sueno", "siesta") -> return R(AvatarAction.SLEEP)
             w(t, "cansado", "cansada", "agotado") -> return R(AvatarAction.TIRED)
             has(t, "escuchar", "escucho") || w(t, "oir") -> return R(AvatarAction.LISTEN)
-            has(t, "leer", "leo") || w(t, "libro", "cuento") -> return R(AvatarAction.READ)
+            // "libro" salió de acá: se fue a la sección 3.7 como objeto que se
+            // nombra. Queda "cuento", que es lo que se lee, y el verbo.
+            has(t, "leer", "leo") || w(t, "cuento") -> return R(AvatarAction.READ)
             // Escribir y lápiz salieron de acá: ahora tienen sus propias
             // acciones en la sección 3.7. Queda dibujar y pintar, de pie.
             has(t, "dibujar", "dibujo", "pintar", "pinto") -> return R(AvatarAction.SCRIBBLE)
