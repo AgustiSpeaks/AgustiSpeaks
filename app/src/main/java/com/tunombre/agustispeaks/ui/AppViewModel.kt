@@ -172,7 +172,30 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         )
     }
 
-    fun removeCustomPictogram(pictogram: Pictogram) = launch { repo.removeCustomPictogram(pictogram.id) }
+    /**
+     * Borra el pictograma propio y, en el mismo momento, su foto.
+     *
+     * A diferencia de los favoritos, acá no hay "Deshacer" que necesite la foto
+     * después: la confirmación se pide antes de borrar. Así, quien borra un
+     * pictograma sabe que su foto dejó de estar en el teléfono.
+     *
+     * Primero el registro y después el archivo: si borrar el archivo fallara,
+     * queda huérfano y la limpieza del próximo arranque lo borra igual. Nunca
+     * al revés, que dejaría un pictograma apuntando a una foto inexistente.
+     *
+     * Antes de borrar se comprueba que nada más use el mismo archivo. Hoy cada
+     * pictograma propio tiene el suyo y ningún favorito lo comparte, pero si
+     * eso cambiara, borrarlo dejaría a otro elemento sin foto.
+     */
+    fun removeCustomPictogram(pictogram: Pictogram) = launch {
+        repo.removeCustomPictogram(pictogram.id)
+        val photo = pictogram.photo ?: return@launch
+        val stillUsed = repo.favorites.first().any { it.photo == photo } ||
+            repo.customPictograms.first().any { it.photo == photo }
+        if (!stillUsed) {
+            withContext(Dispatchers.IO) { UserPhotos.delete(getApplication<Application>(), photo) }
+        }
+    }
 
     private fun launch(block: suspend () -> Unit) {
         viewModelScope.launch { block() }

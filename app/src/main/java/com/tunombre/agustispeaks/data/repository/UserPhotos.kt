@@ -111,16 +111,28 @@ object UserPhotos {
     }
 
     /**
+     * Borra la foto [name] en el momento. Devuelve si quedó fuera del disco,
+     * también cuando ya no estaba.
+     */
+    fun delete(context: Context, name: String): Boolean {
+        val f = file(context, name)
+        return !f.exists() || f.delete()
+    }
+
+    /**
      * Borra las fotos que ya no usa nadie, y la última captura de la cámara.
      * [inUse] tiene que traer **todas** las fotos vigentes —de pictogifts y de
      * pictogramas propios—: la que falte se borra.
      *
-     * No se borran en el momento en que se quita un favorito o un pictograma,
-     * sino acá, al arrancar: así "Deshacer" puede devolver un favorito quitado
-     * por error con su foto entera, y una foto elegida en un formulario que
-     * después se canceló se limpia sola. Y solo se tocan archivos anteriores a
-     * [startedAt], para no borrar una foto que se está guardando justo mientras
-     * esto corre.
+     * Cubre lo que no se borra en el momento:
+     * - las fotos de **favoritos** quitados, que esperan hasta acá para que
+     *   "Deshacer" pueda devolverlos con su foto entera;
+     * - las fotos elegidas en un formulario que después se **canceló**;
+     * - y, como red, la foto de un pictograma propio cuyo borrado inmediato
+     *   ([delete]) hubiera fallado.
+     *
+     * Solo se tocan archivos anteriores a [startedAt], para no borrar una foto
+     * que se está guardando justo mientras esto corre.
      */
     fun cleanUp(context: Context, inUse: Set<String>, startedAt: Long) {
         File(context.filesDir, FOLDER).listFiles()?.forEach { f ->
