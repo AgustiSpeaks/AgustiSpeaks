@@ -26,6 +26,16 @@ object SeedData {
     /*  Palabras núcleo (siempre visibles, iguales en todos los lugares)      */
     /* --------------------------------------------------------------------- */
 
+    /**
+     * Solo lo que arma cualquier frase, en cualquier lugar: quién, qué quiero,
+     * sí o no, y los pedidos urgentes. Los verbos, los saludos y las palabras
+     * para señalar se mudaron a sus categorías, para que este panel se pueda
+     * recorrer de un vistazo.
+     *
+     * Cada palabra que salió de acá fue a una categoría que está **en los ocho
+     * lugares**. Si no, habría desaparecido de alguno: una palabra núcleo se veía
+     * en todas partes, y "Gracias" tiene que poder decirse en el hospital.
+     */
     val coreWords: List<Pictogram> = listOf(
         core("yo", "Yo", "person"),
         core("tu", "Tú", "person"),
@@ -33,25 +43,12 @@ object SeedData {
         core("no_quiero", "No quiero", "do_not_touch"),
         core("si", "Sí", "thumb_up"),
         core("no", "No", "thumb_down"),
-        core("mas", "Más", "add_circle"),
-        core("menos", "Menos", "remove_circle"),
         core("ayuda", "Ayuda", "volunteer_activism"),
         core("parar", "Parar", "back_hand"),
-        core("ir", "Ir", "directions_walk"),
-        core("venir", "Venir", "waving_hand"),
-        core("comer", "Comer", "restaurant"),
-        core("beber", "Beber", "local_drink"),
-        core("jugar", "Jugar", "sports_esports"),
-        core("mirar", "Mirar", "visibility"),
-        core("dar", "Dar", "volunteer_activism"),
         core("me_gusta", "Me gusta", "favorite"),
         core("no_me_gusta", "No me gusta", "heart_broken"),
         core("me_duele", "Me duele", "healing"),
-        core("termine", "Terminé", "check_circle"),
-        core("hola", "Hola", "waving_hand"),
-        core("gracias", "Gracias", "favorite"),
-        core("esto", "Esto", "touch_app"),
-        core("aqui", "Aquí", "place")
+        core("termine", "Terminé", "check_circle")
     )
 
     /* --------------------------------------------------------------------- */
@@ -69,7 +66,7 @@ object SeedData {
         Category("higiene", "Higiene", "clean_hands", "#C8E6C9"),
         Category("tiempo", "Tiempo", "wb_sunny", "#FFF59D"),
         Category("familia", "Familia", "family_restroom", "#E1BEE7"),
-        Category("juego", "Juego", "toys", "#FFCC80"),
+        Category("juego", "Juego", "nino_jugando", "#FFCC80"),
         Category("lugares", "Lugares", "place", "#B2DFDB"),
         Category("escuela", "Escuela", "school", "#B39DDB"),
         Category("compras", "Compras", "shopping_cart", "#FFE082"),
@@ -89,6 +86,10 @@ object SeedData {
      * Hasta ahora esa categoría no figuraba en ningún lugar, así que sus diez
      * pictogramas existían en la semilla y eran inalcanzables en el tablero. Lo
      * encontró la prueba de inventario, contando lugares por categoría.
+     *
+     * **"social" también va en todos**, por la misma razón: tiene "Hola",
+     * "Gracias", "Más" y "Esto", que antes eran palabras núcleo y se veían en
+     * todas partes. Baño, dormitorio y hospital no la tenían.
      */
     val places: List<Place> = listOf(
         Place(
@@ -105,7 +106,7 @@ object SeedData {
         ),
         Place(
             "bano", "Baño", "bathtub", "#B5EAD7",
-            listOf("cuerpo", "higiene", "ropa", "acciones", "sentimientos", "lugares")
+            listOf("cuerpo", "higiene", "ropa", "acciones", "sentimientos", "social", "lugares")
         ),
         Place(
             "patio", "Patio", "park", "#D0E8C5",
@@ -113,11 +114,11 @@ object SeedData {
         ),
         Place(
             "dormitorio", "Dormitorio", "bed", "#E2C6F0",
-            listOf("acciones", "sentimientos", "cuerpo", "ropa", "juego", "tiempo", "lugares")
+            listOf("acciones", "sentimientos", "social", "cuerpo", "ropa", "juego", "tiempo", "lugares")
         ),
         Place(
             "hospital", "Hospital", "local_hospital", "#FFB3BA",
-            listOf("cuerpo", "dolor", "sentimientos", "acciones", "familia", "higiene", "lugares")
+            listOf("cuerpo", "dolor", "sentimientos", "acciones", "social", "familia", "higiene", "lugares")
         ),
         Place(
             "tienda", "Tienda", "shopping_cart", "#F0DAB1",
@@ -155,7 +156,15 @@ object SeedData {
         Seed("te", "Té", "local_cafe", "bebidas"),
         Seed("chocolatada", "Chocolatada", "emoji_food_beverage", "bebidas"),
 
-        // Acciones
+        // Acciones. Los siete primeros eran palabras núcleo: van adelante porque
+        // son los verbos que más se usan, y así se ven sin desplazar la grilla.
+        Seed("ir", "Ir", "directions_walk", "acciones"),
+        Seed("venir", "Venir", "waving_hand", "acciones"),
+        Seed("comer", "Comer", "restaurant", "acciones"),
+        Seed("beber", "Beber", "local_drink", "acciones"),
+        Seed("jugar", "Jugar", "sports_esports", "acciones"),
+        Seed("mirar", "Mirar", "visibility", "acciones"),
+        Seed("dar", "Dar", "volunteer_activism", "acciones"),
         Seed("abrir", "Abrir", "lock_open", "acciones"),
         Seed("cerrar", "Cerrar", "lock", "acciones"),
         Seed("sentarse", "Sentarse", "event_seat", "acciones"),
@@ -262,7 +271,8 @@ object SeedData {
         Seed("tobogan", "Tobogán", "toys", "juego"),
         Seed("hamaca", "Hamaca", "toys", "juego"),
 
-        // Lugares
+        // Lugares. "Aquí" era palabra núcleo; va primero por ser la más usada.
+        Seed("aqui", "Aquí", "place", "lugares"),
         Seed("casa", "Casa", "home", "lugares"),
         Seed("bano_lugar", "Baño", "wc", "lugares"),
         Seed("cocina_lugar", "Cocina", "restaurant", "lugares"),
@@ -295,11 +305,16 @@ object SeedData {
         Seed("canasta", "Canasta", "shopping_basket", "compras"),
         Seed("plata", "Plata", "paid", "compras"),
 
-        // Social
+        // Social. "Hola" y "Gracias" ya estaban acá y también en las palabras
+        // núcleo; ahora están solo acá. "Más", "Menos" y "Esto" eran núcleo y
+        // van junto a "Por favor" porque son palabras para pedir.
         Seed("hola_s", "Hola", "waving_hand", "social"),
         Seed("chau", "Chau", "waving_hand", "social"),
         Seed("gracias_s", "Gracias", "favorite", "social"),
         Seed("por_favor", "Por favor", "volunteer_activism", "social"),
+        Seed("mas", "Más", "add_circle", "social"),
+        Seed("menos", "Menos", "remove_circle", "social"),
+        Seed("esto", "Esto", "touch_app", "social"),
         Seed("perdon", "Perdón", "sentiment_dissatisfied", "social"),
         Seed("buenos_dias", "Buenos días", "wb_sunny", "social"),
         Seed("buenas_noches", "Buenas noches", "bedtime", "social"),

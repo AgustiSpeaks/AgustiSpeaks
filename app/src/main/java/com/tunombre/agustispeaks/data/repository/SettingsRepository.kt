@@ -12,19 +12,23 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.tunombre.agustispeaks.data.model.AvatarConfig
 import com.tunombre.agustispeaks.data.model.AvatarGender
 import com.tunombre.agustispeaks.data.model.AvatarKind
+import com.tunombre.agustispeaks.data.model.Pictogift
+import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.data.model.TextSizeOption
 import com.tunombre.agustispeaks.data.model.UserSettings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.json.JSONArray
+import org.json.JSONObject
 
 private const val MAX_RECENTS = 30
 
 private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "agusti_settings")
 
 /**
- * Persistencia de [UserSettings], [AvatarConfig] y el historial de frases
- * recientes con DataStore (Preferences).
+ * Persistencia de [UserSettings], [AvatarConfig], el historial de frases
+ * recientes, los pictogifts favoritos y los pictogramas propios con DataStore
+ * (Preferences).
  */
 class SettingsRepository(context: Context) {
 
@@ -85,6 +89,78 @@ class SettingsRepository(context: Context) {
 
     suspend fun clearRecents() = ds.edit { it.remove(K.RECENTS) }
 
+    /**
+     * Pictogifts guardados, del último agregado al primero. Van en una clave
+     * aparte de recientes a propósito: borrar el historial no puede llevarse lo
+     * que alguien eligió guardar. Por lo mismo no tienen tope.
+     */
+    val favorites: Flow<List<Pictogift>> = ds.data.map { parseFavorites(it[K.FAVORITES]) }
+
+    /** Guarda [gift], o lo quita si ya estaba. Se compara por id, no por texto. */
+    suspend fun toggleFavorite(gift: Pictogift) {
+        if (gift.phrase.isBlank()) return
+        ds.edit { p ->
+            val current = parseFavorites(p[K.FAVORITES])
+            val without = current.filterNot { it.id == gift.id }
+            val next = if (without.size < current.size) without else listOf(gift) + current
+            p[K.FAVORITES] = favoritesJson(next)
+        }
+    }
+
+    /** Guarda [gift] si todavía no estaba. Nunca lo quita. */
+    suspend fun addFavorite(gift: Pictogift) {
+        if (gift.phrase.isBlank()) return
+        ds.edit { p ->
+            val current = parseFavorites(p[K.FAVORITES])
+            if (current.none { it.id == gift.id }) {
+                p[K.FAVORITES] = favoritesJson(listOf(gift) + current)
+            }
+        }
+    }
+
+    /**
+     * "Deshacer": devuelve los favoritos quitados, cada uno al lugar donde
+     * estaba y no arriba de todo. [removed] va en el orden en que se quitaron,
+     * con la posición que tenía cada uno en ese momento.
+     *
+     * Se reinsertan **del último quitado al primero**, y en una sola escritura.
+     * Cada posición se midió sobre la lista sin los quitados antes que él, así
+     * que en orden inverso cada una cae sobre la lista exacta en la que se midió
+     * y la original queda reconstruida tal cual.
+     */
+    suspend fun restoreFavorites(removed: List<Pair<Pictogift, Int>>) {
+        if (removed.isEmpty()) return
+        ds.edit { p ->
+            val list = parseFavorites(p[K.FAVORITES]).toMutableList()
+            removed.asReversed().forEach { (gift, at) ->
+                if (list.none { it.id == gift.id }) list.add(at.coerceIn(0, list.size), gift)
+            }
+            p[K.FAVORITES] = favoritesJson(list)
+        }
+    }
+
+    /**
+     * Pictogramas creados por quien usa la app, con nombre y foto. Se suman a
+     * los de la semilla en su categoría. Se guardan en el orden en que se
+     * crearon, y así se muestran: al final de la categoría.
+     */
+    val customPictograms: Flow<List<Pictogram>> = ds.data.map { parseCustom(it[K.CUSTOM_PICTOGRAMS]) }
+
+    suspend fun addCustomPictogram(pictogram: Pictogram) {
+        if (pictogram.text.isBlank()) return
+        ds.edit { p ->
+            val current = parseCustom(p[K.CUSTOM_PICTOGRAMS])
+            p[K.CUSTOM_PICTOGRAMS] = customJson(current + pictogram)
+        }
+    }
+
+    suspend fun removeCustomPictogram(id: String) {
+        ds.edit { p ->
+            val current = parseCustom(p[K.CUSTOM_PICTOGRAMS])
+            p[K.CUSTOM_PICTOGRAMS] = customJson(current.filterNot { it.id == id })
+        }
+    }
+
     suspend fun setLanguage(v: String) = ds.edit { it[K.LANGUAGE] = v }
     suspend fun setIgnoreRepeatedTaps(v: Boolean) = ds.edit { it[K.IGNORE_REPEATED_TAPS] = v }
     suspend fun setActivateOnRelease(v: Boolean) = ds.edit { it[K.ACTIVATE_ON_RELEASE] = v }
@@ -126,6 +202,88 @@ class SettingsRepository(context: Context) {
         }.getOrDefault(emptyList())
     }
 
+    /**
+     * Cada favorito es un objeto `{id, frase, foto}`. La primera versión de
+     * favoritos guardaba solo el texto, así que un elemento que es un texto se
+     * lee como pictogift sin foto: los favoritos viejos no se pierden, y pasan
+     * al formato nuevo la próxima vez que se guarde uno.
+     */
+    private fun parseFavorites(json: String?): List<Pictogift> {
+        if (json.isNullOrBlank()) return emptyList()
+        return runCatching {
+            val arr = JSONArray(json)
+            (0 until arr.length()).mapNotNull { i ->
+                when (val e = arr.get(i)) {
+                    is String -> e.takeIf { it.isNotBlank() }?.let { Pictogift.fromText(it) }
+                    is JSONObject -> {
+                        val id = e.optString("id")
+                        val phrase = e.optString("frase")
+                        if (id.isBlank() || phrase.isBlank()) {
+                            null
+                        } else {
+                            Pictogift(id, phrase, e.optString("foto").takeIf { it.isNotBlank() })
+                        }
+                    }
+                    else -> null
+                }
+            }
+        }.getOrDefault(emptyList())
+    }
+
+    private fun favoritesJson(gifts: List<Pictogift>): String {
+        val arr = JSONArray()
+        gifts.forEach { g ->
+            arr.put(JSONObject().apply {
+                put("id", g.id)
+                put("frase", g.phrase)
+                // Sin foto la clave no se escribe: optString de un null guardado
+                // devolvería el texto "null" y parecería un nombre de archivo.
+                g.photo?.let { put("foto", it) }
+            })
+        }
+        return arr.toString()
+    }
+
+    /** Cada pictograma propio es un objeto `{id, categoria, texto, foto}`. */
+    private fun parseCustom(json: String?): List<Pictogram> {
+        if (json.isNullOrBlank()) return emptyList()
+        return runCatching {
+            val arr = JSONArray(json)
+            (0 until arr.length()).mapNotNull { i ->
+                val o = arr.optJSONObject(i) ?: return@mapNotNull null
+                val id = o.optString("id")
+                val category = o.optString("categoria")
+                val text = o.optString("texto")
+                if (id.isBlank() || category.isBlank() || text.isBlank()) {
+                    null
+                } else {
+                    Pictogram(
+                        id = id,
+                        text = text,
+                        icon = "",
+                        categoryId = category,
+                        placeIds = emptyList(),
+                        isCustom = true,
+                        photo = o.optString("foto").takeIf { it.isNotBlank() }
+                    )
+                }
+            }
+        }.getOrDefault(emptyList())
+    }
+
+    private fun customJson(pictograms: List<Pictogram>): String {
+        val arr = JSONArray()
+        pictograms.forEach { p ->
+            arr.put(JSONObject().apply {
+                put("id", p.id)
+                put("categoria", p.categoryId)
+                put("texto", p.text)
+                p.photo?.let { put("foto", it) }
+            })
+        }
+        return arr.toString()
+    }
+
     private object K {
         val LANGUAGE = stringPreferencesKey("language")
         val IGNORE_REPEATED_TAPS = booleanPreferencesKey("ignore_repeated_taps")
@@ -158,5 +316,7 @@ class SettingsRepository(context: Context) {
         val AV_SHOE_COLOR = stringPreferencesKey("av_shoe_color")
 
         val RECENTS = stringPreferencesKey("recents")
+        val FAVORITES = stringPreferencesKey("favorites")
+        val CUSTOM_PICTOGRAMS = stringPreferencesKey("custom_pictograms")
     }
 }

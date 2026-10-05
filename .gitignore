@@ -15,3 +15,15 @@ local.properties
 *.hprof
 # Caché de sesión del compilador de Kotlin 2.x, en la raíz del proyecto.
 .kotlin
+# APK firmados: el asistente de Android Studio los deja en app/release, fuera
+# de build/. Se reconstruyen desde un commit; no van en el historial.
+app/release/
+*.apk
+*.aab
+# Borradores de la tesis en Word: binarios grandes que cambian seguido y que git
+# no puede comparar. Viven fuera del historial del código.
+*.docx
+# La llave con la que se firma la app. Quien la tiene puede publicar una
+# actualización que el teléfono acepta como legítima: nunca va al repositorio.
+*.jks
+*.keystore

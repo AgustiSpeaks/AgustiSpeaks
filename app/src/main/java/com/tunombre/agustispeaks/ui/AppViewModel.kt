@@ -1,13 +1,18 @@
 package com.tunombre.agustispeaks.ui
 
 import android.app.Application
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.tunombre.agustispeaks.avatar.AvatarOptions
 import com.tunombre.agustispeaks.data.model.AvatarConfig
+import com.tunombre.agustispeaks.data.model.Pictogift
+import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.data.model.TextSizeOption
 import com.tunombre.agustispeaks.data.model.UserSettings
+import com.tunombre.agustispeaks.data.repository.UserPhotos
 import com.tunombre.agustispeaks.data.repository.SettingsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,10 +20,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.UUID
 
 /**
- * ViewModel con ámbito de Activity: configuración de la app, avatar e
- * historial de frases recientes. Compartido vía [LocalAppViewModel].
+ * ViewModel con ámbito de Activity: configuración de la app, avatar,
+ * historial de frases recientes y pictogifts favoritos. Compartido vía
+ * [LocalAppViewModel].
  */
 class AppViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -38,8 +46,25 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     val recentPhrases: StateFlow<List<String>> = repo.recentPhrases
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
+    val favorites: StateFlow<List<Pictogift>> = repo.favorites
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    val customPictograms: StateFlow<List<Pictogram>> = repo.customPictograms
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /** Momento en que arrancó este proceso; ver [UserPhotos.cleanUp]. */
+    private val startedAt = System.currentTimeMillis()
+
     init {
         viewModelScope.launch { _avatarDraft.value = repo.avatarConfig.first() }
+        viewModelScope.launch(Dispatchers.IO) {
+            // Las fotos de los pictogifts y las de los pictogramas propios
+            // viven en la misma carpeta. Si faltara uno de los dos grupos acá,
+            // la limpieza borraría sus fotos en el próximo arranque.
+            val inUse = repo.favorites.first().mapNotNull { it.photo }.toSet() +
+                repo.customPictograms.first().mapNotNull { it.photo }
+            UserPhotos.cleanUp(app, inUse, startedAt)
+        }
     }
 
     /* -------- Configuraciones -------- */
@@ -90,6 +115,64 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     fun recordPhrase(phrase: String) = launch { repo.addRecentPhrase(phrase) }
     fun clearRecents() = launch { repo.clearRecents() }
+
+    /* -------- Favoritos -------- */
+
+    fun toggleFavorite(gift: Pictogift) = launch { repo.toggleFavorite(gift) }
+
+    /**
+     * Devuelve a favoritos los recién quitados, cada uno a la posición que
+     * tenía. [removed] va en el orden en que se quitaron.
+     */
+    fun restoreFavorites(removed: List<Pair<Pictogift, Int>>) = launch { repo.restoreFavorites(removed) }
+
+    /**
+     * Crea un pictogift nuevo con la foto de [uri] y lo guarda en favoritos.
+     * Siempre es uno nuevo: si [phrase] ya tenía otro con foto, ese queda
+     * intacto. [onDone] recibe el pictogift, o null si la imagen no se pudo leer.
+     *
+     * Corre en el ámbito del ViewModel y no en el de la pantalla, para que la
+     * foto termine de guardarse aunque se cierre la tarjeta a mitad de camino.
+     */
+    fun addPhoto(phrase: String, uri: Uri, onDone: (Pictogift?) -> Unit) {
+        viewModelScope.launch {
+            val name = withContext(Dispatchers.IO) { UserPhotos.save(getApplication<Application>(), uri) }
+            val gift = name?.let { Pictogift.withPhoto(phrase, it) }
+            if (gift != null) repo.addFavorite(gift)
+            onDone(gift)
+        }
+    }
+
+    /* -------- Pictogramas propios -------- */
+
+    /**
+     * Copia la foto de [uri] a la carpeta de la app. [onDone] recibe el nombre
+     * del archivo, o null si la imagen no se pudo leer. Se guarda apenas se
+     * elige, antes de "Guardar", para poder mostrarla en el formulario; si el
+     * formulario se cancela, la limpieza del próximo arranque la borra.
+     */
+    fun savePhoto(uri: Uri, onDone: (String?) -> Unit) {
+        viewModelScope.launch {
+            val name = withContext(Dispatchers.IO) { UserPhotos.save(getApplication<Application>(), uri) }
+            onDone(name)
+        }
+    }
+
+    fun addCustomPictogram(categoryId: String, text: String, photo: String) = launch {
+        repo.addCustomPictogram(
+            Pictogram(
+                id = "propio:" + UUID.randomUUID(),
+                text = text.trim(),
+                icon = "",
+                categoryId = categoryId,
+                placeIds = emptyList(),
+                isCustom = true,
+                photo = photo
+            )
+        )
+    }
+
+    fun removeCustomPictogram(pictogram: Pictogram) = launch { repo.removeCustomPictogram(pictogram.id) }
 
     private fun launch(block: suspend () -> Unit) {
         viewModelScope.launch { block() }

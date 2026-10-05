@@ -114,6 +114,9 @@ import androidx.compose.material.icons.filled.Wc
 import androidx.compose.material.icons.filled.Weekend
 import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material.icons.filled.Checkroom
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
@@ -186,6 +189,7 @@ fun appIcon(name: String): ImageVector = when (name) {
     "mood" -> Icons.Filled.Mood
     "mood_bad" -> Icons.Filled.MoodBad
     "music_note" -> Icons.Filled.MusicNote
+    "nino_jugando" -> NinoJugando
     "nutrition" -> Icons.Filled.Restaurant
     "paid" -> Icons.Filled.Paid
     "palette" -> Icons.Filled.Palette
@@ -239,4 +243,22 @@ fun appIcon(name: String): ImageVector = when (name) {
     "weekend" -> Icons.Filled.Weekend
     "whatshot" -> Icons.Filled.Whatshot
     else -> Icons.Filled.Category
+}
+
+/**
+ * Dibuja el ícono de nombre [name], teñido con el color del texto que lo rodea.
+ * Todos los íconos de la app son de un solo color, incluidos los dibujados a
+ * mano como [NinoJugando]: así la estética es pareja en todas las tarjetas.
+ */
+@Composable
+fun AppIcon(
+    name: String,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null
+) {
+    Icon(
+        imageVector = appIcon(name),
+        contentDescription = contentDescription,
+        modifier = modifier
+    )
 }

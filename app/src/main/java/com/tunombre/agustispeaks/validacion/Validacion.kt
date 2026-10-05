@@ -23,9 +23,8 @@ import com.tunombre.agustispeaks.BuildConfig
  *
  * ### Qué no hace
  *
- * No toca el ciclo de dibujo. Registra una línea por frase hablada y una por GIF
- * exportado; el dibujo corre veinticuatro veces por segundo y no es lugar para
- * esto.
+ * No toca el ciclo de dibujo. Registra una línea por frase hablada; el dibujo
+ * corre veinticuatro veces por segundo y no es lugar para esto.
  *
  * ### Cómo leer las mediciones
  *
@@ -33,9 +32,13 @@ import com.tunombre.agustispeaks.BuildConfig
  * en milisegundos: no hay que restar instantes a mano.
  *
  * ```
- * VALIDACION latencia_ms=184 frase="Yo quiero agua"
- * VALIDACION gif_bytes=41233 gif_fotogramas=24
+ * VALIDACION latencia_ms=31 frase="Yo quiero agua"
  * ```
+ *
+ * Tres regímenes conviven en esas líneas y conviene separarlos al analizar: el
+ * arranque en frío de la sesión, que ronda el medio segundo; la síntesis nueva,
+ * alrededor de 30 ms; y una frase que el motor ya tiene cacheada, menos de 20.
+ * Promediarlos juntos no describe ninguno de los tres.
  *
  * El token `VALIDACION` se repite dentro del mensaje, además de estar en el tag.
  * Es redundante a propósito: así un `logcat` volcado a archivo se puede filtrar
@@ -51,12 +54,26 @@ object Validacion {
     private val midiendo: Boolean
         get() = BuildConfig.DEBUG && ACTIVA
 
-    // Escritas desde el hilo principal, leídas desde un hilo del motor de voz.
-    @Volatile
-    private var instanteDePulsacion: Long = 0L
+    /**
+     * Una pulsación pendiente de medir.
+     *
+     * Los tres datos viajan juntos en un objeto inmutable, y no como tres
+     * campos sueltos. Con campos sueltos, un `onStart` que llega desde el hilo
+     * del motor de voz puede leer el instante de una pulsación y la frase de
+     * otra, y la resta sale contra el reloj equivocado. Eso produjo dos
+     * mediciones de 5 y 10 ms en la primera tanda: valores que no alcanzan
+     * para que un sintetizador arranque.
+     */
+    private class Pendiente(
+        val nanos: Long,
+        val frase: String,
+        /** Id de la locución, cuando `speak` ya la creó. */
+        val locucion: String?
+    )
 
+    // Escrita desde el hilo principal, leída desde un hilo del motor de voz.
     @Volatile
-    private var fraseEnCurso: String? = null
+    private var pendiente: Pendiente? = null
 
     /**
      * Momento en que el chico tocó un pictograma, con la frase acumulada que eso
@@ -70,8 +87,20 @@ object Validacion {
      */
     fun pulsacion(frase: String) {
         if (!midiendo) return
-        instanteDePulsacion = System.nanoTime()
-        fraseEnCurso = frase
+        pendiente = Pendiente(System.nanoTime(), frase, locucion = null)
+    }
+
+    /**
+     * Ata la pulsación pendiente al id que el motor de voz le asignó.
+     *
+     * Es lo que permite descartar el `onStart` de una locución vieja: sin el
+     * id no hay forma de saber si el sonido que arranca es el de esta pulsación
+     * o el de la anterior, que `QUEUE_FLUSH` acaba de cortar.
+     */
+    fun locucionCreada(id: String) {
+        if (!midiendo) return
+        val p = pendiente ?: return
+        pendiente = Pendiente(p.nanos, p.frase, id)
     }
 
     /**
@@ -83,17 +112,16 @@ object Validacion {
      * dejarían de ser homogéneas. Solo se mide el camino pictograma → voz, que
      * es el que la tesis afirma.
      */
-    fun vozIniciada() {
+    fun vozIniciada(id: String?) {
         if (!midiendo) return
-        val frase = fraseEnCurso ?: return
-        fraseEnCurso = null
-        val ms = (System.nanoTime() - instanteDePulsacion) / 1_000_000
-        Log.i(TAG, "VALIDACION latencia_ms=$ms frase=\"$frase\"")
+        val p = pendiente ?: return
+        // El sonido que arranca tiene que ser el de ESTA pulsación. Si el id no
+        // coincide, es el `onStart` rezagado de una locución que ya se corto:
+        // medirla daría una latencia contra el reloj equivocado.
+        if (id == null || id != p.locucion) return
+        pendiente = null
+        val ms = (System.nanoTime() - p.nanos) / 1_000_000
+        Log.i(TAG, "VALIDACION latencia_ms=$ms frase=\"${p.frase}\"")
     }
 
-    /** Tamaño y cantidad de fotogramas del GIF recién escrito. */
-    fun gifExportado(bytes: Long, fotogramas: Int) {
-        if (!midiendo) return
-        Log.i(TAG, "VALIDACION gif_bytes=$bytes gif_fotogramas=$fotogramas")
-    }
 }

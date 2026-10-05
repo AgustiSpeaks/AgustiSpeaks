@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,6 +27,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tunombre.agustispeaks.R
+import com.tunombre.agustispeaks.data.model.Category
 import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.phrase.LocalPhraseController
 import com.tunombre.agustispeaks.tts.LocalTtsManager
@@ -62,6 +67,7 @@ private val CoreWordColor = Color(0xFFE6ECF2)
 fun BoardScreen(
     onBack: () -> Unit,
     onOpenRecents: () -> Unit,
+    onOpenFavorites: () -> Unit,
     onOpenSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: BoardViewModel = viewModel()
@@ -70,6 +76,10 @@ fun BoardScreen(
     val phraseController = LocalPhraseController.current
     val tts = LocalTtsManager.current
     val appVm = LocalAppViewModel.current
+    val customPictograms by appVm.customPictograms.collectAsStateWithLifecycle()
+
+    var adding by remember { mutableStateOf<Category?>(null) }
+    var deleting by remember { mutableStateOf<Pictogram?>(null) }
 
     fun onTapPictogram(pictogram: Pictogram) {
         val phrase = phraseController.addWord(pictogram.text)
@@ -96,6 +106,9 @@ fun BoardScreen(
                 actions = {
                     IconButton(onClick = onOpenRecents) {
                         Icon(Icons.Default.History, stringResource(R.string.cd_open_recents))
+                    }
+                    IconButton(onClick = onOpenFavorites) {
+                        Icon(Icons.Default.Star, stringResource(R.string.cd_open_favorites))
                     }
                     IconButton(onClick = onOpenSettings) {
                         Icon(Icons.Default.Settings, stringResource(R.string.cd_open_settings))
@@ -164,19 +177,48 @@ fun BoardScreen(
                             )
                         }
                         val cardColor = hexToColor(category.colorHex)
+                        // Los propios van después de los de la semilla, en el
+                        // orden en que se crearon, y se ven en todos los lugares
+                        // que muestran esta categoría.
+                        val pictograms = state.selectedCategoryPictograms +
+                            customPictograms.filter { it.categoryId == category.id }
                         BoxWithConstraints(modifier = Modifier.weight(1f)) {
                             PictogramGrid(
-                                pictograms = state.selectedCategoryPictograms,
+                                pictograms = pictograms,
                                 columns = adaptiveColumns(maxWidth),
                                 containerColorFor = { cardColor },
                                 onPictogramClick = ::onTapPictogram,
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier.fillMaxSize(),
+                                onAdd = { adding = category },
+                                onCustomLongClick = { deleting = it }
                             )
                         }
                     }
                 }
             }
         }
+    }
+
+    adding?.let { category ->
+        AddPictogramDialog(
+            category = category,
+            onDismiss = { adding = null },
+            onSave = { text, photo ->
+                appVm.addCustomPictogram(category.id, text, photo)
+                adding = null
+            }
+        )
+    }
+
+    deleting?.let { pictogram ->
+        DeletePictogramDialog(
+            pictogram = pictogram,
+            onDismiss = { deleting = null },
+            onConfirm = {
+                appVm.removeCustomPictogram(pictogram)
+                deleting = null
+            }
+        )
     }
 }
 

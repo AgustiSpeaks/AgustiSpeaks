@@ -50,7 +50,7 @@ class TtsManager(context: Context) {
             _state.value = _state.value.copy(isSpeaking = true)
             // Medición de tesis. Este es el instante en que empieza a salir
             // sonido, que es el otro extremo de la latencia. Ver `Validacion`.
-            Validacion.vozIniciada()
+            Validacion.vozIniciada(utteranceId)
         }
 
         override fun onDone(utteranceId: String?) {
@@ -83,7 +83,11 @@ class TtsManager(context: Context) {
         val params = Bundle().apply {
             putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME, currentVolume.coerceIn(0f, 1f))
         }
-        engine.speak(clean, TextToSpeech.QUEUE_FLUSH, params, UUID.randomUUID().toString())
+        val locucion = UUID.randomUUID().toString()
+        // Medición de tesis: ata la pulsación a esta locución, para poder
+        // descartar el `onStart` de la que QUEUE_FLUSH acaba de cortar.
+        Validacion.locucionCreada(locucion)
+        engine.speak(clean, TextToSpeech.QUEUE_FLUSH, params, locucion)
     }
 
     /** Corta inmediatamente la reproducción actual. */

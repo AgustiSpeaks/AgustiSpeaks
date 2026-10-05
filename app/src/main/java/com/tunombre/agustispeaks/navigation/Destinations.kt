@@ -6,7 +6,7 @@ package com.tunombre.agustispeaks.navigation
  * - `place_selection` -> elección de lugar
  * - `board/{placeId}` -> tablero horizontal a dos paneles (Palabras | Categorías,
  *                         el detalle de categoría reemplaza el panel derecho in-place)
- * - `recents`         -> pictogramas usados recientemente
+ * - `recents`         -> Recientes y Favoritos, en dos pestañas
  * - `settings`        -> configuración
  */
 sealed class Destination(val route: String) {
@@ -18,7 +18,14 @@ sealed class Destination(val route: String) {
         fun createRoute(placeId: String): String = "board/$placeId"
     }
 
-    data object Recents : Destination("recents")
+    /**
+     * Una sola pantalla con dos pestañas. El botón de Favoritos de la barra
+     * superior abre esta misma pantalla, directamente en la pestaña Favoritos.
+     */
+    data object Recents : Destination("recents?favoritos={favoritos}") {
+        const val ARG_FAVORITES = "favoritos"
+        fun createRoute(favorites: Boolean = false): String = "recents?favoritos=$favorites"
+    }
 
     data object Settings : Destination("settings")
 }

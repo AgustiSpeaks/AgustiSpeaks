@@ -35,7 +35,7 @@ fun AvatarFigure(
 
 /**
  * Avatar de cuerpo completo animado ejecutando una [ResolvedAction] en bucle.
- * Overlay de "Decir", lista de Recientes y frames del GIF.
+ * Overlay de "Decir" y lista de Recientes.
  */
 @Composable
 fun AnimatedAvatar(

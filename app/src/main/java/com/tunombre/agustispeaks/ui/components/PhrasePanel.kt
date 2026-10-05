@@ -7,8 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tunombre.agustispeaks.avatar.ResolvedAction
-import com.tunombre.agustispeaks.avatar.catalog.AvatarCatalog
+import com.tunombre.agustispeaks.data.model.Pictogift
 import com.tunombre.agustispeaks.phrase.LocalPhraseController
 import com.tunombre.agustispeaks.tts.LocalTtsManager
 import com.tunombre.agustispeaks.ui.LocalAppViewModel
@@ -26,7 +25,7 @@ fun PhrasePanel(modifier: Modifier = Modifier) {
     val words by phraseController.words.collectAsStateWithLifecycle()
     val phrase = words.joinToString(" ")
 
-    var overlay by remember { mutableStateOf<ResolvedAction?>(null) }
+    var overlay by remember { mutableStateOf<Pictogift?>(null) }
 
     PhraseBar(
         phrase = phrase,
@@ -34,7 +33,7 @@ fun PhrasePanel(modifier: Modifier = Modifier) {
             if (phrase.isNotBlank()) {
                 tts.speak(phrase)
                 appVm.recordPhrase(phrase)
-                overlay = AvatarCatalog.resolve(phrase)
+                overlay = Pictogift.fromText(phrase)
             }
         },
         onClear = {
@@ -44,10 +43,9 @@ fun PhrasePanel(modifier: Modifier = Modifier) {
         modifier = modifier
     )
 
-    overlay?.let { resolved ->
+    overlay?.let { gift ->
         SpeakingOverlay(
-            phrase = phrase,
-            resolved = resolved,
+            gift = gift,
             onDismiss = { overlay = null }
         )
     }

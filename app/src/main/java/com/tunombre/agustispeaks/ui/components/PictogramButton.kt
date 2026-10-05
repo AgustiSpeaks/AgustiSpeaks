@@ -1,5 +1,7 @@
 package com.tunombre.agustispeaks.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -9,7 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.pointer.pointerInput
@@ -29,25 +32,31 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.ui.LocalUserSettings
-import com.tunombre.agustispeaks.ui.icons.appIcon
+import com.tunombre.agustispeaks.ui.icons.AppIcon
 
 private const val REPEAT_TAP_WINDOW_MS = 700L
 
 /**
  * Botón de pictograma: icono grande arriba, texto en negrita debajo, sobre el
- * color de su categoría. Cuadrado y táctil.
+ * color de su categoría. Cuadrado y táctil. Si el pictograma tiene foto, la
+ * foto ocupa el lugar del ícono.
  *
  * Respeta los ajustes de accesibilidad:
  * - tamaño (escala) según `UserSettings.textSize`
  * - "Activar al soltar" vs. activar al tocar
  * - "Ignorar toques repetidos" (anti rebote)
+ *
+ * @param onLongClick mantener apretado. Solo lo usan los pictogramas propios,
+ *        para borrarlos; en los demás queda en null y el botón se comporta
+ *        exactamente como siempre.
  */
 @Composable
 fun PictogramButton(
     pictogram: Pictogram,
     containerColor: Color,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onLongClick: (() -> Unit)? = null
 ) {
     val settings = LocalUserSettings.current
     val scale = settings.textSize.scale
@@ -64,7 +73,7 @@ fun PictogramButton(
 
     val shapeModifier = modifier.aspectRatio(1f)
 
-    if (settings.activateOnRelease) {
+    if (settings.activateOnRelease && onLongClick == null) {
         Surface(
             onClick = { fire() },
             shape = MaterialTheme.shapes.large,
@@ -74,6 +83,24 @@ fun PictogramButton(
             shadowElevation = 2.dp,
             modifier = shapeModifier
         ) { PictogramContent(pictogram, scale) }
+    } else if (settings.activateOnRelease) {
+        // Mismo botón, con toque largo. El clic va sobre el contenido y no
+        // sobre la superficie para que el efecto del toque quede recortado a
+        // la forma redondeada, igual que en el caso de arriba.
+        Surface(
+            shape = MaterialTheme.shapes.large,
+            color = containerColor,
+            contentColor = contentColor,
+            tonalElevation = 2.dp,
+            shadowElevation = 2.dp,
+            modifier = shapeModifier
+        ) {
+            PictogramContent(
+                pictogram,
+                scale,
+                modifier = Modifier.longClickable(onClick = { fire() }, onLongClick = onLongClick)
+            )
+        }
     } else {
         Surface(
             shape = MaterialTheme.shapes.large,
@@ -81,18 +108,25 @@ fun PictogramButton(
             contentColor = contentColor,
             tonalElevation = 2.dp,
             shadowElevation = 2.dp,
-            modifier = shapeModifier.pointerInput(pictogram.id) {
-                detectTapGestures(onPress = { fire() })
+            modifier = shapeModifier.pointerInput(pictogram.id, onLongClick) {
+                detectTapGestures(
+                    onPress = { fire() },
+                    onLongPress = if (onLongClick != null) { _ -> onLongClick() } else null
+                )
             }
         ) { PictogramContent(pictogram, scale) }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
+private fun Modifier.longClickable(onClick: () -> Unit, onLongClick: (() -> Unit)?): Modifier =
+    combinedClickable(onClick = onClick, onLongClick = onLongClick)
+
 @Composable
-private fun PictogramContent(pictogram: Pictogram, scale: Float) {
+private fun PictogramContent(pictogram: Pictogram, scale: Float, modifier: Modifier = Modifier) {
     val textStyle = MaterialTheme.typography.titleMedium
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 6.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -107,11 +141,17 @@ private fun PictogramContent(pictogram: Pictogram, scale: Float) {
         ) {
             val side = minOf(maxWidth, maxHeight)
             if (side > 14.dp) {
-                Icon(
-                    imageVector = appIcon(pictogram.icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(side)
-                )
+                val photo = pictogram.photo
+                if (photo != null) {
+                    SavedPhoto(
+                        name = photo,
+                        contentDescription = null,
+                        maxSide = 384,
+                        modifier = Modifier.size(side).clip(RoundedCornerShape(10.dp))
+                    )
+                } else {
+                    AppIcon(name = pictogram.icon, modifier = Modifier.size(side))
+                }
             }
         }
         Text(

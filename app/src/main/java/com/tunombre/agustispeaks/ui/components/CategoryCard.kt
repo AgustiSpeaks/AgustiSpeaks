@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -22,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tunombre.agustispeaks.data.model.Category
-import com.tunombre.agustispeaks.ui.icons.appIcon
+import com.tunombre.agustispeaks.ui.icons.AppIcon
 import com.tunombre.agustispeaks.ui.util.hexToColor
 
 /**
@@ -64,11 +63,7 @@ fun CategoryCard(
             ) {
                 val side = minOf(maxWidth, maxHeight)
                 if (side > 14.dp) {
-                    Icon(
-                        imageVector = appIcon(category.icon),
-                        contentDescription = null,
-                        modifier = Modifier.size(side)
-                    )
+                    AppIcon(name = category.icon, modifier = Modifier.size(side))
                 }
             }
             Text(

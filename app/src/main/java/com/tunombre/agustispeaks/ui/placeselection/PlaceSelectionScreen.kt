@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,7 +37,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tunombre.agustispeaks.R
 import com.tunombre.agustispeaks.data.model.Place
-import com.tunombre.agustispeaks.ui.icons.appIcon
+import com.tunombre.agustispeaks.ui.icons.AppIcon
 import com.tunombre.agustispeaks.ui.util.hexToColor
 import com.tunombre.agustispeaks.ui.util.placeGridColumns
 
@@ -50,6 +51,7 @@ fun PlaceSelectionScreen(
     windowSizeClass: WindowSizeClass,
     onPlaceSelected: (String) -> Unit,
     onOpenRecents: () -> Unit,
+    onOpenFavorites: () -> Unit,
     onOpenSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PlaceSelectionViewModel = viewModel()
@@ -67,6 +69,12 @@ fun PlaceSelectionScreen(
                         Icon(
                             imageVector = Icons.Default.History,
                             contentDescription = stringResource(R.string.cd_open_recents)
+                        )
+                    }
+                    IconButton(onClick = onOpenFavorites) {
+                        Icon(
+                            imageVector = Icons.Default.Star,
+                            contentDescription = stringResource(R.string.cd_open_favorites)
                         )
                     }
                     IconButton(onClick = onOpenSettings) {
@@ -122,9 +130,8 @@ private fun PlaceCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(
-                imageVector = appIcon(place.icon),
-                contentDescription = null,
+            AppIcon(
+                name = place.icon,
                 modifier = Modifier.size(64.dp)
             )
             Text(

@@ -33,15 +33,21 @@
             </intent-filter>
         </activity>
 
+        <!--
+          Le presta a la cámara un archivo donde escribir la foto de un
+          pictogift. No agrega ningún permiso: la cámara la abre el sistema, y
+          la app nunca declara CAMERA.
+        -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:authorities="${applicationId}.fotos"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/rutas_fotos" />
         </provider>
+
     </application>
 
 </manifest>

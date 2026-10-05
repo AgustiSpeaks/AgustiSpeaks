@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Lo único que la app comparte con otra app: el archivo temporal donde la
+  cámara escribe la foto. Las fotos ya guardadas de los pictogifts no están
+  acá y ninguna otra app puede leerlas.
+-->
+<paths>
+    <cache-path name="camara" path="camara/" />
+</paths>
