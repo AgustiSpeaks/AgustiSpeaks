@@ -42,6 +42,7 @@ import com.tunombre.agustispeaks.R
 import com.tunombre.agustispeaks.data.model.Category
 import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.phrase.LocalPhraseController
+import com.tunombre.agustispeaks.phrase.tapPictogram
 import com.tunombre.agustispeaks.tts.LocalTtsManager
 import com.tunombre.agustispeaks.validacion.Validacion
 import com.tunombre.agustispeaks.ui.LocalAppViewModel
@@ -81,13 +82,19 @@ fun BoardScreen(
     var adding by remember { mutableStateOf<Category?>(null) }
     var deleting by remember { mutableStateOf<Pictogram?>(null) }
 
+    // La regla central —la oración se acumula y se dice entera— vive en
+    // `tapPictogram`, fuera de la pantalla, para que la prueba del criterio 9
+    // verifique este mismo código.
     fun onTapPictogram(pictogram: Pictogram) {
-        val phrase = phraseController.addWord(pictogram.text)
-        // Medición de tesis: arranca el cronómetro de la latencia. Ver
-        // `Validacion`; en builds de release no hace nada.
-        Validacion.pulsacion(phrase)
-        tts.speak(phrase)
-        appVm.recordPhrase(phrase)
+        tapPictogram(
+            text = pictogram.text,
+            phrase = phraseController,
+            speak = tts::speak,
+            record = appVm::recordPhrase,
+            // Medición de tesis: arranca el cronómetro de la latencia. Ver
+            // `Validacion`; en builds de release no hace nada.
+            onPress = Validacion::pulsacion
+        )
     }
 
     Scaffold(

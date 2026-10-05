@@ -143,22 +143,20 @@ class SettingsRepository(context: Context) {
      * Pictogramas creados por quien usa la app, con nombre y foto. Se suman a
      * los de la semilla en su categoría. Se guardan en el orden en que se
      * crearon, y así se muestran: al final de la categoría.
+     *
+     * El formato vive en [CustomPictogramJson], fuera de esta clase, para que
+     * se pueda probar en la JVM sin DataStore.
      */
-    val customPictograms: Flow<List<Pictogram>> = ds.data.map { parseCustom(it[K.CUSTOM_PICTOGRAMS]) }
+    val customPictograms: Flow<List<Pictogram>> =
+        ds.data.map { CustomPictogramJson.parse(it[K.CUSTOM_PICTOGRAMS]) }
 
     suspend fun addCustomPictogram(pictogram: Pictogram) {
         if (pictogram.text.isBlank()) return
-        ds.edit { p ->
-            val current = parseCustom(p[K.CUSTOM_PICTOGRAMS])
-            p[K.CUSTOM_PICTOGRAMS] = customJson(current + pictogram)
-        }
+        ds.edit { p -> p[K.CUSTOM_PICTOGRAMS] = CustomPictogramJson.add(p[K.CUSTOM_PICTOGRAMS], pictogram) }
     }
 
     suspend fun removeCustomPictogram(id: String) {
-        ds.edit { p ->
-            val current = parseCustom(p[K.CUSTOM_PICTOGRAMS])
-            p[K.CUSTOM_PICTOGRAMS] = customJson(current.filterNot { it.id == id })
-        }
+        ds.edit { p -> p[K.CUSTOM_PICTOGRAMS] = CustomPictogramJson.remove(p[K.CUSTOM_PICTOGRAMS], id) }
     }
 
     suspend fun setLanguage(v: String) = ds.edit { it[K.LANGUAGE] = v }
@@ -239,46 +237,6 @@ class SettingsRepository(context: Context) {
                 // Sin foto la clave no se escribe: optString de un null guardado
                 // devolvería el texto "null" y parecería un nombre de archivo.
                 g.photo?.let { put("foto", it) }
-            })
-        }
-        return arr.toString()
-    }
-
-    /** Cada pictograma propio es un objeto `{id, categoria, texto, foto}`. */
-    private fun parseCustom(json: String?): List<Pictogram> {
-        if (json.isNullOrBlank()) return emptyList()
-        return runCatching {
-            val arr = JSONArray(json)
-            (0 until arr.length()).mapNotNull { i ->
-                val o = arr.optJSONObject(i) ?: return@mapNotNull null
-                val id = o.optString("id")
-                val category = o.optString("categoria")
-                val text = o.optString("texto")
-                if (id.isBlank() || category.isBlank() || text.isBlank()) {
-                    null
-                } else {
-                    Pictogram(
-                        id = id,
-                        text = text,
-                        icon = "",
-                        categoryId = category,
-                        placeIds = emptyList(),
-                        isCustom = true,
-                        photo = o.optString("foto").takeIf { it.isNotBlank() }
-                    )
-                }
-            }
-        }.getOrDefault(emptyList())
-    }
-
-    private fun customJson(pictograms: List<Pictogram>): String {
-        val arr = JSONArray()
-        pictograms.forEach { p ->
-            arr.put(JSONObject().apply {
-                put("id", p.id)
-                put("categoria", p.categoryId)
-                put("texto", p.text)
-                p.photo?.let { put("foto", it) }
             })
         }
         return arr.toString()
