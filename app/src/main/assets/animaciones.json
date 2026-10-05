@@ -727,11 +727,11 @@
     "palabras": [],
     "raices": [],
     "fotogramas": [
-      { "t": 0, "ease": "salida", "headTilt": 0, "reach": 0.35, "armR": "WAVE", "expression": "SAD", "fx": "SWEAT" },
+      { "t": 0, "ease": "salida", "headTilt": 0, "reach": 0.5, "armR": "WAVE", "expression": "SAD", "fx": "SWEAT" },
       { "t": 0, "jaw": 0.3, "fxPulse": 0.82 },
       { "t": 0.25, "headTilt": 8, "reach": 1 },
       { "t": 0.5, "fxPulse": 1 },
-      { "t": 0.75, "ease": "entrada", "headTilt": -8, "reach": -0.3 },
+      { "t": 0.75, "ease": "entrada", "headTilt": -8, "reach": 0 },
       { "t": 1, "headTilt": 0 }
     ]
   },

@@ -253,7 +253,11 @@ fun avatarPoseFor(r: ResolvedAction, t: Float): AvatarPose {
         )
 
         AvatarAction.COLD -> AvatarPose(lean = 0.16f * shiver, bob = 0.1f * shiver, armL = ArmPose.HOLD_BOTH, armR = ArmPose.HOLD_BOTH, reach = 0.85f, crouch = 0.18f, expression = Expression.SAD, fx = Fx.COLD)
-        AvatarAction.HOT -> AvatarPose(armR = ArmPose.WAVE, reach = 0.35f + 0.65f * w, headTilt = 8f * w, jaw = 0.3f, expression = Expression.SAD, fx = Fx.SWEAT)
+        // Abanicarse: el vaivén completo de `w`, llevado a 0..1. Era
+        // `0.35 + 0.65 * w`, las constantes de DRINK con otra señal: como `w`
+        // va de -1 a 1, un tercio del ciclo daba extensión de brazo negativa,
+        // que no existe. Lo encontró la prueba de cobertura de representación.
+        AvatarAction.HOT -> AvatarPose(armR = ArmPose.WAVE, reach = 0.5f + 0.5f * w, headTilt = 8f * w, jaw = 0.3f, expression = Expression.SAD, fx = Fx.SWEAT)
         AvatarAction.FEVER -> AvatarPose(armR = ArmPose.TO_TARGET, handTarget = BodyPart.FOREHEAD, reach = 1f, expression = Expression.HURT, eyeClose = 0.45f, crouch = 0.1f, prop = Prop.THERMOMETER, fx = Fx.SWEAT)
         AvatarAction.SICK -> AvatarPose(armR = ArmPose.TO_TARGET, handTarget = BodyPart.BELLY, reach = 0.95f, expression = Expression.HURT, headTilt = 12f, crouch = 0.2f, lean = 0.1f * fast, highlight = BodyPart.BELLY, fx = Fx.SWEAT)
         AvatarAction.INJECTION -> AvatarPose(armR = ArmPose.TO_TARGET, handTarget = BodyPart.ARM, reach = 1f, expression = Expression.HURT, eyeClose = 0.5f, prop = Prop.SYRINGE, highlight = BodyPart.ARM)
