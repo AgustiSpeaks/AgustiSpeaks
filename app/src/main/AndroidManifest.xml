@@ -9,9 +9,21 @@
         </intent>
     </queries>
 
+    <!--
+      Sin copia de seguridad: ni fotos, ni ajustes, ni favoritos, ni pictogramas
+      propios salen del teléfono. Las fotos pueden mostrar la casa o los objetos
+      del chico, y Recientes y Favoritos son lo que dice.
+
+      Hacen falta las dos piezas. allowBackup="false" apaga la copia en la nube,
+      pero desde Android 12 NO apaga la transferencia a un teléfono nuevo: esa
+      la cierran las exclusiones de data_extraction_rules.xml.
+
+      Costo conocido: al cambiar de teléfono o reinstalar se pierde todo lo
+      personalizado. Un respaldo elegido por la familia queda para otra fase.
+    -->
     <application
         android:name=".AgustiSpeaksApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"

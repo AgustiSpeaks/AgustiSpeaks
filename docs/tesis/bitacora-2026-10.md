@@ -54,4 +54,4 @@ tabla. Los detalles están en [estado-2026-10-05.md](estado-2026-10-05.md), §8.
 |---|---|
 | 4 | `HOT` se corrigió en `842b0f9` antes de medir. Sin ese cambio, el criterio fallaba por la extensión de brazo negativa |
 | 15 | La foto se borra en el momento de eliminar el pictograma desde `d4147ab`. Antes desaparecía recién en el siguiente arranque de la app |
-| 16 | Las reglas de respaldo están vacías: con el código actual, fotos y datos **entran** en la copia automática. La etapa 5 propone el cambio, que espera la confirmación del autor |
+| 16 | Hasta el 5-10 las reglas de respaldo estaban vacías, y fotos y datos entraban en la copia automática. El autor eligió excluir todo (opción A): `allowBackup="false"` más exclusiones en las dos vías de Android 12 o posterior, nube y transferencia entre teléfonos. Costo aceptado: al cambiar de teléfono se pierde lo personalizado. Un respaldo bien diseñado queda para otra fase |
