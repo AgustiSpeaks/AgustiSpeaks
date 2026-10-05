@@ -13,12 +13,22 @@ import java.io.File
 import java.util.Locale
 
 /**
- * La hoja de cifras de la tesis. No prueba comportamiento: **cuenta**.
+ * La hoja de cifras de la tesis, y los criterios 1 y 2 de la bitácora:
  *
- * Cada número que el informe afirma sobre el tamaño del sistema sale de acá y no
- * de un conteo a mano, que es lo que se desactualiza en silencio. La salida está
- * pensada para copiarse tal cual a Word: texto plano, columnas alineadas y orden
- * determinista.
+ * - **Criterio 1**, correspondencia motor ↔ catálogo: un registro por acción,
+ *   sin sobrantes ni faltantes.
+ * - **Criterio 2**, vocabulario alcanzable: ninguna categoría ni ningún
+ *   pictograma de la semilla sin un lugar desde donde tocarlo.
+ *
+ * El resto no prueba comportamiento: **cuenta**. Cada número que el informe
+ * afirma sobre el tamaño del sistema sale de acá y no de un conteo a mano, que
+ * es lo que se desactualiza en silencio. La salida está pensada para copiarse
+ * tal cual a Word: texto plano, columnas alineadas y orden determinista.
+ *
+ * **No cuenta los pictogramas propios.** Se crean en el teléfono, en tiempo de
+ * ejecución, y se guardan en el DataStore del dispositivo: no existen en el
+ * código. Su verificación es manual (criterios 13 y 15), y la lógica de su
+ * formato la cubre `PictogramasPropiosMetadatosTest`.
  *
  * Requiere que `src/main/assets/animaciones.json` exista. Si no está, corré
  * primero `PoseCatalogDumpTest`. Que esta prueba falle por catálogo ausente es
@@ -28,7 +38,10 @@ import java.util.Locale
  */
 class InventarioTesisTest {
 
-    private val ap = Apendice("E-inventario")
+    private val ap = Apendice("criterio-01-02-inventario")
+
+    /** Raíz del código de la app, para contar archivos y líneas por paquete. */
+    private val fuentes = File("src/main/java/com/tunombre/agustispeaks")
 
     private val asset = File("src/main/assets/animaciones.json")
     private val fuenteResolvedor =
@@ -85,8 +98,7 @@ class InventarioTesisTest {
         )
         val registros = leido.records
 
-        linea("APÉNDICE E — INVENTARIO DEL MOTOR Y CATÁLOGO DE ACCIONES")
-        linea("AgustiSpeaks · generado por InventarioTesisTest")
+        ap.encabezado("INVENTARIO — CRITERIOS 1 Y 2, Y CIFRAS DEL SISTEMA", "InventarioTesisTest")
         linea("Catálogo: src/main/assets/animaciones.json")
         linea("")
 
@@ -95,10 +107,11 @@ class InventarioTesisTest {
         objetos()
         vocabulario()
         reglas(registros)
+        codigo()
         tablaDeAcciones(registros)
 
         linea("")
-        linea("Fin del apéndice E.")
+        linea("Fin del inventario.")
     }
 
     /* ------------------------------------------------------------------ */
@@ -129,8 +142,19 @@ class InventarioTesisTest {
         // otra cifra de este informe significa lo que dice.
         val ids = registros.map { it.id }.toSet()
         val esperados = AvatarAction.entries.map { it.name.lowercase() }.toSet()
-        assertEquals("Acciones sin registro en el catálogo", emptySet<String>(), esperados - ids)
-        assertEquals("Registros que no corresponden a ninguna acción", emptySet<String>(), ids - esperados)
+        val faltantes = esperados - ids
+        val sobrantes = ids - esperados
+        linea("")
+        dato("Acciones sin registro en el catálogo", faltantes.size)
+        dato("Registros sin acción en el motor", sobrantes.size)
+        dato("Correspondencia", porciento(esperados.size - faltantes.size, esperados.size))
+        ap.veredicto(
+            1, faltantes.isEmpty() && sobrantes.isEmpty(),
+            "${esperados.size - faltantes.size} de ${esperados.size} acciones con registro, " +
+                "${sobrantes.size} registros sobrantes"
+        )
+        assertEquals("Acciones sin registro en el catálogo", emptySet<String>(), faltantes)
+        assertEquals("Registros que no corresponden a ninguna acción", emptySet<String>(), sobrantes)
     }
 
     /* ------------------------------------------------------------------ */
@@ -215,6 +239,10 @@ class InventarioTesisTest {
         linea("Nota: un pictograma temático aparece en todo lugar cuya lista de")
         linea("categorías incluya la suya, así que el mismo pictograma se muestra en")
         linea("varios lugares. El TOTAL cuenta pictogramas distintos, no apariciones.")
+        linea("")
+        linea("Los pictogramas propios no están en esta cuenta: se crean en el")
+        linea("teléfono, en tiempo de ejecución, y no existen en el código. Se ven")
+        linea("en todos los lugares que muestran su categoría.")
 
         // Una categoría que ningún lugar expone es vocabulario muerto: sus
         // pictogramas existen en la semilla y no hay forma de tocarlos en el
@@ -224,15 +252,35 @@ class InventarioTesisTest {
         val huerfanas = SeedData.categories
             .filter { c -> SeedData.places.none { c.id in it.categoryIds } }
             .map { it.id }
-        assertEquals(
-            "Categorías que ningún lugar expone: sus pictogramas son inalcanzables",
-            emptyList<String>(), huerfanas
-        )
 
         val vacias = SeedData.categories
             .filter { c -> tematicos.none { it.categoryId == c.id } }
             .map { it.id }
+
+        // El umbral habla de categorías **y pictogramas**. Las palabras núcleo
+        // están siempre a la vista, en el panel izquierdo; un temático es
+        // alcanzable si al menos un lugar lo muestra.
+        val pictogramasSinLugar = tematicos.filter { it.placeIds.isEmpty() }.map { it.id }
+
+        linea("")
+        dato("Categorías que ningún lugar muestra", huerfanas.size)
+        dato("Categorías sin pictogramas", vacias.size)
+        dato("Pictogramas temáticos sin ningún lugar", pictogramasSinLugar.size)
+        ap.veredicto(
+            2, huerfanas.isEmpty() && vacias.isEmpty() && pictogramasSinLugar.isEmpty(),
+            "${huerfanas.size} categorías y ${pictogramasSinLugar.size} pictogramas sin acceso; " +
+                "${vacias.size} categorías vacías"
+        )
+
+        assertEquals(
+            "Categorías que ningún lugar expone: sus pictogramas son inalcanzables",
+            emptyList<String>(), huerfanas
+        )
         assertEquals("Categorías sin ningún pictograma", emptyList<String>(), vacias)
+        assertEquals(
+            "Pictogramas temáticos que ningún lugar muestra",
+            emptyList<String>(), pictogramasSinLugar
+        )
     }
 
     /* ------------------------------------------------------------------ */
@@ -275,13 +323,44 @@ class InventarioTesisTest {
     }
 
     /* ------------------------------------------------------------------ */
-    /*  6. Tabla completa                                                  */
+    /*  6. Código                                                          */
+    /* ------------------------------------------------------------------ */
+
+    /**
+     * Archivos y líneas de Kotlin por paquete, para verificar las cifras que el
+     * relevamiento del 5-10 contó leyendo el código. Se cuentan **todas** las
+     * líneas, también las vacías, que es lo que muestra el editor.
+     */
+    private fun codigo() {
+        assertTrue("No se encontró ${fuentes.absolutePath}.", fuentes.isDirectory)
+        val archivos = fuentes.walkTopDown().filter { it.isFile && it.extension == "kt" }.toList()
+        val porPaquete = archivos.groupBy { f ->
+            f.parentFile.relativeTo(fuentes).path.replace(File.separatorChar, '.').ifEmpty { "(raíz)" }
+        }.toSortedMap()
+
+        titulo("6. CÓDIGO KOTLIN DE LA APP (src/main)")
+        linea("PAQUETE".padEnd(24) + "ARCHIVOS".padStart(10) + "LÍNEAS".padStart(10))
+        linea("-".repeat(44))
+        var totalLineas = 0
+        for ((paquete, lista) in porPaquete) {
+            val lineas = lista.sumOf { it.readLines().size }
+            totalLineas += lineas
+            linea(paquete.padEnd(24) + lista.size.toString().padStart(10) + lineas.toString().padStart(10))
+        }
+        linea("-".repeat(44))
+        linea("TOTAL".padEnd(24) + archivos.size.toString().padStart(10) + totalLineas.toString().padStart(10))
+        linea("")
+        linea("Se cuentan todas las líneas, incluidas las vacías.")
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  7. Tabla completa                                                  */
     /* ------------------------------------------------------------------ */
 
     private fun tablaDeAcciones(registros: List<AnimationRecord>) {
         val porId = registros.associateBy { it.id }
 
-        titulo("6. CATÁLOGO COMPLETO DE ACCIONES")
+        titulo("7. CATÁLOGO COMPLETO DE ACCIONES")
         linea("En el orden en que están declaradas en el enum AvatarAction.")
         linea("")
         linea(

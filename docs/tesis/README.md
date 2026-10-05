@@ -15,12 +15,53 @@ hechas sobre el código actual; el plan que lo rige es
 | [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | abierta, sin mediciones |
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
 | [Capturas](capturas.md) | lista de capturas para el capítulo de validación | a actualizar en la etapa 5: todavía menciona el GIF |
-| `salidas-2026-10/` | salida de cada prueba automatizada | se crea en la etapa 3 |
+| `salidas-2026-10/` | salida de cada prueba automatizada | se crea la primera vez que corren las pruebas |
 | `datos/` | CSV para las figuras | se crea en la etapa 4 |
 
 ## Orden de las pruebas en Android Studio
 
-Pendiente: se escribe en la etapa 3, cuando las pruebas estén actualizadas.
+Pruebas de la JVM, criterios 1 a 9. No usan el teléfono.
+
+### Antes de correrlas
+
+1. **Commiteá todo.** La bitácora pide el commit del código medido, y una
+   medición hecha con cambios sin commitear no se puede reproducir.
+2. Anotá el hash: `git log --oneline -1`.
+3. **No borres `app/src/main/assets/animaciones.json`** ni corras
+   `PoseCatalogDumpTest`. El catálogo instalado es el que se mide, y desde
+   `842b0f9` tiene `HOT` corregido a mano.
+
+### Cómo correr cada una
+
+Abrí el archivo de la prueba y tocá la flecha verde al lado del nombre de la
+clase → **Run**. Están en `app/src/test/java/com/tunombre/agustispeaks/`.
+
+| Orden | Prueba | Carpeta | Criterio | Salida en `salidas-2026-10/` |
+|---|---|---|---|---|
+| 1 | `InventarioTesisTest` | `tesis/` | 1 y 2 | `criterio-01-02-inventario.txt` |
+| 2 | `PoseCatalogParityTest` | `avatar/catalog/` | 3 | `criterio-03-equivalencia.txt` |
+| 3 | `CoberturaRepresentacionTest` | `tesis/` | 4 | `criterio-04-representacion.txt` |
+| 4 | `CorpusResolvedorTest` (sus dos pruebas) | `tesis/` | 5 y 6 | `criterio-05-corpus.txt`, `criterio-06-trampas.txt` |
+| 5 | `CoberturaSemanticaTest` | `tesis/` | 7 y 8 | `criterio-07-08-cobertura.txt` |
+| 6 | `OracionCompletaTest` | `tesis/` | 9 | `criterio-09-oracion.txt` |
+| 7 | `PictogramasPropiosMetadatosTest` | `tesis/` | complementa 13 y 15 | `pictogramas-propios-metadatos.txt` |
+
+El orden sigue la numeración de la bitácora. Ninguna depende de otra: todas leen
+el catálogo instalado, que ya existe. Si preferís correrlas todas juntas: clic
+derecho en la carpeta `app/src/test` → **Run 'Tests in …'**. Las salidas son
+las mismas.
+
+### Después de correrlas
+
+1. Cada salida termina con una línea `>>> CRITERIO n: …`. Esa línea va a la
+   columna "Resultado" de la [bitácora](bitacora-2026-10.md).
+2. **Una prueba en rojo no se arregla tocando la prueba.** El fallo es el dato:
+   se anota "no cumple" y la salida queda como evidencia.
+3. Commiteá las salidas en un commit propio, separado del código, para que se
+   distinga qué es medición y qué es cambio.
+
+`PictogramCoverageTest` y `CatalogMergeTest` también están en la carpeta de
+pruebas, pero no corresponden a ningún criterio. Pueden correr o no.
 
 ---
 
@@ -70,3 +111,4 @@ Antes de medir, y en commits separados de la evidencia:
 |---|---|---|
 | `842b0f9` | `HOT` deja de tener extensión de brazo negativa | 4 |
 | `d4147ab` | la foto de un pictograma propio se borra en el momento de eliminarlo | 15 |
+| `cbe46e9` | sin copia de seguridad: fotos y datos no entran ni en la nube ni en la transferencia a otro teléfono | 16 |

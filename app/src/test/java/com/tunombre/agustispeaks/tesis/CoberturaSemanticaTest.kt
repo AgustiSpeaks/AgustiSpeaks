@@ -15,11 +15,15 @@ import java.io.File
 import java.util.Locale
 
 /**
- * APÉNDICE F.2 — Cobertura semántica y distinguibilidad.
+ * Criterios 7 y 8 de la bitácora — Cobertura semántica y distinguibilidad.
  *
- * Recorre los 170 pictogramas del vocabulario, resuelve cada uno como lo hace la
+ * Recorre todos los pictogramas de la semilla, resuelve cada uno como lo hace la
  * app e informa, por categoría, cuántos caen en la acción genérica y cuántas
  * animaciones distintas produce la categoría.
+ *
+ * Los pictogramas propios no entran: se crean en el teléfono y no existen en
+ * el código. Tampoco tienen animación propia por diseño; la tarjeta de "Decir"
+ * muestra al avatar señalando su foto.
  *
  * ### Por qué mide dos cosas y no una
  *
@@ -39,7 +43,7 @@ import java.util.Locale
  */
 class CoberturaSemanticaTest {
 
-    private val ap = Apendice("F2-cobertura")
+    private val ap = Apendice("criterio-07-08-cobertura")
 
     private val generica = AvatarAction.TALK
 
@@ -70,8 +74,7 @@ class CoberturaSemanticaTest {
     private fun medir() {
         catalogo = cargarCatalogo()
 
-        linea("APÉNDICE F.2 — COBERTURA SEMÁNTICA Y DISTINGUIBILIDAD")
-        linea("AgustiSpeaks · generado por CoberturaSemanticaTest")
+        ap.encabezado("CRITERIOS 7 Y 8 — COBERTURA SEMÁNTICA Y DISTINGUIBILIDAD", "CoberturaSemanticaTest")
         linea("Acción genérica: ${generica.name} (mover la boca sin decir nada)")
         linea("")
         linea("Sin umbral: esta prueba mide, no aprueba. El criterio se fija aparte.")
@@ -93,12 +96,20 @@ class CoberturaSemanticaTest {
         linea("")
         sinAnimacionPropia(resueltos)
         linea("")
-        indistinguibles(resueltos)
+        val pares = indistinguibles(resueltos)
 
         val total = resueltos.values.sumOf { it.size }
+        val genericos = resueltos.values.sumOf { filas -> filas.count { it.animacion.accion == generica } }
+        ap.veredicto(
+            7, null,
+            "cobertura ${porciento(total - genericos, total)} ($genericos de $total en la acción genérica)"
+        )
+        ap.veredicto(8, null, "$pares pares indistinguibles")
+
+        val esperado = SeedData.coreWords.size + SeedData.pictograms.size
         assertTrue(
-            "Se esperaban 170 pictogramas y se recorrieron $total.",
-            total == SeedData.coreWords.size + SeedData.pictograms.size
+            "Se esperaban $esperado pictogramas y se recorrieron $total.",
+            total == esperado
         )
     }
 
@@ -155,7 +166,8 @@ class CoberturaSemanticaTest {
         linea("PICTOGRAMAS SIN ANIMACIÓN PROPIA (${caidos.size})")
         linea("=".repeat(76))
         if (caidos.isEmpty()) {
-            linea("  Ninguno: los 170 pictogramas tienen animación propia.")
+            val total = datos.values.sumOf { it.size }
+            linea("  Ninguno: los $total pictogramas tienen animación propia.")
             return
         }
         linea("CATEGORÍA".padEnd(20) + "PICTOGRAMA")
@@ -165,7 +177,8 @@ class CoberturaSemanticaTest {
         }
     }
 
-    private fun indistinguibles(datos: Map<String, List<Fila>>) {
+    /** Devuelve el total de pares, para el veredicto del criterio 8. */
+    private fun indistinguibles(datos: Map<String, List<Fila>>): Int {
         linea("=".repeat(76))
         linea("PARES INDISTINGUIBLES DENTRO DE UNA MISMA CATEGORÍA")
         linea("=".repeat(76))
@@ -189,6 +202,7 @@ class CoberturaSemanticaTest {
             linea("")
         }
         dato("Pares indistinguibles, total", totalPares)
+        return totalPares
     }
 
     /**

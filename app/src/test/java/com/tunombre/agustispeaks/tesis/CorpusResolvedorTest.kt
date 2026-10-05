@@ -7,10 +7,15 @@ import org.junit.Test
 import java.util.Locale
 
 /**
- * APÉNDICE F.1 — Corpus del resolvedor.
+ * Criterios 5 y 6 de la bitácora — Corpus del resolvedor.
  *
- * Noventa y cuatro oraciones con la acción que **deberían** producir, y dos
- * criterios de validación: resolución mínima del 90 % y cero colisiones léxicas.
+ * Oraciones con la acción que **deberían** producir, y dos criterios de
+ * validación: resolución mínima del 90 % (criterio 5) y cero colisiones
+ * léxicas (criterio 6).
+ *
+ * Los grupos rotulan dónde vive hoy cada palabra en el tablero. Cuando una
+ * palabra cambia de categoría se cambia el rótulo, nunca la acción esperada:
+ * el significado de la oración no depende de dónde esté el botón.
  *
  * ### La regla que hace que esto sea una prueba y no un espejo
  *
@@ -85,13 +90,11 @@ class CorpusResolvedorTest {
         Caso("núcleo", "Tú", AvatarAction.POINT),
         Caso("núcleo", "Yo quiero agua", AvatarAction.DRINK,
             "la app arma la oración entera: manda el verbo con su objeto, no el pronombre"),
-        Caso("núcleo", "Quiero más", AvatarAction.MORE),
         Caso("núcleo", "No quiero", AvatarAction.NO),
         Caso("núcleo", "Sí", AvatarAction.YES),
         Caso("núcleo", "Ayuda", AvatarAction.HELP),
         Caso("núcleo", "Parar", AvatarAction.STOP),
         Caso("núcleo", "Terminé", AvatarAction.DONE),
-        Caso("núcleo", "Gracias", AvatarAction.THANKS),
 
         /* ---- alimentos ---- */
         Caso("alimentos", "Quiero pan", AvatarAction.EAT),
@@ -219,6 +222,10 @@ class CorpusResolvedorTest {
                 "yo mismo apliqué a lápiz y cuaderno. El sustantivo nombra"),
 
         /* ---- social ---- */
+        // "Más" y "Gracias" eran palabras núcleo hasta octubre de 2026; hoy
+        // están en Social. Cambió el rótulo, no la acción esperada.
+        Caso("social", "Quiero más", AvatarAction.MORE),
+        Caso("social", "Gracias", AvatarAction.THANKS),
         Caso("social", "Hola", AvatarAction.HELLO),
         Caso("social", "Chau", AvatarAction.BYE),
         Caso("social", "Por favor", AvatarAction.PLEASE),
@@ -234,17 +241,16 @@ class CorpusResolvedorTest {
     )
 
     /**
-     * Criterio 1: resolución ≥ 90 %. Es una prueba aparte de la de colisiones
+     * Criterio 5: resolución ≥ 90 %. Es una prueba aparte de la de colisiones
      * para que cada criterio tenga su propio veredicto: si las dos vivieran en
      * un mismo método, la primera en fallar taparía a la otra y la bitácora de
      * verificación quedaría con una fila sin resultado.
      */
     @Test
     fun resolucionDelCorpus() {
-        ap = Apendice("F1-corpus")
-        linea("APÉNDICE F.1 — CORPUS DEL RESOLVEDOR")
-        linea("AgustiSpeaks · generado por CorpusResolvedorTest")
-        linea("Criterio: resolución ≥ ${fmt(minimoDeResolucion)} %")
+        ap = Apendice("criterio-05-corpus")
+        ap.encabezado("CRITERIO 5 — CORPUS DEL RESOLVEDOR", "CorpusResolvedorTest")
+        linea("Umbral: resolución ≥ ${fmt(minimoDeResolucion)} %")
         linea("")
         linea("La acción esperada se define por el significado de la oración, no por")
         linea("lo que el resolvedor devuelve. Un FALLA puede ser del resolvedor.")
@@ -253,10 +259,15 @@ class CorpusResolvedorTest {
         val fallas = tabla()
         linea("")
         decisiones()
-        ap.guardar()
 
         val resueltas = corpus.size - fallas
         val porcentaje = 100.0 * resueltas / corpus.size
+        ap.veredicto(
+            5, porcentaje >= minimoDeResolucion,
+            "${fmt(porcentaje)} % ($resueltas de ${corpus.size} oraciones)"
+        )
+        ap.guardar()
+
         assertTrue(
             "Resolución ${fmt(porcentaje)} %, por debajo del mínimo de " +
                 "${fmt(minimoDeResolucion)} %. El umbral no se toca: los casos " +
@@ -265,16 +276,16 @@ class CorpusResolvedorTest {
         )
     }
 
-    /** Criterio 2: cero colisiones léxicas. */
+    /** Criterio 6: cero colisiones léxicas. */
     @Test
     fun colisionesLexicas() {
-        ap = Apendice("F1bis-trampas")
-        linea("APÉNDICE F.1 (bis) — PARES TRAMPA")
-        linea("AgustiSpeaks · generado por CorpusResolvedorTest")
-        linea("Criterio: colisión léxica 0 casos")
+        ap = Apendice("criterio-06-trampas")
+        ap.encabezado("CRITERIO 6 — PARES TRAMPA", "CorpusResolvedorTest")
+        linea("Umbral: colisión léxica 0 casos")
         linea("")
 
         val colisiones = paresTrampa()
+        ap.veredicto(6, colisiones == 0, "$colisiones colisiones en ${trampas.size} pares")
         ap.guardar()
         assertTrue(
             "$colisiones colisiones léxicas. El criterio exige 0: dos significados " +
@@ -354,7 +365,7 @@ class CorpusResolvedorTest {
     /**
      * Las oraciones cuya acción correcta es una decisión de producto y no una
      * lectura del diccionario. Se imprimen aparte para que queden a la vista de
-     * quien revise el corpus, en vez de escondidas entre noventa filas.
+     * quien revise el corpus, en vez de escondidas entre las filas de la tabla.
      */
     private fun decisiones() {
         val conNota = corpus.filter { it.nota.isNotEmpty() }

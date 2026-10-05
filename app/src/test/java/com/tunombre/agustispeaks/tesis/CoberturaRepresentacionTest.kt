@@ -12,9 +12,9 @@ import java.io.File
 import java.util.Locale
 
 /**
- * APÉNDICE G.2 — Cobertura de representación.
+ * Criterio 4 de la bitácora — Cobertura de representación.
  *
- * Las 88 acciones tienen que producir una pose válida en **toda** la grilla de
+ * Todas las acciones tienen que producir una pose válida en **toda** la grilla de
  * fases: sin lanzar excepciones, sin NaN ni infinitos, sin valores fuera del
  * rango que cada campo declara en [AvatarPose], y con una duración de bucle
  * positiva.
@@ -35,7 +35,7 @@ import java.util.Locale
  */
 class CoberturaRepresentacionTest {
 
-    private val ap = Apendice("G2-representacion")
+    private val ap = Apendice("criterio-04-representacion")
 
     private val muestras = 1024
 
@@ -105,6 +105,20 @@ class CoberturaRepresentacionTest {
         }
 
         informe(fases.size, problemas, minimos, maximos)
+
+        // El umbral nombra tres conteos. La aserción de abajo es más estricta:
+        // también falla por un registro faltante o un bucle no positivo. Esos
+        // casos se informan aparte en el detalle, y en la práctica ya los
+        // descarta el criterio 1.
+        val fueraDeRangoN = problemas.count { it.detalle.contains("fuera de") }
+        val excepcionesN = problemas.count { it.detalle.startsWith("excepción") }
+        val noFinitosN = problemas.count { it.detalle.contains("no es finito") }
+        val otrosN = problemas.size - fueraDeRangoN - excepcionesN - noFinitosN
+        ap.veredicto(
+            4, fueraDeRangoN == 0 && excepcionesN == 0 && noFinitosN == 0,
+            "$fueraDeRangoN fuera de rango, $excepcionesN excepciones, $noFinitosN no finitos" +
+                if (otrosN > 0) " ($otrosN problemas de otro tipo)" else ""
+        )
         ap.guardar()
 
         assertTrue(
@@ -154,9 +168,7 @@ class CoberturaRepresentacionTest {
         minimos: Map<FloatField, Float>,
         maximos: Map<FloatField, Float>
     ) {
-        linea("APÉNDICE G.2 — COBERTURA DE REPRESENTACIÓN")
-        linea("AgustiSpeaks · generado por CoberturaRepresentacionTest")
-        linea("")
+        ap.encabezado("CRITERIO 4 — COBERTURA DE REPRESENTACIÓN", "CoberturaRepresentacionTest")
         dato("Acciones evaluadas", AvatarAction.entries.size)
         dato("Fases por acción", fasesPorAccion)
         dato("  dentro del ciclo", muestras)
@@ -173,7 +185,7 @@ class CoberturaRepresentacionTest {
 
         linea("")
         linea("=".repeat(72))
-        linea("RECORRIDO REAL DE CADA CAMPO, SOBRE LAS 88 ACCIONES")
+        linea("RECORRIDO REAL DE CADA CAMPO, SOBRE LAS ${AvatarAction.entries.size} ACCIONES")
         linea("=".repeat(72))
         linea("No es un criterio: documenta cuánto del rango declarado se usa.")
         linea("")

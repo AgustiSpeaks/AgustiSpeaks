@@ -51,7 +51,8 @@ import kotlin.math.abs
  */
 class PoseCatalogParityTest {
 
-    private val ap = Apendice("G1-equivalencia")
+    /** Criterio 3 de la bitácora: equivalencia catálogo ↔ motor. */
+    private val ap = Apendice("criterio-03-equivalencia")
 
     private val muestras = 501
     private fun fase(k: Int) = (k + 0.37f) / muestras
@@ -105,6 +106,11 @@ class PoseCatalogParityTest {
 
         fallas += medidas.filter { it.error > it.tolerancia }
         informe(etiquetas, medidas, fallas)
+        ap.veredicto(
+            3, fallas.isEmpty(),
+            "${fallas.size} desvíos fuera de tolerancia en ${etiquetas.size} casos " +
+                "(${etiquetas.size * muestras} comparaciones de pose)"
+        )
         ap.guardar()
 
         if (fallas.isNotEmpty()) {
@@ -236,7 +242,7 @@ class PoseCatalogParityTest {
     /* ---------------- informe ---------------- */
 
     /**
-     * Apéndice G.1 de la tesis. Una fila por caso, con el desvío peor expresado
+     * Salida del criterio 3. Una fila por caso, con el desvío peor expresado
      * como porcentaje de la tolerancia que ese campo tiene.
      *
      * El porcentaje del margen dice más que el error crudo. Un error de 0.004 es
@@ -248,9 +254,7 @@ class PoseCatalogParityTest {
         val porCaso = medidas.groupBy { it.caso }
         val exactos = etiquetas.count { porCaso[it].orEmpty().all { f -> f.error == 0f } }
 
-        ap.linea("APÉNDICE G.1 — EQUIVALENCIA DEL CATÁLOGO CONTRA EL MOTOR")
-        ap.linea("AgustiSpeaks · generado por PoseCatalogParityTest")
-        ap.linea()
+        ap.encabezado("CRITERIO 3 — EQUIVALENCIA DEL CATÁLOGO CONTRA EL MOTOR", "PoseCatalogParityTest")
         dato("Acciones del motor", AvatarAction.entries.size)
         dato("Casos comparados", etiquetas.size)
         dato("Fases por caso", muestras)
@@ -266,7 +270,7 @@ class PoseCatalogParityTest {
         ap.linea("  Los campos discretos no toleran nada.")
         ap.linea()
 
-        // Los desvíos van ANTES de la tabla de 97 filas. Si la consola recorta,
+        // Los desvíos van ANTES de la tabla de casos. Si la consola recorta,
         // lo que se pierde es la tabla y no el diagnóstico.
         if (fallas.isEmpty()) {
             ap.linea(
