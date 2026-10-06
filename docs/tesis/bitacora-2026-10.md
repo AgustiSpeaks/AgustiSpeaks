@@ -39,7 +39,7 @@ Dispositivo de pruebas: Samsung Galaxy A57, Android 16 (API 36).
 | Columna | Qué va |
 |---|---|
 | Fecha | día de la medición, `AAAA-MM-DD` |
-| Commit | hash corto del código medido (`git log --oneline -1`). Si había cambios sin commitear al medir, la medición no vale: se commitea y se repite |
+| Commit | hash corto del código medido: el último commit que tocó la app, `git log --oneline -1 -- app`. Los commits que solo agregan documentos o salidas no cambian el código medido. Si había cambios sin commitear al medir, la medición no vale: se commitea y se repite |
 | Dispositivo | `Galaxy A57` para los criterios en el teléfono; `JVM` para las pruebas automatizadas (1 a 9), que no usan dispositivo |
 | Android | `16 (API 36)`, o `—` en las pruebas de la JVM |
 | Resultado | **cumple** / **no cumple** con la cifra medida. Los criterios 7 y 8 no llevan umbral: se anota **medido** y la cifra |

@@ -41,8 +41,10 @@ repetida podría salir de la caché del motor de voz y medir otra cosa.
 
 ## Preparación
 
-1. **El código tiene que estar commiteado.** Anotá el hash con
-   `git log --oneline -1`. Va a la columna "Commit" de la bitácora.
+1. **El código tiene que estar commiteado.** Anotá el hash del último commit
+   que tocó la app, con `git log --oneline -1 -- app`. Va a la columna
+   "Commit" de la bitácora. Sin el `-- app` saldría el último commit de
+   cualquier tipo, que puede ser uno que solo agregó documentos.
 2. **Instalá la build de depuración** en el A57 desde Android Studio (▶ Run).
    La medición solo existe en esa build: en release no registra nada.
 3. En el teléfono, **Ajustes → Idiomas → Salida de texto a voz**: el motor tiene

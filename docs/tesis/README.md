@@ -27,7 +27,7 @@ Pruebas de la JVM, criterios 1 a 9. No usan el teléfono.
 
 1. **Commiteá todo.** La bitácora pide el commit del código medido, y una
    medición hecha con cambios sin commitear no se puede reproducir.
-2. Anotá el hash: `git log --oneline -1`.
+2. Anotá el hash del último commit que tocó la app: `git log --oneline -1 -- app`.
 3. **No borres `app/src/main/assets/animaciones.json`** ni corras
    `PoseCatalogDumpTest`. El catálogo instalado es el que se mide, y desde
    `842b0f9` tiene `HOT` corregido a mano.
