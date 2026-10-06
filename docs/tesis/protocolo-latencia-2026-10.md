@@ -94,6 +94,25 @@ repetida podría salir de la caché del motor de voz y medir otra cosa.
   el reinicio del teléfono. Un error invalida la sesión entera, así que seguir
   solo gasta tiempo. Tampoco sirve corregir sobre la marcha: volver a tocar el
   pictograma correcto repite una oración que el motor ya tiene en caché.
+- **Empezar de nuevo es reiniciar el teléfono, siempre.** No alcanza con borrar
+  la frase y volver a "Hola", ni con vaciar el registro. La app y el motor de
+  voz siguen con todo en memoria: las oraciones ya dichas salen de la caché en
+  pocos milisegundos (`repetida`), y la cuenta de pulsaciones no vuelve a 1.
+  Así salió el intento 3.
+
+### Comprobación en el primer toque
+
+Después de tocar "Hola" (n = 1), mirá la pestaña **Logcat** de Android Studio
+filtrada por `tag:VALIDACION`. Tiene que mostrar exactamente dos líneas:
+
+```
+n,frase,pictogramas,latencia_ms,regimen
+1,"Hola",1,…,arranque_frio
+```
+
+Si la fila empieza con otro número, o dice `repetida`, la app no arrancó en
+frío: **reiniciá el teléfono antes de seguir**. Son diez segundos que ahorran
+una sesión entera.
 - En el panel "Palabras", **"Quiero" y "No quiero" están uno al lado del otro**.
   Es donde se equivocó el intento 2.
 
@@ -279,7 +298,14 @@ fijado de antemano busca evitar.
 | 1 | 2026-10-06 14:15 | `datos/latencias-2026-10-intento-1-invalido.csv` | faltó el bloque 0; en los bloques 1 a 3 la frase se vació entre toques, así que hubo oraciones de 1 pictograma donde tenía que haber de 2 a 6, y 4 oraciones repetidas. Solo 50 pulsaciones en lugar de 51 |
 | 2 | 2026-10-06 15:03 | `datos/latencias-2026-10-intento-2-invalido.csv` | dos pictogramas equivocados en el bloque 7 (n = 38 y 40). Al corregir, "No quiero" se dijo dos veces y la segunda salió de la caché (n = 41, `repetida`). 54 pulsaciones. Sacar las filas erróneas no alcanza: la medición planificada de "No quiero" quedó contaminada y quedarían 49 |
 
+| 3 | 2026-10-06 15:16 | `datos/latencias-2026-10-intento-3-invalido.csv` | se repitió la secuencia desde "Hola" sin reiniciar el teléfono, después de cortar un intento en el toque 17. Sin encabezado, `n` empieza en 18, y las primeras 15 filas son `repetida` con 5 a 11 ms: salieron de la caché del motor de voz |
+
 Se conservan sin editar, como registro. **No se citan** para el criterio 10.
+
+De paso, los tres intentos dejan a la vista algo que la tesis puede usar: las
+oraciones repetidas tardan **de 5 a 11 ms**, porque el motor las saca de su
+caché. Eso confirma que las 50 oraciones del protocolo tienen que ser nuevas
+para medir la síntesis y no la caché.
 
 ## Análisis
 
