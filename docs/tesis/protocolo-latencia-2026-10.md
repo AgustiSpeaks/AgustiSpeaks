@@ -300,7 +300,31 @@ fijado de antemano busca evitar.
 
 | 3 | 2026-10-06 15:16 | `datos/latencias-2026-10-intento-3-invalido.csv` | se repitió la secuencia desde "Hola" sin reiniciar el teléfono, después de cortar un intento en el toque 17. Sin encabezado, `n` empieza en 18, y las primeras 15 filas son `repetida` con 5 a 11 ms: salieron de la caché del motor de voz |
 
-Se conservan sin editar, como registro. **No se citan** para el criterio 10.
+Se conservan sin editar, como registro.
+
+### Sesión que se cita: combinación de los intentos 2 y 3
+
+Ningún intento cumplió el protocolo por sí solo. El autor decidió combinar los
+intentos 2 y 3 en `datos/latencias-2026-10.csv`, con una regla fijada **antes**
+de calcular ninguna cifra y que no depende de los valores medidos:
+
+> Cada una de las 51 oraciones de la tabla se toma del intento más reciente
+> donde quedó medida como nueva (o como arranque en frío).
+
+| | Filas | Qué aporta |
+|---|---|---|
+| Intento 3 | 36 | de "Maestra Quiero Leer" (toque 16) a "Terminé Chau" (toque 51) |
+| Intento 2 | 15 | de "Hola" (toque 1, arranque en frío) a "Maestra Quiero" (toque 15) |
+
+El archivo combinado agrega dos columnas a las cinco de la medición: `intento` y
+`n_original`, para que cada fila se pueda rastrear hasta el registro sin editar
+del que salió. Lo armó un script que compara contra esta tabla; las 51 oraciones
+coinciden y ninguna falta.
+
+Hay que declararlo en la tesis como lo que es: **dos sesiones del mismo día,
+mismo commit y mismo dispositivo, con 13 minutos entre ellas**, y no una sesión
+única. Ninguna de las 36 filas del intento 3 cae en el rango de la caché (5 a
+11 ms), así que el motor no las sacó de lo dicho en el intento 2.
 
 De paso, los tres intentos dejan a la vista algo que la tesis puede usar: las
 oraciones repetidas tardan **de 5 a 11 ms**, porque el motor las saca de su

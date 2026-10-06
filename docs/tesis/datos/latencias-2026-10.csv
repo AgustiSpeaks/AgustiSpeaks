@@ -1,0 +1,52 @@
+n,frase,pictogramas,latencia_ms,regimen,intento,n_original
+1,"Hola",1,193,arranque_frio,2,1
+2,"Yo",1,45,nueva,2,2
+3,"Yo Quiero",2,59,nueva,2,3
+4,"Yo Quiero Beber",3,66,nueva,2,4
+5,"Yo Quiero Beber Agua",4,69,nueva,2,5
+6,"Yo Quiero Beber Agua Por favor",5,79,nueva,2,6
+7,"Yo Quiero Beber Agua Por favor Gracias",6,96,nueva,2,7
+8,"Mamá",1,63,nueva,2,8
+9,"Mamá Quiero",2,65,nueva,2,9
+10,"Mamá Quiero Jugar",3,66,nueva,2,10
+11,"Mamá Quiero Jugar Pelota",4,68,nueva,2,11
+12,"Mamá Quiero Jugar Pelota Afuera",5,86,nueva,2,12
+13,"Mamá Quiero Jugar Pelota Afuera Por favor",6,80,nueva,2,13
+14,"Maestra",1,62,nueva,2,14
+15,"Maestra Quiero",2,76,nueva,2,15
+16,"Maestra Quiero Leer",3,79,nueva,3,33
+17,"Maestra Quiero Leer Libro",4,81,nueva,3,34
+18,"Maestra Quiero Leer Libro Más",5,76,nueva,3,35
+19,"Maestra Quiero Leer Libro Más Gracias",6,83,nueva,3,36
+20,"Me duele",1,61,nueva,3,37
+21,"Me duele Cabeza",2,73,nueva,3,38
+22,"Me duele Cabeza Quiero",3,74,nueva,3,39
+23,"Me duele Cabeza Quiero Ir",4,70,nueva,3,40
+24,"Me duele Cabeza Quiero Ir Casa",5,81,nueva,3,41
+25,"Me duele Cabeza Quiero Ir Casa Ayuda",6,95,nueva,3,42
+26,"Papá",1,62,nueva,3,43
+27,"Papá Venir",2,63,nueva,3,44
+28,"Papá Venir Aquí",3,66,nueva,3,45
+29,"Papá Venir Aquí Ayuda",4,80,nueva,3,46
+30,"Papá Venir Aquí Ayuda Por favor",5,77,nueva,3,47
+31,"Papá Venir Aquí Ayuda Por favor Gracias",6,86,nueva,3,48
+32,"Tú",1,48,nueva,3,49
+33,"Tú Quiero",2,63,nueva,3,50
+34,"Tú Quiero Escuchar",3,63,nueva,3,51
+35,"Tú Quiero Escuchar Música",4,77,nueva,3,52
+36,"Tú Quiero Escuchar Música Me gusta",5,83,nueva,3,53
+37,"Tú Quiero Escuchar Música Me gusta Más",6,85,nueva,3,54
+38,"No quiero",1,58,nueva,3,55
+39,"No quiero Dormir",2,68,nueva,3,56
+40,"No quiero Dormir Quiero",3,70,nueva,3,57
+41,"No quiero Dormir Quiero Jugar",4,75,nueva,3,58
+42,"No quiero Dormir Quiero Jugar Bloques",5,79,nueva,3,59
+43,"No quiero Dormir Quiero Jugar Bloques Por favor",6,88,nueva,3,60
+44,"Abuela",1,66,nueva,3,61
+45,"Abuela Hola",2,73,nueva,3,62
+46,"Abuela Hola ¿Cómo estás?",3,80,nueva,3,63
+47,"Abuela Hola ¿Cómo estás? Yo",4,80,nueva,3,64
+48,"Abuela Hola ¿Cómo estás? Yo Bien",5,71,nueva,3,65
+49,"Abuela Hola ¿Cómo estás? Yo Bien Gracias",6,74,nueva,3,66
+50,"Terminé",1,55,nueva,3,67
+51,"Terminé Chau",2,57,nueva,3,68
