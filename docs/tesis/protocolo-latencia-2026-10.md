@@ -79,8 +79,17 @@ repetida podría salir de la caché del motor de voz y medir otra cosa.
   no habla y no se mide.
 - **No toques "Decir"**, ni abras Recientes, Favoritos o Ajustes, hasta terminar.
   "Decir" habla la oración por otro camino y la deja en la caché del motor.
-- Para cambiar de categoría: la flecha ← del panel derecho vuelve a la lista de
-  categorías. Navegar no habla ni se mide.
+- Para cambiar de categoría: la flecha ← **del panel derecho**, al lado del
+  nombre de la categoría, vuelve a la lista de categorías. Navegar no habla ni
+  se mide. **No uses la flecha de arriba a la izquierda**, al lado de "Colegio":
+  esa sale del lugar, y al volver a entrar la app empieza una frase nueva.
+- **Mirá la barra de la frase después de cada toque: la oración tiene que ir
+  creciendo.** Después del segundo toque de un bloque tiene que mostrar dos
+  palabras, después del tercero tres, y así. Si alguna vez muestra solo la
+  última palabra, la frase se borró por el camino: la sesión ya no sirve,
+  conviene cortarla y empezar de nuevo desde el reinicio.
+- La sesión **empieza por el bloque 0** ("Hola"). Ese primer toque es el
+  arranque en frío, y no se reemplaza por otro.
 - **Si te equivocás de pictograma**, anotá el número de toque y seguí. No
   intentes corregir. Al final se ve en el CSV: si hay errores, se repite la sesión
   entera; no se filtran filas a mano.
@@ -259,6 +268,14 @@ distinta a la tabla, hubo un error de protocolo. **En cualquiera de esos casos s
 repite la sesión entera, desde el reinicio del teléfono.** No se borran filas a
 mano: elegir qué mediciones cuentan después de verlas es justo lo que el umbral
 fijado de antemano busca evitar.
+
+## Intentos anteriores
+
+| Intento | Fecha | Archivo | Por qué no vale |
+|---|---|---|---|
+| 1 | 2026-10-06 14:15 | `datos/latencias-2026-10-intento-1-invalido.csv` | faltó el bloque 0; en los bloques 1 a 3 la frase se vació entre toques, así que hubo oraciones de 1 pictograma donde tenía que haber de 2 a 6, y 4 oraciones repetidas. Solo 50 pulsaciones en lugar de 51 |
+
+Se conserva sin editar, como registro. **No se cita** para el criterio 10.
 
 ## Análisis
 

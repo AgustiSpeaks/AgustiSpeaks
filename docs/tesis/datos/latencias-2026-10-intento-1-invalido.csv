@@ -1,0 +1,51 @@
+﻿n,frase,pictogramas,latencia_ms,regimen
+1,"Yo",1,193,arranque_frio
+2,"Quiero",1,59,nueva
+3,"Beber",1,58,nueva
+4,"Agua",1,57,nueva
+5,"Por favor",1,59,nueva
+6,"Gracias",1,60,nueva
+7,"Mamá",1,62,nueva
+8,"Quiero",1,7,repetida
+9,"Jugar",1,53,nueva
+10,"Pelota",1,57,nueva
+11,"Afuera",1,54,nueva
+12,"Por favor",1,8,repetida
+13,"Maestra",1,60,nueva
+14,"Quiero",1,10,repetida
+15,"Quiero Leer",2,68,nueva
+16,"Libro",1,54,nueva
+17,"Más",1,60,nueva
+18,"Gracias",1,7,repetida
+19,"Me duele",1,48,nueva
+20,"Me duele Cabeza",2,65,nueva
+21,"Me duele Cabeza Quiero",3,64,nueva
+22,"Me duele Cabeza Quiero Ir",4,74,nueva
+23,"Me duele Cabeza Quiero Ir Casa",5,76,nueva
+24,"Me duele Cabeza Quiero Ir Casa Ayuda",6,82,nueva
+25,"Papá",1,56,nueva
+26,"Papá Venir",2,63,nueva
+27,"Papá Venir Aquí",3,61,nueva
+28,"Papá Venir Aquí Ayuda",4,70,nueva
+29,"Papá Venir Aquí Ayuda Por favor",5,85,nueva
+30,"Papá Venir Aquí Ayuda Por favor Gracias",6,82,nueva
+31,"Tú",1,44,nueva
+32,"Tú Quiero",2,58,nueva
+33,"Tú Quiero Escuchar",3,67,nueva
+34,"Tú Quiero Escuchar Música",4,80,nueva
+35,"Tú Quiero Escuchar Música Me gusta",5,85,nueva
+36,"Tú Quiero Escuchar Música Me gusta Más",6,93,nueva
+37,"No quiero",1,68,nueva
+38,"No quiero Dormir",2,60,nueva
+39,"No quiero Dormir Quiero",3,70,nueva
+40,"No quiero Dormir Quiero Jugar",4,90,nueva
+41,"No quiero Dormir Quiero Jugar Bloques",5,80,nueva
+42,"No quiero Dormir Quiero Jugar Bloques Por favor",6,90,nueva
+43,"Abuela",1,56,nueva
+44,"Abuela Hola",2,63,nueva
+45,"Abuela Hola ¿Cómo estás?",3,77,nueva
+46,"Abuela Hola ¿Cómo estás? Yo",4,69,nueva
+47,"Abuela Hola ¿Cómo estás? Yo Bien",5,69,nueva
+48,"Abuela Hola ¿Cómo estás? Yo Bien Gracias",6,75,nueva
+49,"Terminé",1,59,nueva
+50,"Terminé Chau",2,62,nueva
