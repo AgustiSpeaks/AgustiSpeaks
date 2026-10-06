@@ -90,9 +90,12 @@ repetida podría salir de la caché del motor de voz y medir otra cosa.
   conviene cortarla y empezar de nuevo desde el reinicio.
 - La sesión **empieza por el bloque 0** ("Hola"). Ese primer toque es el
   arranque en frío, y no se reemplaza por otro.
-- **Si te equivocás de pictograma**, anotá el número de toque y seguí. No
-  intentes corregir. Al final se ve en el CSV: si hay errores, se repite la sesión
-  entera; no se filtran filas a mano.
+- **Si te equivocás de pictograma, cortá la sesión ahí** y empezá de nuevo desde
+  el reinicio del teléfono. Un error invalida la sesión entera, así que seguir
+  solo gasta tiempo. Tampoco sirve corregir sobre la marcha: volver a tocar el
+  pictograma correcto repite una oración que el motor ya tiene en caché.
+- En el panel "Palabras", **"Quiero" y "No quiero" están uno al lado del otro**.
+  Es donde se equivocó el intento 2.
 
 "Palabras" es el panel izquierdo, que siempre está a la vista. El resto son
 categorías del panel derecho de Colegio.
@@ -274,8 +277,9 @@ fijado de antemano busca evitar.
 | Intento | Fecha | Archivo | Por qué no vale |
 |---|---|---|---|
 | 1 | 2026-10-06 14:15 | `datos/latencias-2026-10-intento-1-invalido.csv` | faltó el bloque 0; en los bloques 1 a 3 la frase se vació entre toques, así que hubo oraciones de 1 pictograma donde tenía que haber de 2 a 6, y 4 oraciones repetidas. Solo 50 pulsaciones en lugar de 51 |
+| 2 | 2026-10-06 15:03 | `datos/latencias-2026-10-intento-2-invalido.csv` | dos pictogramas equivocados en el bloque 7 (n = 38 y 40). Al corregir, "No quiero" se dijo dos veces y la segunda salió de la caché (n = 41, `repetida`). 54 pulsaciones. Sacar las filas erróneas no alcanza: la medición planificada de "No quiero" quedó contaminada y quedarían 49 |
 
-Se conserva sin editar, como registro. **No se cita** para el criterio 10.
+Se conservan sin editar, como registro. **No se citan** para el criterio 10.
 
 ## Análisis
 

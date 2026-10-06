@@ -1,0 +1,55 @@
+﻿n,frase,pictogramas,latencia_ms,regimen
+1,"Hola",1,193,arranque_frio
+2,"Yo",1,45,nueva
+3,"Yo Quiero",2,59,nueva
+4,"Yo Quiero Beber",3,66,nueva
+5,"Yo Quiero Beber Agua",4,69,nueva
+6,"Yo Quiero Beber Agua Por favor",5,79,nueva
+7,"Yo Quiero Beber Agua Por favor Gracias",6,96,nueva
+8,"Mamá",1,63,nueva
+9,"Mamá Quiero",2,65,nueva
+10,"Mamá Quiero Jugar",3,66,nueva
+11,"Mamá Quiero Jugar Pelota",4,68,nueva
+12,"Mamá Quiero Jugar Pelota Afuera",5,86,nueva
+13,"Mamá Quiero Jugar Pelota Afuera Por favor",6,80,nueva
+14,"Maestra",1,62,nueva
+15,"Maestra Quiero",2,76,nueva
+16,"Maestra Quiero Leer",3,69,nueva
+17,"Maestra Quiero Leer Libro",4,73,nueva
+18,"Maestra Quiero Leer Libro Más",5,74,nueva
+19,"Maestra Quiero Leer Libro Más Gracias",6,87,nueva
+20,"Me duele",1,63,nueva
+21,"Me duele Cabeza",2,66,nueva
+22,"Me duele Cabeza Quiero",3,70,nueva
+23,"Me duele Cabeza Quiero Ir",4,74,nueva
+24,"Me duele Cabeza Quiero Ir Casa",5,78,nueva
+25,"Me duele Cabeza Quiero Ir Casa Ayuda",6,80,nueva
+26,"Papá",1,55,nueva
+27,"Papá Venir",2,64,nueva
+28,"Papá Venir Aquí",3,59,nueva
+29,"Papá Venir Aquí Ayuda",4,70,nueva
+30,"Papá Venir Aquí Ayuda Por favor",5,74,nueva
+31,"Papá Venir Aquí Ayuda Por favor Gracias",6,85,nueva
+32,"Tú",1,52,nueva
+33,"Tú Quiero",2,55,nueva
+34,"Tú Quiero Escuchar",3,61,nueva
+35,"Tú Quiero Escuchar Música",4,78,nueva
+36,"Tú Quiero Escuchar Música Me gusta",5,94,nueva
+37,"Tú Quiero Escuchar Música Me gusta Más",6,82,nueva
+38,"Quiero",1,55,nueva
+39,"No quiero",1,61,nueva
+40,"No quiero Escuchar",2,65,nueva
+41,"No quiero",1,6,repetida
+42,"No quiero Dormir",2,69,nueva
+43,"No quiero Dormir Quiero",3,63,nueva
+44,"No quiero Dormir Quiero Jugar",4,77,nueva
+45,"No quiero Dormir Quiero Jugar Bloques",5,84,nueva
+46,"No quiero Dormir Quiero Jugar Bloques Por favor",6,86,nueva
+47,"Abuela",1,70,nueva
+48,"Abuela Hola",2,57,nueva
+49,"Abuela Hola ¿Cómo estás?",3,77,nueva
+50,"Abuela Hola ¿Cómo estás? Yo",4,75,nueva
+51,"Abuela Hola ¿Cómo estás? Yo Bien",5,65,nueva
+52,"Abuela Hola ¿Cómo estás? Yo Bien Gracias",6,73,nueva
+53,"Terminé",1,55,nueva
+54,"Terminé Chau",2,63,nueva
