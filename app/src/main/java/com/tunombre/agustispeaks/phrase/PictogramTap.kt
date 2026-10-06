@@ -21,10 +21,11 @@ fun tapPictogram(
     phrase: PhraseController,
     speak: (String) -> Unit,
     record: (String) -> Unit,
-    onPress: (String) -> Unit = {}
+    /** Recibe la oración y cuántos pictogramas tiene. Lo usa la medición de latencia. */
+    onPress: (sentence: String, pictograms: Int) -> Unit = { _, _ -> }
 ): String {
     val sentence = phrase.addWord(text)
-    onPress(sentence)
+    onPress(sentence, phrase.words.value.size)
     speak(sentence)
     record(sentence)
     return sentence

@@ -16,7 +16,8 @@ hechas sobre el código actual; el plan que lo rige es
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
 | [Capturas](capturas.md) | lista de capturas para el capítulo de validación | a actualizar en la etapa 5: todavía menciona el GIF |
 | `salidas-2026-10/` | salida de cada prueba automatizada | se crea la primera vez que corren las pruebas |
-| `datos/` | CSV para las figuras | se crea en la etapa 4 |
+| [Protocolo de latencia](protocolo-latencia-2026-10.md) | criterio 10: preparación, las 51 pulsaciones en orden y cómo copiar el resultado | listo para ejecutar |
+| `datos/latencias-2026-10.csv` | una fila por pulsación: `n,frase,pictogramas,latencia_ms,regimen` | se crea al ejecutar el protocolo |
 
 ## Orden de las pruebas en Android Studio
 
