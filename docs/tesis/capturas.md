@@ -3,6 +3,11 @@
 Lista de qué fotografiar, en qué orden y qué debería verse. Está armada para
 sacarlas **en una sola sesión**, sin tener que volver atrás a buscar una pantalla.
 
+Son capturas para **ilustrar** el capítulo. Las capturas que sirven de
+**evidencia** de los criterios 11 a 16 tienen su propia lista, en el
+[protocolo manual](protocolo-manual-2026-10.md), y van a
+`evidencia-2026-10/`. Estas van a `capturas-2026-10/`.
+
 ---
 
 ## Antes de empezar
@@ -15,6 +20,8 @@ sacarlas **en una sola sesión**, sin tener que volver atrás a buscar una panta
   `ACTIVA = false` en `validacion/Validacion.kt`. Para las capturas de pantalla
   normales da igual.
 - Formato **PNG**, captura de pantalla completa del sistema.
+- **Fotos de objetos, nunca de personas**, en todo lo que lleve foto:
+  pictogramas propios y pictogifts.
 
 Las animaciones son cíclicas: si una captura sale en un instante poco
 representativo, tocar el pictograma otra vez y repetir. Para las acciones con
@@ -83,15 +90,22 @@ capturas, el argumento queda en palabras.
 
 ---
 
-## Bloque 4 — Verificación pendiente (3 capturas)
+## Bloque 4 — Pictogramas propios (3 capturas)
 
-No son ilustración: son evidencia de la bitácora del Apéndice G.
+Muestran que cada familia puede ampliar el vocabulario con sus propias fotos.
+Se hacen con un pictograma creado para la ocasión, por ejemplo **"Camioncito"**
+en Juego, con la foto de un juguete. El nombre no puede coincidir con una
+palabra de la app.
 
-| # | Qué | Para el criterio |
-|---|---|---|
-| 30 | Modo avión activo **y** avatar animado en la misma imagen | 10 |
-| 31 | Pestaña Merged Manifest con la lista de permisos | 11 |
-| 32 | Antes y después de cerrar desde recientes | 12 |
+| # | Pantalla | Qué hacer | Qué debe verse |
+|---|---|---|---|
+| 30 | Crear | Colegio → Juego → **Agregar**, escribir el nombre y elegir la foto, **sin guardar todavía** | el formulario con el nombre, los botones de foto y la vista previa del pictograma con el color de Juego |
+| 31 | En el tablero | guardar, y volver a la grilla de Juego | el pictograma propio al final de la categoría, con la foto en lugar del ícono |
+| 32 | Diciendo la frase | tocar "Quiero", después el pictograma propio, y el botón de hablar | la tarjeta de «Decir» con **el avatar a la izquierda señalando la foto** |
+
+La captura 32 es la que conecta esta función con el resto de la tesis: un
+pictograma propio no tiene animación, pero al decirlo el avatar **señala** su
+foto, así que se integra al mismo lenguaje visual que los demás.
 
 ---
 
@@ -113,6 +127,6 @@ está mal, es el momento de detectarlo:
 
 ## Resumen
 
-**32 capturas**, en cuatro bloques. Las 29 primeras se pueden sacar seguidas en
-una sesión de veinte minutos; las tres últimas requieren el protocolo manual del
-Apéndice G.
+**32 capturas**, en cuatro bloques, todas de ilustración. Se pueden sacar
+seguidas en una sesión de unos veinticinco minutos. Al terminar, borrá el
+pictograma propio del bloque 4.

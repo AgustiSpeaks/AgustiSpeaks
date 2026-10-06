@@ -14,7 +14,10 @@ hechas sobre el código actual; el plan que lo rige es
 | [Estado al 5-10-2026](estado-2026-10-05.md) | relevamiento del código: pictogramas propios, permisos, respaldo, pruebas, cifras | etapa 1, completo |
 | [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | abierta, sin mediciones |
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
-| [Capturas](capturas.md) | lista de capturas para el capítulo de validación | a actualizar en la etapa 5: todavía menciona el GIF |
+| [Protocolo manual](protocolo-manual-2026-10.md) | criterios 11 a 16: pasos, qué tiene que pasar y qué captura guardar | listo para ejecutar |
+| `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | se crea al ejecutar el protocolo manual |
+| [Capturas](capturas.md) | las 32 capturas de ilustración del capítulo, con el bloque de pictogramas propios | actualizado el 6-10 |
+| `capturas-2026-10/` | esas capturas | se crea al sacarlas |
 | `salidas-2026-10/` | salida de cada prueba automatizada | se crea la primera vez que corren las pruebas |
 | [Protocolo de latencia](protocolo-latencia-2026-10.md) | criterio 10: preparación, las 51 pulsaciones en orden y cómo copiar el resultado | listo para ejecutar |
 | `datos/latencias-2026-10.csv` | una fila por pulsación: `n,frase,pictogramas,latencia_ms,regimen` | se crea al ejecutar el protocolo |
