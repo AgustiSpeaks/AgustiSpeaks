@@ -1,0 +1,43 @@
+CRITERIO 4 — COBERTURA DE REPRESENTACIÓN
+AgustiSpeaks · generado por CoberturaRepresentacionTest
+Corrida: 2026-10-06 12:54
+
+  Acciones evaluadas......................           88
+  Fases por acción........................         1030
+    dentro del ciclo......................         1024
+    fuera del intervalo [0, 1]............            6
+  Poses evaluadas.........................        90640
+  Campos revisados por pose...............           12
+  Comprobaciones..........................      1087680
+
+  Excepciones.............................            0
+  Valores no finitos......................            0
+  Valores fuera de rango..................            0
+  loopMillis no positivos.................            0
+  TOTAL de problemas......................            0
+
+========================================================================
+RECORRIDO REAL DE CADA CAMPO, SOBRE LAS 88 ACCIONES
+========================================================================
+No es un criterio: documenta cuánto del rango declarado se usa.
+
+CAMPO         DECLARADO          MÍNIMO     MÁXIMO
+--------------------------------------------------
+bob           [-1, 1]           -0.2200     1.0000
+lean          [-1, 1]           -0.4200     0.4200
+headTilt      sin tope         -18.0000    18.0000
+jaw           [0, 1]             0.0000     1.0000
+tears         [0, 1]             0.0000     1.0000
+eyeClose      [0, 1]             0.0000     1.0000
+crouch        [0, 1]             0.0000     1.0000
+legSwing      [-1, 1]           -1.0000     1.0000
+armSwing      [-1, 1]           -1.0000     1.0000
+reach         [0, 1]             0.0000     1.0000
+propPhase     [0, 1]             0.0000     1.0000
+fxPulse       [0, 1]             0.8200     1.0000
+--------------------------------------------------
+
+Sin problemas: las 88 acciones producen una pose
+válida en toda la grilla, dentro y fuera del intervalo del ciclo.
+
+>>> CRITERIO 4: CUMPLE — 0 fuera de rango, 0 excepciones, 0 no finitos

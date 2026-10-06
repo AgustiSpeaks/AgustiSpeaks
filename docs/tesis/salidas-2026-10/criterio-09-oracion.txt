@@ -1,0 +1,18 @@
+CRITERIO 9 — EMISIÓN DE LA ORACIÓN COMPLETA
+AgustiSpeaks · generado por OracionCompletaTest
+Corrida: 2026-10-06 12:54
+
+Umbral: 100 % de los pictogramas entregan al motor de voz la oración
+acumulada completa.
+
+  Pictogramas de la semilla...............        168
+    palabras núcleo.......................         12
+    temáticos.............................        156
+  Cumplen en el recorrido aislado.........        168
+  Cumplen en el recorrido acumulado.......        168
+  Cumplen en los dos......................        168
+
+Sin fallas: cada pulsación entregó la oración entera, una sola vez,
+y Recientes recibió la misma oración que el motor de voz.
+
+>>> CRITERIO 9: CUMPLE — 100.0 % (168 de 168 pictogramas)

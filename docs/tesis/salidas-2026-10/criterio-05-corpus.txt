@@ -1,0 +1,152 @@
+CRITERIO 5 — CORPUS DEL RESOLVEDOR
+AgustiSpeaks · generado por CorpusResolvedorTest
+Corrida: 2026-10-06 12:54
+
+Umbral: resolución ≥ 90.0 %
+
+La acción esperada se define por el significado de la oración, no por
+lo que el resolvedor devuelve. Un FALLA puede ser del resolvedor.
+
+GRUPO        ORACIÓN                   ESPERADA     OBTENIDA     ESTADO
+------------------------------------------------------------------------
+núcleo       Yo                        TOUCH_PART   TOUCH_PART   OK
+             Tú                        POINT        POINT        OK
+             Yo quiero agua            DRINK        DRINK        OK
+             No quiero                 NO           NO           OK
+             Sí                        YES          YES          OK
+             Ayuda                     HELP         HELP         OK
+             Parar                     STOP         STOP         OK
+             Terminé                   DONE         DONE         OK
+alimentos    Quiero pan                EAT          EAT          OK
+             Tengo hambre              EAT          EAT          OK
+             Quiero sopa               EAT          EAT          OK
+             Manzana                   EAT          EAT          OK
+             Quiero galletas           EAT          EAT          OK
+             No quiero comer           NO           EAT          FALLA
+bebidas      Quiero agua               DRINK        DRINK        OK
+             Tengo sed                 DRINK        DRINK        OK
+             Leche                     DRINK        DRINK        OK
+             Quiero té                 DRINK        DRINK        OK
+acciones     Quiero jugar              PLAY         PLAY         OK
+             Vamos a correr            RUN          RUN          OK
+             Quiero dormir             SLEEP        SLEEP        OK
+             Abrir la puerta           OPEN         OPEN         OK
+             Cerrar la puerta          CLOSE        CLOSE        OK
+             Quiero dibujar            SCRIBBLE     SCRIBBLE     OK
+             Escribir                  WRITE        WRITE        OK
+             Esperar un momento        WAIT         WAIT         OK
+             Caminar                   GO           GO           OK
+             Sentarme                  SIT          SIT          OK
+             Quiero escuchar           LISTEN       LISTEN       OK
+             Buscar mi juguete         SEARCH       TOYS         FALLA
+sentimientos Estoy feliz               HAPPY        HAPPY        OK
+             Estoy triste              SAD          SAD          OK
+             Estoy enojado             ANGRY        ANGRY        OK
+             Tengo miedo               SCARED       SCARED       OK
+             Estoy cansado             TIRED        TIRED        OK
+             Estoy aburrido            BORED        BORED        OK
+             Estoy nervioso            NERVOUS      NERVOUS      OK
+             Estoy tranquilo           CALM         CALM         OK
+             Quiero llorar             CRY          WANT         FALLA
+dolor        Me duele la cabeza        HURT         HURT         OK
+             Me duele la panza         HURT         HURT         OK
+             Me duele la garganta      HURT         HURT         OK
+             Tengo fiebre              FEVER        FEVER        OK
+             Tengo frío                COLD         COLD         OK
+             Tengo calor               HOT          HOT          OK
+             Tengo náuseas             SICK         SICK         OK
+             Quiero el remedio         MEDICINE     MEDICINE     OK
+             La inyección              INJECTION    INJECTION    OK
+             Una curita                TOUCH_PART   TOUCH_PART   OK
+cuerpo       Mis manos                 TOUCH_PART   TOUCH_PART   OK
+             Mi cabeza                 TOUCH_PART   TOUCH_PART   OK
+             Los ojos                  TOUCH_PART   TOUCH_PART   OK
+             Mis pies                  TOUCH_PART   TOUCH_PART   OK
+ropa         Ponerme los zapatos       DRESS        DRESS        OK
+             Quiero la campera         DRESS        DRESS        OK
+             Mi gorro                  DRESS        DRESS        OK
+             El pijama                 DRESS        DRESS        OK
+higiene      Lavarme las manos         WASH_HANDS   WASH_HANDS   OK
+             Cepillarme los dientes    BRUSH_TEETH  BRUSH_TEETH  OK
+             Quiero bañarme            BATHE        BATHE        OK
+             Peinarme                  COMB         COMB         OK
+             Jabón                     SHOW         SHOW         OK
+             Quiero hacer pis          TOILET       TOILET       OK
+             La toalla                 SHOW         SHOW         OK
+tiempo       Ahora                     NOW          NOW          OK
+             Mañana                    LATER        LATER        OK
+             Ayer                      BEFORE       BEFORE       OK
+             Es de día                 DAY          DAY          OK
+             Es de noche               NIGHT        NIGHT        OK
+             Está lloviendo            RAIN         RAIN         OK
+             Está nublado              CLOUDY       CLOUDY       OK
+familia      Quiero a mamá             WITH         WITH         OK
+             Mi hermano                WITH         WITH         OK
+             La abuela                 WITH         WITH         OK
+             Mi tía                    WITH         WITH         OK
+             El bebé                   CRADLE       CRADLE       OK
+juego        Quiero los juguetes       TOYS         TOYS         OK
+             La hamaca                 SWING        SWING        OK
+             El tobogán                SLIDE        SLIDE        OK
+             Quiero la pelota          PLAY         PLAY         OK
+             Los bloques               BLOCKS       BLOCKS       OK
+             La muñeca                 CRADLE       CRADLE       OK
+lugares      Quiero ir a casa          GO_TO        GO_TO        OK
+             Vamos a la plaza          GO_TO        GO_TO        OK
+             Vamos a la escuela        GO_TO        GO_TO        OK
+             Quiero ir al baño         TOILET       TOILET       OK
+escuela      La maestra                WITH         WITH         OK
+             Mi mochila                DRESS        DRESS        OK
+             El cuaderno               SHOW         SHOW         OK
+             El lápiz                  SHOW         SHOW         OK
+             El libro                  SHOW         SHOW         OK
+             Quiero leer               READ         READ         OK
+             Recreo                    PLAY         PLAY         OK
+compras      Quiero comprar            SHOP         SHOP         OK
+             Pagar                     PAY          PAY          OK
+             La bolsa                  CARRY        CARRY        OK
+             La plata                  SHOW         SHOW         OK
+social       Quiero más                MORE         MORE         OK
+             Gracias                   THANKS       THANKS       OK
+             Hola                      HELLO        HELLO        OK
+             Chau                      BYE          BYE          OK
+             Por favor                 PLEASE       PLEASE       OK
+             Perdón                    SORRY        SORRY        OK
+             Buenos días               HELLO        HELLO        OK
+             Buenas tardes             HELLO        HELLO        OK
+             ¿Cómo estás?              ASK          ASK          OK
+             ¿Cómo estás? Bien         ASK          ASK          OK
+             Estoy bien                GOOD         GOOD         OK
+             Me siento mal             BAD          BAD          OK
+             Ya está                   DONE         DONE         OK
+------------------------------------------------------------------------
+
+  Oraciones en el corpus..................        110
+  Resueltas segun lo esperado.............        107
+  Desvíos.................................          3
+  Resolución..............................     97.3 %
+  Mínimo exigido..........................     90.0 %
+
+========================================================================
+DECISIONES DE PRODUCTO TOMADAS AL ARMAR EL CORPUS (9)
+========================================================================
+  "Yo quiero agua" → DRINK
+      la app arma la oración entera: manda el verbo con su objeto, no el pronombre
+  "No quiero comer" → NO
+      el mensaje es el rechazo, no la comida: mostrar a alguien comiendo dice lo contrario
+  "Buscar mi juguete" → SEARCH
+      el verbo es el mensaje; el juguete es el objeto de la búsqueda, no la acción
+  "Una curita" → TOUCH_PART
+      nombrar la curita es señalar dónde duele, no una acción propia
+  "Jabón" → SHOW
+      nombrar un objeto es mostrarlo; usarlo es lavarse las manos, que es otra acción
+  "Quiero ir al baño" → TOILET
+      el mensaje es la necesidad, no el traslado
+  "El libro" → SHOW
+      mismo criterio que lápiz y cuaderno: el sustantivo nombra, y leer es otra cosa
+  "La plata" → SHOW
+      corregido: la esperaba en PAGAR, lo cual contradecía el criterio que yo mismo apliqué a lápiz y cuaderno. El sustantivo nombra
+  "¿Cómo estás? Bien" → ASK
+      la pregunta manda sobre la respuesta: es la frase que abre el intercambio
+
+>>> CRITERIO 5: CUMPLE — 97.3 % (107 de 110 oraciones)

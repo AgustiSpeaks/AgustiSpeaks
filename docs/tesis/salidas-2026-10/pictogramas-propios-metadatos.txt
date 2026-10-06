@@ -1,0 +1,22 @@
+PICTOGRAMAS PROPIOS — METADATOS (complementa los criterios 13 y 15)
+AgustiSpeaks · generado por PictogramasPropiosMetadatosTest
+Corrida: 2026-10-06 12:54
+
+Formato: arreglo JSON, un objeto {id, categoria, texto, foto} por pictograma.
+
+  [OK   ] Guardar el primero sobre un almacén vacío
+  [OK   ] Guardar un segundo conserva el orden de creación
+  [OK   ] Leer devuelve los tres, iguales a los guardados
+  [OK   ] Todos se leen marcados como propios
+  [OK   ] Sin foto se lee como sin foto, no como "null"
+  [OK   ] Tildes y eñes sobreviven a guardar y leer
+  [OK   ] Uno con nombre en blanco no se guarda
+  [OK   ] Borrar quita solo ese
+  [OK   ] Borrar uno que no existe no cambia nada
+  [OK   ] Borrar todos deja el almacén vacío
+  [OK   ] Un almacén nulo se lee vacío
+  [OK   ] Un JSON roto se lee vacío, sin excepción
+  [OK   ] Un elemento incompleto se saltea sin llevarse a los demás
+
+  Comprobaciones..........................         13
+  Fallas..................................          0

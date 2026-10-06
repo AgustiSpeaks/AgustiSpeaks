@@ -1,0 +1,125 @@
+CRITERIO 3 — EQUIVALENCIA DEL CATÁLOGO CONTRA EL MOTOR
+AgustiSpeaks · generado por PoseCatalogParityTest
+Corrida: 2026-10-06 12:54
+
+  Acciones del motor..................         88
+  Casos comparados....................         97
+  Fases por caso......................        501
+  Comparaciones de pose...............      48597
+  Casos con error exactamente cero....         18
+  Casos con algún desvío medible......         79
+  Desvíos fuera de tolerancia.........          0
+
+  Grilla corrida 0.37 de paso: ninguna fase coincide con las que
+  generaron el catálogo. Verificar en los puntos de generación
+  no probaría nada, porque coincidirían por construcción.
+  Tolerancia: 1% del recorrido del campo en esa acción, piso 0.002.
+  Los campos discretos no toleran nada.
+
+Sin desvíos: el catálogo reproduce el motor en los 97 casos de las 88 acciones.
+
+========================================================================
+DESVÍO POR CASO
+========================================================================
+  caso                             error    tolera del margen  exacto
+  --------------------------------------------------------------------
+  idle                           0.00099   0.00987     10.02%  no
+  talk                           0.00000   0.00598      0.01%  no
+  want                           0.00000   0.00349      0.01%  no
+  more                           0.00000   0.00200      0.00%  no
+  less                           0.00000   0.00200      0.00%  no
+  give                           0.00000   0.00200      0.00%  no
+  take                           0.00000   0.00200      0.00%  no
+  eat                            0.00000   0.00200      0.00%  sí
+  eat +soup                      0.00000   0.00200      0.00%  sí
+  drink                          0.00000   0.00200      0.00%  no
+  drink +milk                    0.00000   0.00200      0.00%  no
+  go                             0.00000   0.00499      0.00%  no
+  run                            0.00000   0.00849      0.00%  no
+  jump                           0.00379   0.01000     37.89%  no
+  dance                          0.00000   0.00599      0.00%  no
+  sit                            0.00000   0.00200      0.00%  no
+  stand                          0.00000   0.00200      0.00%  no
+  sleep                          0.00000   0.00200      0.00%  no
+  tired                          0.00000   0.00200      0.00%  no
+  play                           0.00000   0.00749      0.00%  no
+  look                           0.00000   0.00200      0.00%  no
+  point                          0.00000   0.00200      0.00%  no
+  read                           0.00000   0.00200      0.00%  no
+  scribble                       0.00000   0.00320      0.00%  sí
+  listen                         0.00000   0.12000      0.00%  sí
+  sing                           0.00000   0.00599      0.00%  no
+  wash_hands                     0.00029   0.00640      4.55%  no
+  brush_teeth                    0.00013   0.00280      4.55%  no
+  bathe                          0.00005   0.00200      2.28%  no
+  comb                           0.00000   0.00200      0.00%  no
+  toilet                         0.00000   0.00200      0.00%  no
+  help                           0.00000   0.00400      0.00%  no
+  stop                           0.00000   0.00200      0.00%  no
+  wait                           0.00000   0.00300      0.00%  no
+  tap                            0.00000   0.00380      0.00%  no
+  search                         0.00000   0.00200      0.00%  no
+  hug                            0.00000   0.00200      0.00%  no
+  kiss                           0.00000   0.00200      0.00%  no
+  hello                          0.00000   0.00200      0.00%  no
+  bye                            0.00000   0.00200      0.00%  no
+  thanks                         0.00000   0.00200      0.00%  no
+  sorry                          0.00000   0.00200      0.00%  no
+  please                         0.00000   0.00200      0.00%  no
+  good                           0.00000   0.00599      0.00%  no
+  bad                            0.00000   0.00200      0.00%  no
+  ask                            0.00000   0.00200      0.00%  no
+  yes                            0.00000   0.00200      0.00%  no
+  no                             0.00000   0.00200      0.00%  no
+  open                           0.00000   0.00200      0.00%  no
+  close                          0.00000   0.00200      0.00%  no
+  hurt                           0.00000   0.00200      0.00%  sí
+  hurt +leg                      0.00000   0.00200      0.00%  sí
+  hurt +belly                    0.00000   0.00200      0.00%  sí
+  touch_part                     0.00000   0.00200      0.00%  no
+  touch_part +leg                0.00000   0.00200      0.00%  no
+  touch_part +belly              0.00000   0.00200      0.00%  no
+  cold                           0.00000   0.00200      0.00%  sí
+  hot                            0.00000   0.00200      0.00%  no
+  fever                          0.00000   0.00200      0.00%  no
+  sick                           0.00000   0.00200      0.00%  sí
+  medicine                       0.00000   0.00530      0.00%  sí
+  injection                      0.00000   0.00200      0.00%  no
+  happy                          0.00000   0.00799      0.00%  no
+  laugh                          0.00000   0.00548      0.01%  no
+  sad                            0.00000   0.00200      0.00%  no
+  cry                            0.00000   0.00200      0.00%  no
+  angry                          0.00000   0.00200      0.00%  no
+  nervous                        0.00000   0.00200      0.00%  sí
+  scared                         0.00000   0.00240      0.00%  sí
+  bored                          0.00000   0.00200      0.00%  no
+  calm                           0.00000   0.00200      0.00%  no
+  surprised                      0.00000   0.00200      0.00%  no
+  dress                          0.00000   0.00480      0.00%  sí
+  dress +head +hat               0.00000   0.00480      0.00%  sí
+  dress +foot +shoes             0.00000   0.00200      0.00%  sí
+  dress +leg +pants              0.00000   0.00200      0.00%  sí
+  come                           0.00000   0.00200      0.00%  no
+  done                           0.00000   0.00200      0.00%  no
+  pay                            0.00000   0.00200      0.00%  no
+  shop                           0.00000   0.00349      0.00%  no
+  carry                          0.00000   0.00449      0.00%  no
+  toys                           0.00000   0.00200      0.00%  no
+  blocks                         0.00000   0.00200      0.00%  no
+  cradle                         0.00000   0.00200      0.00%  no
+  swing                          0.00000   0.00200      0.00%  no
+  slide                          0.00000   0.00200      0.00%  no
+  show                           0.00000   0.05000      0.00%  no
+  write                          0.00026   0.00280      9.11%  no
+  now                            0.00000   0.00200      0.00%  no
+  later                          0.00000   0.00200      0.00%  sí
+  before                         0.00000   0.00200      0.00%  sí
+  day                            0.00000   0.00220      0.00%  no
+  night                          0.00000   0.00200      0.00%  no
+  rain                           0.00000   0.00200      0.00%  no
+  cloudy                         0.00000   0.00200      0.00%  no
+  with                           0.00000   0.00200      0.00%  no
+  go_to                          0.00000   0.00499      0.00%  no
+  --------------------------------------------------------------------
+
+>>> CRITERIO 3: CUMPLE — 0 desvíos fuera de tolerancia en 97 casos (48597 comparaciones de pose)
