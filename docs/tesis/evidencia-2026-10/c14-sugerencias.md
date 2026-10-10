@@ -40,9 +40,20 @@ horizontal (2340 × 1080).
 | 4 | 3 | **Contraste del texto** | [1608,303][1772,360] | texto de la pestaña "Favoritos" | **sí** |
 | 4 | 4 | Texto no expuesto | [34,433][2171,715] | fila de "Aaw": su foto es una captura de la app, y el Scanner leyó el texto "Nuevo pictograma en…" dentro de la imagen | no |
 
-Las proporciones exactas de los cinco contrastes están **pendientes**: hay que
-abrir cada sugerencia en el Scanner. No se calculan a partir de los colores del
-código, porque el Scanner mide lo que efectivamente se ve en pantalla.
+### Proporciones de contraste informadas por el Scanner
+
+Leídas por el autor al desplegar cada sugerencia, el 2026-10-10:
+
+| Elemento | Proporción actual | Proporción que sugiere el Scanner |
+|---|---|---|
+| "Agregar a favoritos" | **2,49:1** | 4,50:1 |
+| "Agregar foto" | **2,49:1** | 4,50:1 |
+| "Listo" | **3,23:1** | 4,50:1 |
+| Pestañas "Recientes" y "Favoritos" | no se leyeron | — |
+
+Las tres coinciden con el cálculo de WCAG sobre los colores del tema: el azul
+`#5B8DEF` sobre el fondo de la tarjeta (`#E6E0E9`) da 2,49:1, y el texto blanco
+sobre ese azul da 3,23:1.
 
 ## Lectura
 
@@ -68,5 +79,13 @@ aparecen marcados.
 
 ## Resultado
 
-**No cumple**, por contraste: 5 textos por debajo de 4,5:1. La parte de
-objetivos táctiles cumple en lo visto.
+**No cumple**, por contraste: 5 textos por debajo de 4,5:1, el peor en 2,49:1.
+La parte de objetivos táctiles cumple en lo visto.
+
+## Qué pasó después
+
+El autor decidió corregirlo como cambio de producto: el azul principal del modo
+claro pasa a `#2E5AAC`, y pictogramas y tarjetas de categoría llevan su nombre
+como descripción. **Esta medición queda como el "antes"**, sobre `a0accaf`, y
+se reemplaza por una nueva sobre el commit del cambio. Por eso no se completaron
+las sugerencias 1.5–1.7 y 2.5 ni las proporciones de las pestañas.
