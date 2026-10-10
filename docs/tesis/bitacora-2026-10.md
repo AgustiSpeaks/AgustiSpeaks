@@ -28,7 +28,7 @@ Dispositivo de pruebas: Samsung Galaxy A57, Android 16 (API 36).
 | 11 | Funcionamiento sin red | 100 % de las funciones en modo avión | | | | | | |
 | 12 | Permisos | 0 permisos de red o cámara en el manifiesto combinado | 2026-10-06 (manifiesto) y 2026-10-10 (teléfono) | `a0accaf` | Galaxy A57 | 16 (API 36) | **cumple**: 0 permisos de red o cámara. Único `uses-permission`: el propio de la app, de nivel `signature`, que agrega `androidx.core`. El teléfono informa "No se requieren permisos" | `evidencia-2026-10/c12-c16-manifiesto.md`, `evidencia-2026-10/c12-permisos-telefono.jpg` |
 | 13 | Persistencia | 100 % de ajustes y pictogramas propios tras cerrar desde recientes | | | | | | |
-| 14 | Accesibilidad | 0 objetivos < 48 dp en pictogramas y «Decir»; contraste ≥ 4,5:1; el resto se reporta | | | | | | |
+| 14 | Accesibilidad | 0 objetivos < 48 dp en pictogramas y «Decir»; contraste ≥ 4,5:1; el resto se reporta | 2026-10-10 | `a0accaf` | Galaxy A57 | 16 (API 36) | **no cumple**: 5 textos con contraste por debajo de 4,5:1 (botones de la tarjeta de «Decir» y pestañas de Recientes/Favoritos, todos en el azul principal). Objetivos táctiles < 48 dp: 0 en lo visto. Se reportan 11 etiquetas faltantes en elementos cortados por el borde, 2 descripciones repetidas y 1 texto dentro de una foto de prueba. **Pendiente:** proporciones exactas de contraste y 4 sugerencias sin ver | `evidencia-2026-10/c14-sugerencias.md` y las 8 capturas `c14-*.jpg` |
 | 15 | Pictograma propio con foto | 100 % de los pasos: crear, ver, decir, reabrir, eliminar (el archivo debe desaparecer) | | | | | | |
 | 16 | Resguardo de las fotografías | 0 fotos fuera del almacenamiento privado o incluidas en el respaldo automático | | | | | | |
 
