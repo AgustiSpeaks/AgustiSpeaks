@@ -26,6 +26,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -73,6 +75,12 @@ fun PictogramButton(
 
     val shapeModifier = modifier.aspectRatio(1f)
 
+    // El nombre del pictograma, puesto sobre el mismo elemento que recibe el
+    // toque. Sin esto, el lector de pantalla lo tomaba del texto visible, y un
+    // pictograma cortado por el borde de la grilla quedaba sin nombre:
+    // Accessibility Scanner lo marcó así en cada fila a medio mostrar.
+    val nombre = Modifier.semantics { contentDescription = pictogram.text }
+
     if (settings.activateOnRelease && onLongClick == null) {
         Surface(
             onClick = { fire() },
@@ -81,7 +89,7 @@ fun PictogramButton(
             contentColor = contentColor,
             tonalElevation = 2.dp,
             shadowElevation = 2.dp,
-            modifier = shapeModifier
+            modifier = shapeModifier.then(nombre)
         ) { PictogramContent(pictogram, scale) }
     } else if (settings.activateOnRelease) {
         // Mismo botón, con toque largo. El clic va sobre el contenido y no
@@ -98,7 +106,7 @@ fun PictogramButton(
             PictogramContent(
                 pictogram,
                 scale,
-                modifier = Modifier.longClickable(onClick = { fire() }, onLongClick = onLongClick)
+                modifier = Modifier.longClickable(onClick = { fire() }, onLongClick = onLongClick).then(nombre)
             )
         }
     } else {
@@ -113,7 +121,7 @@ fun PictogramButton(
                     onPress = { fire() },
                     onLongPress = if (onLongClick != null) { _ -> onLongClick() } else null
                 )
-            }
+            }.then(nombre)
         ) { PictogramContent(pictogram, scale) }
     }
 }

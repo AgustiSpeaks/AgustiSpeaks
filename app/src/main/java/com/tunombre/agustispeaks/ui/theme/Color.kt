@@ -6,7 +6,18 @@ import androidx.compose.ui.graphics.Color
  *  Paleta base pastel (esquema normal)
  * ------------------------------------------------------------------------- */
 
-val Primary = Color(0xFF5B8DEF)
+/**
+ * Azul principal. Era `#5B8DEF`, y como texto sobre los fondos claros de la app
+ * daba un contraste de 2,5 a 3,2:1: Accessibility Scanner lo marcó en los
+ * botones de la tarjeta de «Decir» y en las pestañas de Recientes/Favoritos
+ * (criterio 14 de la tesis, umbral 4,5:1).
+ *
+ * `#2E5AAC` es el mismo azul, más profundo. Calculado con la fórmula de WCAG:
+ * 5,1:1 contra el fondo claro más oscuro donde aparece como texto (las
+ * tarjetas, `#E6E0E9`) y 6,6:1 con texto blanco encima. El cálculo sirvió para
+ * elegirlo; lo que vale como medición es volver a pasar el Scanner.
+ */
+val Primary = Color(0xFF2E5AAC)
 val OnPrimary = Color(0xFFFFFFFF)
 val PrimaryContainer = Color(0xFFD6E4FF)
 val OnPrimaryContainer = Color(0xFF0C2A5B)

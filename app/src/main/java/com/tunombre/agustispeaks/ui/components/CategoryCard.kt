@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,7 +48,13 @@ fun CategoryCard(
         shadowElevation = 3.dp,
         // Algo más alta que ancha respecto de antes: los nombres de categoría
         // son largos ("Partes del cuerpo") y necesitan dos renglones.
-        modifier = modifier.aspectRatio(1.15f)
+        //
+        // El nombre va también como descripción, sobre el elemento que recibe
+        // el toque: una tarjeta cortada por el borde de la grilla quedaba sin
+        // nombre para el lector de pantalla (lo marcó Accessibility Scanner).
+        modifier = modifier
+            .aspectRatio(1.15f)
+            .semantics { contentDescription = category.name }
     ) {
         Column(
             modifier = Modifier
