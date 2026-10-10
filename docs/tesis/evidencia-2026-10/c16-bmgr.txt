@@ -1,0 +1,32 @@
+Criterio 16, parte B — prueba de respaldo con bmgr
+Galaxy A57, Android 16 (API 36). App instalada: build de depuración de a0accaf.
+Fecha: 2026-10-10.
+
+Salida copiada tal cual de la Terminal de Android Studio:
+
+PS C:\Users\Felip\AgustiSpeaks> $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
+PS C:\Users\Felip\AgustiSpeaks> & $adb shell bmgr enabled
+Backup Manager currently disabled
+
+PS C:\Users\Felip\AgustiSpeaks> & $adb shell bmgr backupnow com.tunombre.agustispeaks
+Running incremental backup for 1 requested packages.
+Unable to run backup
+Backup finished with result: Backup is not allowed
+
+Lectura:
+
+El servicio de respaldo de Android está deshabilitado en este dispositivo. Con
+el servicio deshabilitado, Android responde "Backup is not allowed" a cualquier
+paquete, sin consultar su android:allowBackup. Por eso esta respuesta NO
+demuestra que la configuración de la app bloquee el respaldo: habría sido la
+misma con allowBackup="true".
+
+Resultado de la parte B: NO REALIZABLE. No se activó el servicio de respaldo,
+porque eso cambia la configuración del teléfono del autor. El criterio 16 se
+apoya en la parte A (manifiesto combinado: c12-c16-manifiesto.md) y en la
+parte C (galería y almacenamiento privado, durante el criterio 15).
+
+Consecuencia práctica, que no reemplaza al criterio: en este teléfono, con el
+servicio deshabilitado, la copia en la nube de Android no se ejecuta para
+ninguna app. La transferencia a otro teléfono (por ejemplo, Smart Switch) es
+otro mecanismo, y para ese vale la exclusión de device-transfer de la parte A.
