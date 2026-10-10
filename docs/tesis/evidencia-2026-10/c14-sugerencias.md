@@ -1,4 +1,8 @@
-# Criterio 14 — Accesibilidad: sugerencias de Accessibility Scanner
+# Criterio 14 — Accesibilidad: sugerencias de Accessibility Scanner (antes del cambio, `a0accaf`)
+
+> **Medición reemplazada.** Esta es la medición anterior al cambio de
+> contraste. La que se cita es la de `6caa5e3`, en
+> [`c14-sugerencias-6caa5e3.md`](c14-sugerencias-6caa5e3.md).
 
 Galaxy A57, Android 16 (API 36). App: build de depuración de `a0accaf`, tamaño
 de texto por defecto. Fecha: 2026-10-10, entre las 07:29 y las 07:33.
