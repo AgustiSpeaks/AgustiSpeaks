@@ -9,6 +9,10 @@ no cambia desde el commit `cbe46e9` (5-10, 18:56), anterior a `a0accaf`.
 
 Leído el 2026-10-06.
 
+**Reverificado sobre `6caa5e3`:** el manifiesto combinado de la build del
+2026-10-10 a las 08:00, posterior al cambio de contraste, es idéntico byte a
+byte a esta copia. Todo lo de abajo vale también para `6caa5e3`.
+
 ## Criterio 12 — Permisos
 
 `<uses-permission>` presentes en el manifiesto combinado:
