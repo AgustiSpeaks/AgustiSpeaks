@@ -30,7 +30,7 @@ Dispositivo de pruebas: Samsung Galaxy A57, Android 16 (API 36).
 | 13 | Persistencia | 100 % de ajustes y pictogramas propios tras cerrar desde recientes | | | | | | |
 | 14 | Accesibilidad | 0 objetivos < 48 dp en pictogramas y «Decir»; contraste ≥ 4,5:1; el resto se reporta | 2026-10-10 | `6caa5e3` | Galaxy A57 | 16 (API 36) | **cumple**: 0 objetivos táctiles < 48 dp y 0 textos con contraste < 4,5:1 en las 4 pantallas. Se reportan 2 descripciones repetidas ("Volver" dos veces; la pestaña "Recientes" igual que el título) y 1 texto dentro de una foto de prueba. Antes del cambio de contraste (`a0accaf`) **no cumplía**: ver notas | `evidencia-2026-10/c14-sugerencias-6caa5e3.md` y las capturas `c14-despues-*.jpg` |
 | 15 | Pictograma propio con foto | 100 % de los pasos: crear, ver, decir, reabrir, eliminar (el archivo debe desaparecer) | | | | | | |
-| 16 | Resguardo de las fotografías | 0 fotos fuera del almacenamiento privado o incluidas en el respaldo automático | | | | | | |
+| 16 | Resguardo de las fotografías | 0 fotos fuera del almacenamiento privado o incluidas en el respaldo automático | 2026-10-10 | `6caa5e3` | Galaxy A57 | 16 (API 36) | **cumple**: 0 fotos fuera del almacenamiento privado (la foto sacada con la cámara quedó solo en `files/pictogifts/`; nada en `DCIM/Camera` ni en la Galería) y 0 incluidas en el respaldo (`allowBackup="false"`, y exclusión total en nube y en transferencia entre teléfonos). La prueba con `bmgr` no fue realizable: ver notas | `evidencia-2026-10/c12-c16-manifiesto.md`, `c16-bmgr.txt`, `c16-almacenamiento.md`, `c16-galeria-antes.jpg`, `c16-galeria-despues.jpg` |
 
 ---
 
