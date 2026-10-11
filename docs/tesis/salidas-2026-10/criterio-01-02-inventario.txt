@@ -1,6 +1,6 @@
 INVENTARIO — CRITERIOS 1 Y 2, Y CIFRAS DEL SISTEMA
 AgustiSpeaks · generado por InventarioTesisTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
 Catálogo: src/main/assets/animaciones.json
 
@@ -146,7 +146,7 @@ Tablas auxiliares: no eligen la acción sino el matiz.
 ==============================================================================
 PAQUETE                   ARCHIVOS    LÍNEAS
 --------------------------------------------
-(raíz)                           2       127
+(raíz)                           2       147
 avatar                          10      3675
 avatar.catalog                   6      1039
 data.model                       7       184
@@ -166,7 +166,7 @@ ui.theme                         3       281
 ui.util                          1        26
 validacion                       1       154
 --------------------------------------------
-TOTAL                           62     10561
+TOTAL                           62     10581
 
 Se cuentan todas las líneas, incluidas las vacías.
 

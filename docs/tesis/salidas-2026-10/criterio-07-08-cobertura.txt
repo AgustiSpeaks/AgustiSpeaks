@@ -1,6 +1,6 @@
 CRITERIOS 7 Y 8 — COBERTURA SEMÁNTICA Y DISTINGUIBILIDAD
 AgustiSpeaks · generado por CoberturaSemanticaTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
 Acción genérica: TALK (mover la boca sin decir nada)
 

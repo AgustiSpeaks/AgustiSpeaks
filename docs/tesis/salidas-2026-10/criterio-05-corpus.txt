@@ -1,6 +1,6 @@
 CRITERIO 5 — CORPUS DEL RESOLVEDOR
 AgustiSpeaks · generado por CorpusResolvedorTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
 Umbral: resolución ≥ 90.0 %
 

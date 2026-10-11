@@ -1,6 +1,6 @@
 CRITERIO 4 — COBERTURA DE REPRESENTACIÓN
 AgustiSpeaks · generado por CoberturaRepresentacionTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
   Acciones evaluadas......................           88
   Fases por acción........................         1030

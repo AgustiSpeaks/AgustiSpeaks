@@ -1,6 +1,6 @@
 CRITERIO 9 — EMISIÓN DE LA ORACIÓN COMPLETA
 AgustiSpeaks · generado por OracionCompletaTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
 Umbral: 100 % de los pictogramas entregan al motor de voz la oración
 acumulada completa.

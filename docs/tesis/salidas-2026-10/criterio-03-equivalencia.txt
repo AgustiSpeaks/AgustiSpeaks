@@ -1,6 +1,6 @@
 CRITERIO 3 — EQUIVALENCIA DEL CATÁLOGO CONTRA EL MOTOR
 AgustiSpeaks · generado por PoseCatalogParityTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
   Acciones del motor..................         88
   Casos comparados....................         97

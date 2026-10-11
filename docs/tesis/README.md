@@ -126,3 +126,12 @@ citando el commit sobre el que se hicieron.
 |---|---|---|
 | `6caa5e3` | azul principal `#2E5AAC`, con contraste suficiente; pictogramas y categorías con nombre para el lector de pantalla | el criterio 14 no cumplía sobre `a0accaf` |
 | `c106b6e` | las barras del sistema siguen el modo oscuro de la app: en modo claro, la hora y los íconos ya no quedan invisibles | error encontrado al medir el criterio 11 (no lo decide) |
+
+## Pendiente, solo si hace falta
+
+Decidido por el autor el 11-10: no se hace por ahora.
+
+- Las 32 capturas de ilustración de [capturas.md](capturas.md).
+- Dos hallazgos del criterio 14 que no lo deciden: los dos botones "Volver"
+  con la misma descripción en la misma pantalla, y la pestaña "Recientes" con
+  el mismo texto que el título.

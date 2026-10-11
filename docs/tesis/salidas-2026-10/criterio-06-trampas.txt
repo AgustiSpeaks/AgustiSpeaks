@@ -1,6 +1,6 @@
 CRITERIO 6 — PARES TRAMPA
 AgustiSpeaks · generado por CorpusResolvedorTest
-Corrida: 2026-10-10 07:59
+Corrida: 2026-10-11 10:26
 
 Umbral: colisión léxica 0 casos
 
