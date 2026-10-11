@@ -12,15 +12,15 @@ hechas sobre el código actual; el plan que lo rige es
 |---|---|---|
 | [Encargo del 5-10-2026](ENCARGO-2026-10-05.md) | plan de evidencia, reglas de trabajo y los 16 criterios con sus umbrales | vigente |
 | [Estado al 5-10-2026](estado-2026-10-05.md) | relevamiento del código: pictogramas propios, permisos, respaldo, pruebas, cifras | etapa 1, completo |
-| [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | los 16 medidos al 11-10; el 10 combina dos intentos y se va a repetir en una sesión única |
+| [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | completa: los 16 criterios medidos al 11-10 |
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
 | [Protocolo manual](protocolo-manual-2026-10.md) | criterios 11 a 16: pasos, qué tiene que pasar y qué captura guardar | ejecutado el 10-10 y el 11-10 |
 | `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | completo: un `.md` por criterio con sus capturas |
 | [Capturas](capturas.md) | las 32 capturas de ilustración del capítulo, con el bloque de pictogramas propios | actualizado el 6-10 |
 | `capturas-2026-10/` | esas capturas | se crea al sacarlas |
 | `salidas-2026-10/` | salida de cada prueba automatizada | se crea la primera vez que corren las pruebas |
-| [Protocolo de latencia](protocolo-latencia-2026-10.md) | criterio 10: preparación, las 51 pulsaciones en orden y cómo copiar el resultado | listo para ejecutar |
-| `datos/latencias-2026-10*.csv` | una fila por pulsación: `n,frase,pictogramas,latencia_ms,regimen`. Un archivo por intento (`-intento-N`), y `latencias-2026-10.csv` con la combinación de los intentos 2 y 3 | intentos 1 a 3 del 6-10; el 4 se va a medir sobre `c106b6e` |
+| [Protocolo de latencia](protocolo-latencia-2026-10.md) | criterio 10: preparación, las 51 pulsaciones en orden y cómo copiar el resultado | ejecutado: 4 intentos, el 4 válido |
+| `datos/latencias-2026-10*.csv` | una fila por pulsación: `n,frase,pictogramas,latencia_ms,regimen`. Un archivo por intento (`-intento-N`), y `latencias-2026-10.csv` con la combinación de los intentos 2 y 3 | intentos 1 a 3 del 6-10; se cita el 4, del 11-10 sobre `c106b6e` |
 
 ## Orden de las pruebas en Android Studio
 

@@ -260,8 +260,8 @@ New-Item -ItemType Directory -Force docs\tesis\datos | Out-Null
 ```
 
 Cada intento va a su propio archivo. `latencias-2026-10.csv` es la combinación
-de los intentos 2 y 3, y no se sobrescribe: si el intento 4 resulta válido, la
-bitácora pasa a citarlo a él.
+de los intentos 2 y 3, y no se sobrescribe. El intento 4 resultó válido, y es
+el que cita la bitácora.
 
 Qué hace cada línea:
 
@@ -306,9 +306,33 @@ fijado de antemano busca evitar.
 
 Se conservan sin editar, como registro.
 
-### Sesión que se cita: combinación de los intentos 2 y 3
+### Sesión que se cita: intento 4
 
-Ningún intento cumplió el protocolo por sí solo. El autor decidió combinar los
+| Intento | Fecha | Commit | Archivo |
+|---|---|---|---|
+| 4 | 2026-10-11, copiado a las 10:22 | `c106b6e` | `datos/latencias-2026-10-intento-4.csv` |
+
+Cumple todas las comprobaciones de "Cómo saber si la sesión es válida", sin
+editar nada: un encabezado, 51 filas con `n` de 1 a 51 sin huecos, 1
+`arranque_frio` y 50 `nueva`, ninguna `repetida`, y las 51 oraciones iguales a
+la tabla. Es una sola sesión: el primer toque es el arranque en frío, y ninguna
+oración salió de la caché del motor.
+
+| | Valor |
+|---|---|
+| Mediana de las 50 mediciones | 71 ms |
+| Máximo | 100 ms ("No quiero Dormir Quiero Jugar Bloques Por favor", 6 pictogramas) |
+| Casos > 1.000 ms | 0 |
+| Arranque en frío ("Hola") | 204 ms |
+
+| Pictogramas | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| Mediciones | 9 | 9 | 8 | 8 | 8 | 8 |
+| Mediana (ms) | 62 | 63 | 70 | 78,5 | 85 | 85,5 |
+
+### Combinación de los intentos 2 y 3 (ya no se cita)
+
+Se citó hasta el intento 4. Ningún intento del 6-10 cumplió el protocolo por sí solo. El autor decidió combinar los
 intentos 2 y 3 en `datos/latencias-2026-10.csv`, con una regla fijada **antes**
 de calcular ninguna cifra y que no depende de los valores medidos:
 

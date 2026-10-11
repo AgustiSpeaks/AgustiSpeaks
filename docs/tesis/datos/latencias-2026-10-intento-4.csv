@@ -1,0 +1,52 @@
+﻿n,frase,pictogramas,latencia_ms,regimen
+1,"Hola",1,204,arranque_frio
+2,"Yo",1,47,nueva
+3,"Yo Quiero",2,59,nueva
+4,"Yo Quiero Beber",3,65,nueva
+5,"Yo Quiero Beber Agua",4,69,nueva
+6,"Yo Quiero Beber Agua Por favor",5,69,nueva
+7,"Yo Quiero Beber Agua Por favor Gracias",6,80,nueva
+8,"Mamá",1,53,nueva
+9,"Mamá Quiero",2,63,nueva
+10,"Mamá Quiero Jugar",3,62,nueva
+11,"Mamá Quiero Jugar Pelota",4,78,nueva
+12,"Mamá Quiero Jugar Pelota Afuera",5,88,nueva
+13,"Mamá Quiero Jugar Pelota Afuera Por favor",6,90,nueva
+14,"Maestra",1,65,nueva
+15,"Maestra Quiero",2,64,nueva
+16,"Maestra Quiero Leer",3,79,nueva
+17,"Maestra Quiero Leer Libro",4,86,nueva
+18,"Maestra Quiero Leer Libro Más",5,75,nueva
+19,"Maestra Quiero Leer Libro Más Gracias",6,87,nueva
+20,"Me duele",1,65,nueva
+21,"Me duele Cabeza",2,72,nueva
+22,"Me duele Cabeza Quiero",3,71,nueva
+23,"Me duele Cabeza Quiero Ir",4,79,nueva
+24,"Me duele Cabeza Quiero Ir Casa",5,80,nueva
+25,"Me duele Cabeza Quiero Ir Casa Ayuda",6,88,nueva
+26,"Papá",1,62,nueva
+27,"Papá Venir",2,59,nueva
+28,"Papá Venir Aquí",3,66,nueva
+29,"Papá Venir Aquí Ayuda",4,71,nueva
+30,"Papá Venir Aquí Ayuda Por favor",5,85,nueva
+31,"Papá Venir Aquí Ayuda Por favor Gracias",6,82,nueva
+32,"Tú",1,45,nueva
+33,"Tú Quiero",2,56,nueva
+34,"Tú Quiero Escuchar",3,73,nueva
+35,"Tú Quiero Escuchar Música",4,80,nueva
+36,"Tú Quiero Escuchar Música Me gusta",5,87,nueva
+37,"Tú Quiero Escuchar Música Me gusta Más",6,84,nueva
+38,"No quiero",1,63,nueva
+39,"No quiero Dormir",2,65,nueva
+40,"No quiero Dormir Quiero",3,69,nueva
+41,"No quiero Dormir Quiero Jugar",4,80,nueva
+42,"No quiero Dormir Quiero Jugar Bloques",5,88,nueva
+43,"No quiero Dormir Quiero Jugar Bloques Por favor",6,100,nueva
+44,"Abuela",1,64,nueva
+45,"Abuela Hola",2,61,nueva
+46,"Abuela Hola ¿Cómo estás?",3,73,nueva
+47,"Abuela Hola ¿Cómo estás? Yo",4,64,nueva
+48,"Abuela Hola ¿Cómo estás? Yo Bien",5,85,nueva
+49,"Abuela Hola ¿Cómo estás? Yo Bien Gracias",6,77,nueva
+50,"Terminé",1,61,nueva
+51,"Terminé Chau",2,68,nueva
