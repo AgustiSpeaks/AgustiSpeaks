@@ -12,15 +12,15 @@ hechas sobre el código actual; el plan que lo rige es
 |---|---|---|
 | [Encargo del 5-10-2026](ENCARGO-2026-10-05.md) | plan de evidencia, reglas de trabajo y los 16 criterios con sus umbrales | vigente |
 | [Estado al 5-10-2026](estado-2026-10-05.md) | relevamiento del código: pictogramas propios, permisos, respaldo, pruebas, cifras | etapa 1, completo |
-| [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | abierta, sin mediciones |
+| [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | los 16 medidos al 11-10; el 10 combina dos intentos y se va a repetir en una sesión única |
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
-| [Protocolo manual](protocolo-manual-2026-10.md) | criterios 11 a 16: pasos, qué tiene que pasar y qué captura guardar | listo para ejecutar |
-| `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | se crea al ejecutar el protocolo manual |
+| [Protocolo manual](protocolo-manual-2026-10.md) | criterios 11 a 16: pasos, qué tiene que pasar y qué captura guardar | ejecutado el 10-10 y el 11-10 |
+| `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | completo: un `.md` por criterio con sus capturas |
 | [Capturas](capturas.md) | las 32 capturas de ilustración del capítulo, con el bloque de pictogramas propios | actualizado el 6-10 |
 | `capturas-2026-10/` | esas capturas | se crea al sacarlas |
 | `salidas-2026-10/` | salida de cada prueba automatizada | se crea la primera vez que corren las pruebas |
 | [Protocolo de latencia](protocolo-latencia-2026-10.md) | criterio 10: preparación, las 51 pulsaciones en orden y cómo copiar el resultado | listo para ejecutar |
-| `datos/latencias-2026-10.csv` | una fila por pulsación: `n,frase,pictogramas,latencia_ms,regimen` | se crea al ejecutar el protocolo |
+| `datos/latencias-2026-10*.csv` | una fila por pulsación: `n,frase,pictogramas,latencia_ms,regimen`. Un archivo por intento (`-intento-N`), y `latencias-2026-10.csv` con la combinación de los intentos 2 y 3 | intentos 1 a 3 del 6-10; el 4 se va a medir sobre `c106b6e` |
 
 ## Orden de las pruebas en Android Studio
 
@@ -116,3 +116,13 @@ Antes de medir, y en commits separados de la evidencia:
 | `842b0f9` | `HOT` deja de tener extensión de brazo negativa | 4 |
 | `d4147ab` | la foto de un pictograma propio se borra en el momento de eliminarlo | 15 |
 | `cbe46e9` | sin copia de seguridad: fotos y datos no entran ni en la nube ni en la transferencia a otro teléfono | 16 |
+
+## Cambios de producto hechos durante la medición
+
+Cada uno corrige algo que apareció al medir. Las mediciones anteriores siguen
+citando el commit sobre el que se hicieron.
+
+| Commit | Cambio | Qué lo motivó |
+|---|---|---|
+| `6caa5e3` | azul principal `#2E5AAC`, con contraste suficiente; pictogramas y categorías con nombre para el lector de pantalla | el criterio 14 no cumplía sobre `a0accaf` |
+| `c106b6e` | las barras del sistema siguen el modo oscuro de la app: en modo claro, la hora y los íconos ya no quedan invisibles | error encontrado al medir el criterio 11 (no lo decide) |

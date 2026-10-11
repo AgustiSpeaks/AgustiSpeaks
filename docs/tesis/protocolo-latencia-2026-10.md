@@ -246,7 +246,7 @@ Fin de la sesión. **No cierres la app todavía**: primero copiá el registro.
 
 ---
 
-## Copiar el resultado a `docs/tesis/datos/latencias-2026-10.csv`
+## Copiar el resultado a `docs/tesis/datos/latencias-2026-10-intento-4.csv`
 
 En la misma Terminal de Android Studio, con el teléfono todavía conectado:
 
@@ -256,8 +256,12 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 New-Item -ItemType Directory -Force docs\tesis\datos | Out-Null
 & $adb logcat -d -v raw -s VALIDACION:I |
     Where-Object { $_ -notmatch '^-{5,}' } |
-    Out-File -Encoding utf8 docs\tesis\datos\latencias-2026-10.csv
+    Out-File -Encoding utf8 docs\tesis\datos\latencias-2026-10-intento-4.csv
 ```
+
+Cada intento va a su propio archivo. `latencias-2026-10.csv` es la combinación
+de los intentos 2 y 3, y no se sobrescribe: si el intento 4 resulta válido, la
+bitácora pasa a citarlo a él.
 
 Qué hace cada línea:
 
