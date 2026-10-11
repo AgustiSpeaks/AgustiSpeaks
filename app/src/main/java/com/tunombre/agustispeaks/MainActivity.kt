@@ -1,7 +1,9 @@
 package com.tunombre.agustispeaks
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -26,6 +29,11 @@ import com.tunombre.agustispeaks.ui.LocalAppViewModel
 import com.tunombre.agustispeaks.ui.LocalAvatarConfig
 import com.tunombre.agustispeaks.ui.LocalUserSettings
 import com.tunombre.agustispeaks.ui.theme.AgustiSpeaksTheme
+
+// Los mismos velos que pone enableEdgeToEdge() por defecto detrás de la barra de
+// navegación de tres botones.
+private val LIGHT_SCRIM = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+private val DARK_SCRIM = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
 class MainActivity : ComponentActivity() {
 
@@ -47,6 +55,18 @@ class MainActivity : ComponentActivity() {
             val settings by appViewModel.userSettings.collectAsStateWithLifecycle()
             val avatarConfig by appViewModel.avatarConfig.collectAsStateWithLifecycle()
             val ttsState by ttsManager.state.collectAsStateWithLifecycle()
+
+            // Íconos de las barras del sistema según el modo oscuro de la app, no
+            // el del teléfono: con el teléfono en oscuro y la app en claro, salían
+            // claros sobre fondo claro y no se veían.
+            DisposableEffect(settings.darkMode) {
+                val dark = settings.darkMode
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { dark },
+                    navigationBarStyle = SystemBarStyle.auto(LIGHT_SCRIM, DARK_SCRIM) { dark }
+                )
+                onDispose {}
+            }
 
             // Aplica la configuración de voz cuando cambia (o cuando el TTS queda listo).
             LaunchedEffect(
