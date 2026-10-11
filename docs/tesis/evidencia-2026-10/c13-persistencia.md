@@ -1,7 +1,7 @@
 # Criterio 13 — Persistencia
 
 Galaxy A57, Android 16 (API 36). App: build de depuración de `6caa5e3`.
-Fecha: 2026-10-10, alrededor de las 08:36 a 08:42.
+Fecha: 2026-10-11, alrededor de las 08:36 a 08:42.
 
 **Umbral:** 100 % de los ajustes y pictogramas propios tras cerrar desde
 recientes.
