@@ -13,8 +13,10 @@ android {
         applicationId = "com.tunombre.agustispeaks"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        // Subir versionCode en cada APK que se manda: el teléfono que ya tiene
+        // la app la instala como actualización, sin borrar lo guardado.
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
