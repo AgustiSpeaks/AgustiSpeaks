@@ -44,16 +44,52 @@
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
 
-    <!-- Fotos de los pictogifts -->
-    <string name="photo_add">Agregar foto</string>
-    <string name="photo_add_another">Agregar otra foto</string>
-    <string name="photo_saving">Guardando…</string>
+    <!-- Fotos -->
     <string name="photo_camera">Sacar una foto</string>
     <string name="photo_gallery">Elegir de la galería</string>
-    <string name="photo_saved">Guardado en Favoritos</string>
     <string name="photo_failed">No se pudo leer esa imagen</string>
     <string name="photo_no_camera">No hay ninguna app de cámara</string>
     <string name="photo_description">Foto de: %1$s</string>
+
+    <!-- Contraseña del modo edición -->
+    <string name="password_create_title">Crea una contraseña</string>
+    <string name="password_create_text">Es para el adulto que acompaña. Se pide para entrar al modo edición, donde se agregan y cambian lugares, categorías y pictogramas. Se crea una sola vez.</string>
+    <string name="password_create_warning">Anótala en un lugar seguro: por ahora no se puede recuperar.</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_repeat">Repetir la contraseña</string>
+    <string name="password_current">Contraseña actual</string>
+    <string name="password_new">Contraseña nueva</string>
+    <string name="password_min">Al menos %1$d caracteres</string>
+    <string name="password_too_short">Tiene que tener al menos %1$d caracteres</string>
+    <string name="password_mismatch">Las dos contraseñas no coinciden</string>
+    <string name="password_wrong">Contraseña incorrecta</string>
+    <string name="password_save">Guardar contraseña</string>
+    <string name="password_change">Cambiar contraseña</string>
+    <string name="password_changed">Contraseña cambiada</string>
+    <string name="password_show">Mostrar la contraseña</string>
+    <string name="password_hide">Ocultar la contraseña</string>
+
+    <!-- Modo edición -->
+    <string name="edit_mode_enter">Entrar al modo edición</string>
+    <string name="edit_mode_enter_hint">Escribe la contraseña del adulto.</string>
+    <string name="edit_mode_enter_button">Entrar</string>
+    <string name="edit_mode_banner">Modo edición: toca el lápiz para cambiar algo, o «Agregar» para sumar algo nuevo. La X sale del modo.</string>
+    <string name="edit_mode_exit">Salir del modo edición</string>
+    <string name="edit_item">Editar %1$s</string>
+    <string name="edit_title">Editar «%1$s»</string>
+    <string name="edit_hide">Ocultar</string>
+    <string name="edit_show">Mostrar</string>
+    <string name="edit_restore">Volver al original</string>
+    <string name="edit_color">Color</string>
+    <string name="edit_seed_note">Viene con la app: no se puede borrar, pero sí ocultar. Lo oculto no se ve fuera del modo edición, y se puede volver a mostrar.</string>
+    <string name="category_add">Agregar categoría</string>
+    <string name="category_new_title">Nueva categoría en %1$s</string>
+    <string name="category_delete_text">Se borran la categoría, los pictogramas creados en ella y todas sus fotos.</string>
+    <string name="category_seed_note">Viene con la app: lo que se cambie, o si se oculta, vale en todos los lugares que tienen esta categoría.</string>
+    <string name="place_add">Agregar lugar</string>
+    <string name="place_new_title">Nuevo lugar</string>
+    <string name="place_categories">Categorías de la app que muestra</string>
+    <string name="place_delete_text">Se borran el lugar, las categorías creadas en él con sus pictogramas, y todas sus fotos.</string>
 
     <string name="screen_under_construction">Pantalla en construcción</string>
 

@@ -381,9 +381,9 @@ private fun PhraseRow(
     onUse: () -> Unit,
     onToggleFavorite: () -> Unit
 ) {
-    val customPictograms by LocalAppViewModel.current.customPictograms.collectAsStateWithLifecycle()
-    // La suya, o la de un pictograma propio que nombre la frase.
-    val shownPhoto = gift.shownPhoto(customPictograms)
+    val catalog by LocalAppViewModel.current.catalog.collectAsStateWithLifecycle()
+    // La suya, o la de un pictograma con foto que nombre la frase.
+    val shownPhoto = gift.shownPhoto(catalog.pictogramsWithPhoto)
     val resolved = remember(gift.phrase, shownPhoto) { animationFor(gift.phrase, shownPhoto) }
 
     Card(onClick = onOpen, modifier = Modifier.fillMaxWidth()) {

@@ -74,4 +74,19 @@ internal object CustomPictogramJson {
     /** Quita el de [id]. Si no estaba, la lista queda igual. */
     fun remove(json: String?, id: String): String =
         write(parse(json).filterNot { it.id == id })
+
+    /**
+     * Reemplaza el que tiene el mismo id que [pictogram], en el mismo lugar de
+     * la lista: editarlo no lo manda al final de su categoría. Si no estaba, o
+     * el texto nuevo está en blanco, la lista queda igual.
+     */
+    fun update(json: String?, pictogram: Pictogram): String {
+        val current = parse(json)
+        if (pictogram.text.isBlank()) return write(current)
+        return write(current.map { if (it.id == pictogram.id) pictogram else it })
+    }
+
+    /** Quita todos los de las categorías [categoryIds]: los de una categoría propia que se borra. */
+    fun removeInCategories(json: String?, categoryIds: Set<String>): String =
+        write(parse(json).filterNot { it.categoryId in categoryIds })
 }

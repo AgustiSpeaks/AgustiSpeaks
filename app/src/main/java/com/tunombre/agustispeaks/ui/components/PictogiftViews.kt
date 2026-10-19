@@ -29,19 +29,23 @@ import kotlinx.coroutines.withContext
 
 /**
  * La foto que muestra un pictogift: la suya si tiene una, y si no, la del
- * pictograma propio que nombre su frase.
+ * pictograma con foto que nombre su frase.
  *
  * Se calcula cada vez a partir del texto, en vez de copiarse al guardar. Así
  * "Quiero Aaw" muestra la foto de Aaw en la tarjeta de "Decir", en Recientes y
- * en Favoritos por igual, y si después se borra el pictograma propio, la frase
- * vuelve sola a su animación de siempre.
+ * en Favoritos por igual, y si después se borra el pictograma o se le quita la
+ * foto, la frase vuelve sola a su animación de siempre.
+ *
+ * @param withPhoto los pictogramas con foto: los propios y los de fábrica a los
+ *        que se les puso una en modo edición
+ *        ([com.tunombre.agustispeaks.data.catalog.Catalog.pictogramsWithPhoto]).
  */
-fun Pictogift.shownPhoto(customPictograms: List<Pictogram>): String? =
-    photo ?: photoNamedIn(phrase, customPictograms)
+fun Pictogift.shownPhoto(withPhoto: List<Pictogram>): String? =
+    photo ?: photoNamedIn(phrase, withPhoto)
 
 /**
- * La foto del pictograma propio que nombra [phrase], o null si no nombra
- * ninguno.
+ * La foto del pictograma que nombra [phrase], o null si no nombra ninguno de
+ * los que tienen foto.
  *
  * Se compara con la misma normalización que usa el resolvedor de acciones —sin
  * tildes ni mayúsculas, por palabra completa—, para que "oso" no aparezca
@@ -50,11 +54,11 @@ fun Pictogift.shownPhoto(customPictograms: List<Pictogram>): String? =
  * que se tocó. Si dos terminan en el mismo lugar ("oso" y "mi oso"), gana el
  * más largo, que es el más específico.
  */
-fun photoNamedIn(phrase: String, customPictograms: List<Pictogram>): String? {
+fun photoNamedIn(phrase: String, withPhoto: List<Pictogram>): String? {
     val text = ActionResolver.normalized(phrase)
     var best: Pictogram? = null
     var bestEnd = -1
-    for (p in customPictograms) {
+    for (p in withPhoto) {
         if (p.photo == null) continue
         val word = ActionResolver.normalized(p.text)
         val start = text.lastIndexOf(word)
@@ -74,7 +78,7 @@ fun photoNamedIn(phrase: String, customPictograms: List<Pictogram>): String? {
  * el gesto que la vuelve un pedido.
  *
  * @param shownPhoto la que devuelve [shownPhoto]: puede venir del pictogift o
- *        de un pictograma propio, y en los dos casos el avatar la señala.
+ *        de un pictograma, y en los dos casos el avatar la señala.
  */
 fun animationFor(phrase: String, shownPhoto: String?): ResolvedAction =
     if (shownPhoto != null) ResolvedAction(AvatarAction.POINT) else AvatarCatalog.resolve(phrase)

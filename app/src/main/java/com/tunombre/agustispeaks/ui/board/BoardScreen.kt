@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CreateNewFolder
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
@@ -39,20 +40,38 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tunombre.agustispeaks.R
+import com.tunombre.agustispeaks.data.catalog.Catalog
 import com.tunombre.agustispeaks.data.model.Category
+import com.tunombre.agustispeaks.data.model.EditableKind
 import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.phrase.LocalPhraseController
 import com.tunombre.agustispeaks.phrase.tapPictogram
 import com.tunombre.agustispeaks.tts.LocalTtsManager
-import com.tunombre.agustispeaks.validacion.Validacion
 import com.tunombre.agustispeaks.ui.LocalAppViewModel
+import com.tunombre.agustispeaks.ui.components.CATEGORY_CARD_RATIO
 import com.tunombre.agustispeaks.ui.components.CategoryCard
 import com.tunombre.agustispeaks.ui.components.PhrasePanel
 import com.tunombre.agustispeaks.ui.components.PictogramGrid
+import com.tunombre.agustispeaks.ui.edit.AddTile
+import com.tunombre.agustispeaks.ui.edit.EditItemDialog
+import com.tunombre.agustispeaks.ui.edit.EditModeBanner
+import com.tunombre.agustispeaks.ui.edit.EditableTile
+import com.tunombre.agustispeaks.ui.edit.NEW_ITEM_COLORS
+import com.tunombre.agustispeaks.ui.edit.editActions
 import com.tunombre.agustispeaks.ui.util.adaptiveColumns
 import com.tunombre.agustispeaks.ui.util.hexToColor
+import com.tunombre.agustispeaks.validacion.Validacion
 
+private const val CORE_WORD_HEX = "#E6ECF2"
 private val CoreWordColor = Color(0xFFE6ECF2)
+
+/** Qué formulario del modo edición está abierto en el tablero. */
+private sealed interface BoardEditor {
+    data class NewPictogram(val category: Category) : BoardEditor
+    data class EditPictogram(val pictogram: Pictogram, val colorHex: String) : BoardEditor
+    data object NewCategory : BoardEditor
+    data class EditCategory(val category: Category) : BoardEditor
+}
 
 /**
  * Tablero de un lugar, en horizontal, a dos paneles:
@@ -62,6 +81,10 @@ private val CoreWordColor = Color(0xFFE6ECF2)
  *
  * Al tocar cualquier pictograma se añade a la frase y se lee por TTS la frase
  * completa construida hasta ese momento (QUEUE_FLUSH corta lo que suene).
+ *
+ * En modo edición funciona igual, y además cada palabra, categoría y
+ * pictograma lleva un lápiz para cambiarlo, y las grillas de categorías y de
+ * pictogramas terminan en "Agregar".
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,14 +96,25 @@ fun BoardScreen(
     modifier: Modifier = Modifier,
     viewModel: BoardViewModel = viewModel()
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
     val phraseController = LocalPhraseController.current
     val tts = LocalTtsManager.current
     val appVm = LocalAppViewModel.current
-    val customPictograms by appVm.customPictograms.collectAsStateWithLifecycle()
+    val catalog by appVm.catalog.collectAsStateWithLifecycle()
+    val editing by appVm.editMode.collectAsStateWithLifecycle()
+    val selectedId by viewModel.selectedCategoryId.collectAsStateWithLifecycle()
+    val placeId = viewModel.placeId
 
-    var adding by remember { mutableStateOf<Category?>(null) }
-    var deleting by remember { mutableStateOf<Pictogram?>(null) }
+    val place = remember(catalog, placeId) { catalog.place(placeId) }
+    val coreWords = remember(catalog, editing) { catalog.coreWords(includeHidden = editing) }
+    val categories = remember(catalog, placeId, editing) { catalog.categoriesFor(placeId, includeHidden = editing) }
+    // La categoría abierta, mientras siga existiendo y a la vista: si se borra,
+    // o se oculta y se sale del modo edición, el panel vuelve solo a la lista.
+    val category = categories.firstOrNull { it.id == selectedId }
+    val pictograms = remember(catalog, category, editing) {
+        category?.let { catalog.pictogramsFor(it.id, includeHidden = editing) }.orEmpty()
+    }
+
+    var editor by remember { mutableStateOf<BoardEditor?>(null) }
 
     // La regla central —la oración se acumula y se dice entera— vive en
     // `tapPictogram`, fuera de la pantalla, para que la prueba del criterio 9
@@ -101,7 +135,7 @@ fun BoardScreen(
         modifier = modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(state.placeName.ifBlank { stringResource(R.string.board_title) }) },
+                title = { Text(place?.name ?: stringResource(R.string.board_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -126,19 +160,25 @@ fun BoardScreen(
     ) { innerPadding ->
         Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
 
+            if (editing) EditModeBanner(onExit = appVm::exitEditMode)
+
             PhrasePanel()
 
             Row(modifier = Modifier.weight(1f).fillMaxWidth()) {
-                // Panel izquierdo: Palabras (fijo, no cambia).
+                // Panel izquierdo: Palabras (fijo, no cambia). En modo edición se
+                // pueden cambiar u ocultar, pero no se agregan: es el panel que
+                // tiene que poder recorrerse de un vistazo.
                 Column(modifier = Modifier.weight(1f).fillMaxHeight()) {
                     PanelHeader(stringResource(R.string.tab_words))
                     BoxWithConstraints(modifier = Modifier.weight(1f)) {
                         PictogramGrid(
-                            pictograms = state.coreWords,
+                            pictograms = coreWords,
                             columns = adaptiveColumns(maxWidth),
                             containerColorFor = { CoreWordColor },
                             onPictogramClick = ::onTapPictogram,
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier.fillMaxSize(),
+                            editing = editing,
+                            onEdit = { editor = BoardEditor.EditPictogram(it, CORE_WORD_HEX) }
                         )
                     }
                 }
@@ -147,7 +187,6 @@ fun BoardScreen(
 
                 // Panel derecho: Categorías, o el detalle de la categoría elegida.
                 Column(modifier = Modifier.weight(1f).fillMaxHeight()) {
-                    val category = state.selectedCategory
                     if (category == null) {
                         PanelHeader(stringResource(R.string.tab_categories))
                         BoxWithConstraints(modifier = Modifier.weight(1f)) {
@@ -158,11 +197,28 @@ fun BoardScreen(
                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                                 verticalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
-                                items(state.categories, key = { it.id }) { cat ->
-                                    CategoryCard(
-                                        category = cat,
-                                        onClick = { viewModel.selectCategory(cat.id) }
-                                    )
+                                items(categories, key = { it.id }) { cat ->
+                                    EditableTile(
+                                        editing = editing,
+                                        hidden = cat.isHidden,
+                                        name = cat.name,
+                                        onEdit = { editor = BoardEditor.EditCategory(cat) }
+                                    ) {
+                                        CategoryCard(
+                                            category = cat,
+                                            onClick = { viewModel.selectCategory(cat.id) }
+                                        )
+                                    }
+                                }
+                                if (editing) {
+                                    item(key = "agregar") {
+                                        AddTile(
+                                            label = stringResource(R.string.category_add),
+                                            icon = Icons.Filled.CreateNewFolder,
+                                            aspectRatio = CATEGORY_CARD_RATIO,
+                                            onClick = { editor = BoardEditor.NewCategory }
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -184,11 +240,6 @@ fun BoardScreen(
                             )
                         }
                         val cardColor = hexToColor(category.colorHex)
-                        // Los propios van después de los de la semilla, en el
-                        // orden en que se crearon, y se ven en todos los lugares
-                        // que muestran esta categoría.
-                        val pictograms = state.selectedCategoryPictograms +
-                            customPictograms.filter { it.categoryId == category.id }
                         BoxWithConstraints(modifier = Modifier.weight(1f)) {
                             PictogramGrid(
                                 pictograms = pictograms,
@@ -196,8 +247,13 @@ fun BoardScreen(
                                 containerColorFor = { cardColor },
                                 onPictogramClick = ::onTapPictogram,
                                 modifier = Modifier.fillMaxSize(),
-                                onAdd = { adding = category },
-                                onCustomLongClick = { deleting = it }
+                                editing = editing,
+                                onEdit = { editor = BoardEditor.EditPictogram(it, category.colorHex) },
+                                onAdd = if (editing) {
+                                    { editor = BoardEditor.NewPictogram(category) }
+                                } else {
+                                    null
+                                }
                             )
                         }
                     }
@@ -206,27 +262,105 @@ fun BoardScreen(
         }
     }
 
-    adding?.let { category ->
-        AddPictogramDialog(
-            category = category,
-            onDismiss = { adding = null },
-            onSave = { text, photo ->
-                appVm.addCustomPictogram(category.id, text, photo)
-                adding = null
+    // Si se sale del modo edición con un formulario abierto, el formulario se va.
+    val open = editor.takeIf { editing }
+    val close = { editor = null }
+    when (open) {
+        null -> Unit
+        is BoardEditor.NewPictogram -> EditItemDialog(
+            title = stringResource(R.string.custom_title, open.category.name),
+            initialName = "",
+            initialPhoto = null,
+            icon = "",
+            colorHex = open.category.colorHex,
+            photoRequired = true,
+            nameHint = stringResource(R.string.custom_name_hint),
+            onDismiss = close,
+            onSave = { name, photo, _ ->
+                if (photo != null) appVm.addCustomPictogram(open.category.id, name, photo)
+                close()
             }
         )
+        is BoardEditor.EditPictogram -> PictogramEditor(open.pictogram, open.colorHex, catalog, close)
+        BoardEditor.NewCategory -> EditItemDialog(
+            title = stringResource(R.string.category_new_title, place?.name.orEmpty()),
+            initialName = "",
+            initialPhoto = null,
+            icon = "",
+            colorHex = NEW_ITEM_COLORS[categories.size % NEW_ITEM_COLORS.size],
+            photoRequired = true,
+            colors = NEW_ITEM_COLORS,
+            onDismiss = close,
+            onSave = { name, photo, color ->
+                if (photo != null) appVm.addCategory(placeId, name, photo, color)
+                close()
+            }
+        )
+        is BoardEditor.EditCategory -> CategoryEditor(open.category, catalog, close)
     }
+}
 
-    deleting?.let { pictogram ->
-        DeletePictogramDialog(
-            pictogram = pictogram,
-            onDismiss = { deleting = null },
-            onConfirm = {
-                appVm.removeCustomPictogram(pictogram)
-                deleting = null
-            }
-        )
-    }
+@Composable
+private fun PictogramEditor(pictogram: Pictogram, colorHex: String, catalog: Catalog, onClose: () -> Unit) {
+    val appVm = LocalAppViewModel.current
+    EditItemDialog(
+        title = stringResource(R.string.edit_title, pictogram.text),
+        initialName = pictogram.text,
+        initialPhoto = pictogram.photo,
+        icon = pictogram.icon,
+        colorHex = colorHex,
+        photoRequired = pictogram.isCustom,
+        nameHint = stringResource(R.string.custom_name_hint),
+        onDismiss = onClose,
+        onSave = { name, photo, _ ->
+            appVm.editPictogram(pictogram, name, photo)
+            onClose()
+        },
+        actions = editActions(
+            kind = EditableKind.PICTOGRAM,
+            id = pictogram.id,
+            name = pictogram.text,
+            isCustom = pictogram.isCustom,
+            isHidden = pictogram.isHidden,
+            isChanged = catalog.isChanged(EditableKind.PICTOGRAM, pictogram.id),
+            deleteText = stringResource(R.string.custom_delete_text),
+            onDelete = { appVm.removeCustomPictogram(pictogram) },
+            onClose = onClose
+        ),
+        note = if (pictogram.isCustom) null else stringResource(R.string.edit_seed_note)
+    )
+}
+
+@Composable
+private fun CategoryEditor(category: Category, catalog: Catalog, onClose: () -> Unit) {
+    val appVm = LocalAppViewModel.current
+    EditItemDialog(
+        title = stringResource(R.string.edit_title, category.name),
+        initialName = category.name,
+        initialPhoto = category.photo,
+        icon = category.icon,
+        colorHex = category.colorHex,
+        photoRequired = category.isCustom,
+        // El color de una de fábrica no se cambia: lo comparte en todos los lugares.
+        colors = if (category.isCustom) NEW_ITEM_COLORS else null,
+        onDismiss = onClose,
+        onSave = { name, photo, color ->
+            appVm.editCategory(category, name, photo, color)
+            onClose()
+        },
+        actions = editActions(
+            kind = EditableKind.CATEGORY,
+            id = category.id,
+            name = category.name,
+            isCustom = category.isCustom,
+            isHidden = category.isHidden,
+            isChanged = catalog.isChanged(EditableKind.CATEGORY, category.id),
+            deleteText = stringResource(R.string.category_delete_text),
+            onDelete = { appVm.deleteCategory(category) },
+            onClose = onClose
+        ),
+        note = if (category.isCustom) null else stringResource(R.string.category_seed_note)
+    )
 }
 
 @Composable

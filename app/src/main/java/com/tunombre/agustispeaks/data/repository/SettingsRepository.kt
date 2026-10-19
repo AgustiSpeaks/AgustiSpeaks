@@ -12,6 +12,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.tunombre.agustispeaks.data.model.AvatarConfig
 import com.tunombre.agustispeaks.data.model.AvatarGender
 import com.tunombre.agustispeaks.data.model.AvatarKind
+import com.tunombre.agustispeaks.data.model.Customization
 import com.tunombre.agustispeaks.data.model.Pictogift
 import com.tunombre.agustispeaks.data.model.Pictogram
 import com.tunombre.agustispeaks.data.model.TextSizeOption
@@ -27,8 +28,8 @@ private val Context.settingsDataStore: DataStore<Preferences> by preferencesData
 
 /**
  * Persistencia de [UserSettings], [AvatarConfig], el historial de frases
- * recientes, los pictogifts favoritos y los pictogramas propios con DataStore
- * (Preferences).
+ * recientes, los pictogifts favoritos, los pictogramas propios, lo hecho en
+ * modo edición y la contraseña de ese modo, con DataStore (Preferences).
  */
 class SettingsRepository(context: Context) {
 
@@ -159,6 +160,49 @@ class SettingsRepository(context: Context) {
         ds.edit { p -> p[K.CUSTOM_PICTOGRAMS] = CustomPictogramJson.remove(p[K.CUSTOM_PICTOGRAMS], id) }
     }
 
+    suspend fun updateCustomPictogram(pictogram: Pictogram) {
+        ds.edit { p -> p[K.CUSTOM_PICTOGRAMS] = CustomPictogramJson.update(p[K.CUSTOM_PICTOGRAMS], pictogram) }
+    }
+
+    /**
+     * Lo agregado y cambiado en modo edición, salvo los pictogramas propios.
+     * Ver [CustomizationJson].
+     */
+    val customization: Flow<Customization> =
+        ds.data.map { CustomizationJson.parse(it[K.CUSTOMIZATION]) }
+
+    /** Lee, aplica [change] y guarda, todo en una sola escritura. */
+    suspend fun updateCustomization(change: (Customization) -> Customization) {
+        ds.edit { p ->
+            p[K.CUSTOMIZATION] = CustomizationJson.write(change(CustomizationJson.parse(p[K.CUSTOMIZATION])))
+        }
+    }
+
+    /**
+     * Borra las categorías [categoryIds] y los pictogramas propios que tenían, y
+     * aplica [change] al resto: en una sola escritura, para que nunca queden
+     * pictogramas apuntando a una categoría que ya no existe.
+     */
+    suspend fun deleteCategoriesWithPictograms(
+        categoryIds: Set<String>,
+        change: (Customization) -> Customization
+    ) {
+        ds.edit { p ->
+            val current = CustomizationJson.parse(p[K.CUSTOMIZATION])
+            val next = change(current.copy(categories = current.categories.filterNot { it.category.id in categoryIds }))
+            p[K.CUSTOMIZATION] = CustomizationJson.write(next)
+            p[K.CUSTOM_PICTOGRAMS] = CustomPictogramJson.removeInCategories(p[K.CUSTOM_PICTOGRAMS], categoryIds)
+        }
+    }
+
+    /**
+     * La huella de la contraseña del modo edición, o null si todavía no se
+     * creó. Nunca la contraseña misma: ver [EditPassword].
+     */
+    val editPasswordHash: Flow<String?> = ds.data.map { it[K.EDIT_PASSWORD] }
+
+    suspend fun setEditPasswordHash(hash: String) = ds.edit { it[K.EDIT_PASSWORD] = hash }
+
     suspend fun setLanguage(v: String) = ds.edit { it[K.LANGUAGE] = v }
     suspend fun setIgnoreRepeatedTaps(v: Boolean) = ds.edit { it[K.IGNORE_REPEATED_TAPS] = v }
     suspend fun setActivateOnRelease(v: Boolean) = ds.edit { it[K.ACTIVATE_ON_RELEASE] = v }
@@ -276,5 +320,7 @@ class SettingsRepository(context: Context) {
         val RECENTS = stringPreferencesKey("recents")
         val FAVORITES = stringPreferencesKey("favorites")
         val CUSTOM_PICTOGRAMS = stringPreferencesKey("custom_pictograms")
+        val CUSTOMIZATION = stringPreferencesKey("customization")
+        val EDIT_PASSWORD = stringPreferencesKey("edit_password")
     }
 }

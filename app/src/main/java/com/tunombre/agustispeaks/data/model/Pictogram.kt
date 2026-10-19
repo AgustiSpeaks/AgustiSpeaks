@@ -15,6 +15,7 @@ package com.tunombre.agustispeaks.data.model
  *        Por ahora solo se almacena; no hay lógica de reproducción todavía.
  * @param photo foto que reemplaza al ícono: nombre del archivo en
  *        [com.tunombre.agustispeaks.data.repository.UserPhotos], o null.
+ * @param isHidden ocultado en modo edición. Fuera de ese modo no se muestra.
  */
 data class Pictogram(
     val id: String,
@@ -25,5 +26,6 @@ data class Pictogram(
     val isFavorite: Boolean = false,
     val isCustom: Boolean = false,
     val gifUrl: String? = null,
-    val photo: String? = null
+    val photo: String? = null,
+    val isHidden: Boolean = false
 )

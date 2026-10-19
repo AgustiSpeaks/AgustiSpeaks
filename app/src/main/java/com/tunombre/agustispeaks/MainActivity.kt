@@ -28,6 +28,7 @@ import com.tunombre.agustispeaks.ui.AppViewModel
 import com.tunombre.agustispeaks.ui.LocalAppViewModel
 import com.tunombre.agustispeaks.ui.LocalAvatarConfig
 import com.tunombre.agustispeaks.ui.LocalUserSettings
+import com.tunombre.agustispeaks.ui.edit.CreatePasswordScreen
 import com.tunombre.agustispeaks.ui.theme.AgustiSpeaksTheme
 
 // Los mismos velos que pone enableEdgeToEdge() por defecto detrás de la barra de
@@ -55,6 +56,7 @@ class MainActivity : ComponentActivity() {
             val settings by appViewModel.userSettings.collectAsStateWithLifecycle()
             val avatarConfig by appViewModel.avatarConfig.collectAsStateWithLifecycle()
             val ttsState by ttsManager.state.collectAsStateWithLifecycle()
+            val hasPassword by appViewModel.hasPassword.collectAsStateWithLifecycle()
 
             // Íconos de las barras del sistema según el modo oscuro de la app, no
             // el del teléfono: con el teléfono en oscuro y la app en claro, salían
@@ -101,10 +103,18 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        NavGraph(
-                            navController = navController,
-                            windowSizeClass = windowSizeClass
-                        )
+                        // La primera vez, antes que nada, se crea la contraseña
+                        // del modo edición. Mientras se lee si ya existe (null),
+                        // no se muestra nada: es un instante, y así no aparece el
+                        // formulario a quien ya la creó.
+                        when (hasPassword) {
+                            null -> Unit
+                            false -> CreatePasswordScreen(onCreate = appViewModel::createPassword)
+                            true -> NavGraph(
+                                navController = navController,
+                                windowSizeClass = windowSizeClass
+                            )
+                        }
                     }
                 }
             }

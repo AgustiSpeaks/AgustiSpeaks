@@ -8,12 +8,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.semantics.contentDescription
@@ -26,9 +28,13 @@ import com.tunombre.agustispeaks.data.model.Category
 import com.tunombre.agustispeaks.ui.icons.AppIcon
 import com.tunombre.agustispeaks.ui.util.hexToColor
 
+/** Proporción de la tarjeta de categoría. La usa también la tarjeta "Agregar categoría". */
+const val CATEGORY_CARD_RATIO = 1.15f
+
 /**
  * Tarjeta de categoría: icono grande + nombre, sobre el color de la categoría.
- * Al tocarla se abre el detalle de esa categoría.
+ * Al tocarla se abre el detalle de esa categoría. Si tiene foto, la foto ocupa
+ * el lugar del ícono.
  */
 @Composable
 fun CategoryCard(
@@ -53,7 +59,7 @@ fun CategoryCard(
         // el toque: una tarjeta cortada por el borde de la grilla quedaba sin
         // nombre para el lector de pantalla (lo marcó Accessibility Scanner).
         modifier = modifier
-            .aspectRatio(1.15f)
+            .aspectRatio(CATEGORY_CARD_RATIO)
             .semantics { contentDescription = category.name }
     ) {
         Column(
@@ -71,7 +77,17 @@ fun CategoryCard(
             ) {
                 val side = minOf(maxWidth, maxHeight)
                 if (side > 14.dp) {
-                    AppIcon(name = category.icon, modifier = Modifier.size(side))
+                    val photo = category.photo
+                    if (photo != null) {
+                        SavedPhoto(
+                            name = photo,
+                            contentDescription = null,
+                            maxSide = 384,
+                            modifier = Modifier.size(side).clip(RoundedCornerShape(10.dp))
+                        )
+                    } else {
+                        AppIcon(name = category.icon, modifier = Modifier.size(side))
+                    }
                 }
             }
             Text(
