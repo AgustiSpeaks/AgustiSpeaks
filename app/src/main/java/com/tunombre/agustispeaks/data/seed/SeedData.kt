@@ -162,7 +162,7 @@ object SeedData {
         Seed("venir", "Venir", "waving_hand", "acciones"),
         Seed("comer", "Comer", "restaurant", "acciones"),
         Seed("beber", "Beber", "local_drink", "acciones"),
-        Seed("jugar", "Jugar", "sports_esports", "acciones"),
+        Seed("jugar", "Jugar", "nino_jugando", "acciones"),
         Seed("mirar", "Mirar", "visibility", "acciones"),
         Seed("dar", "Dar", "volunteer_activism", "acciones"),
         Seed("abrir", "Abrir", "lock_open", "acciones"),
