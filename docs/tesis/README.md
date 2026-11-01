@@ -90,7 +90,6 @@ git show 66006df:docs/tesis/fases-2-y-3.md
 | `datos/latencias.csv` | 25 mediciones de latencia del 26-09 | medida con la app anterior, en otra sesión, y sin el protocolo de 50 pulsaciones del encargo |
 | `datos/README.md` | descripción de esas 25 mediciones | describía un archivo que ya no está |
 | `fases-2-y-3.md` | registro consolidado de las mediciones de septiembre | sus cifras corresponden al código anterior |
-| traspaso de estado del 26-09 | resumen del proyecto para retomarlo en otra conversación | describía un estado del proyecto que ya cambió |
 | `apendice-A-estructura.md` | estructura de paquetes | cifras de archivos y líneas de septiembre |
 | `apendice-B-modelo-de-datos.md` | entidades y campos | anterior a los pictogifts y a los pictogramas propios |
 | `apendice-C-resolvedor.md` | resolvedor de acciones | no se usa en el plan de octubre |
@@ -98,14 +97,25 @@ git show 66006df:docs/tesis/fases-2-y-3.md
 | `apendice-E-catalogo.md` | inventario del catálogo | cifras medidas en septiembre |
 | `apendice-F-corpus-y-cobertura.md` | corpus y cobertura semántica | cifras medidas en septiembre (170 pictogramas, 25 núcleo) |
 | `apendice-G-bitacora.md` | bitácora de 13 criterios con resultados | criterios y resultados reemplazados por los 16 del encargo |
-| `/TESIS-PICTOGRAMAS-ANIMADOS.md` (raíz) | traspaso de contexto sobre la ampliación del vocabulario animado | describe el proyecto antes del 20-09 |
-| `/TESIS-REFACTOR-CATALOGO.md` (raíz) | briefing para redactar la sección del refactor del catálogo | describe el proyecto antes del 20-09 |
-| `/CONTEXTO-PROYECTO.md` (raíz) | documento de traspaso para otra sesión | describe el proyecto antes del 20-09; lo reemplaza [estado-2026-10-05.md](estado-2026-10-05.md) |
 
-`salidas/`, `fases-2-y-3.md` y los tres documentos de la raíz también están en
-el commit `94cf5c6` (24-09); los de la raíz, además, desde el commit inicial
-`bddaae2`. Los apéndices, `datos/` y el traspaso del 26-09 se escribieron
-después y **solo** están en `66006df`.
+`salidas/` y `fases-2-y-3.md` también están en el commit `94cf5c6` (24-09). Los
+apéndices y `datos/` se escribieron después y **solo** están en `66006df`.
+
+## Historial reescrito el 31-10-2026
+
+Antes de publicar el repositorio se reescribió el historial de git para quitar
+cuatro notas de trabajo que no son evidencia y que la tesis no cita: un
+traspaso de estado del 26-09 (`docs/tesis/`) y tres documentos de traspaso de
+la raíz del proyecto, retirados del árbol el 5-10. Ya no están en ningún commit.
+
+- **El código no cambió.** Se comparó cada uno de los commits con su original:
+  fuera de `docs/` y de una línea del `.gitignore`, ninguna diferencia. Las
+  mediciones citan el mismo código que se midió.
+- **Los hashes sí cambiaron**, porque un hash depende de todo el contenido del
+  commit. Los que citan estos documentos ya son los nuevos, incluido el nombre
+  de `c14-sugerencias-6caa5e3.md`.
+- Fechas, autor y orden de los commits se conservan. Hay un commit menos: uno
+  que solo renombraba documentos quedó vacío y se quitó.
 
 ## Cambios de producto hechos al empezar octubre
 
