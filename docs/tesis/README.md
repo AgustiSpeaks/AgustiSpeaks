@@ -15,6 +15,8 @@ hechas sobre el código actual; el plan que lo rige es
 | [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | completa: los 16 criterios medidos al 11-10 |
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
 | [Protocolo manual](protocolo-manual-2026-10.md) | criterios 11 a 16: pasos, qué tiene que pasar y qué captura guardar | ejecutado el 10-10 y el 11-10 |
+| [Protocolo de los criterios 11 y 13, segundo intento](protocolo-c11-c13-2026-10.md) | evidencia reproducible sobre la versión 1.1, en modo edición: grabación con audio, salidas de `adb`, capturas por `adb`, PID y DataStore antes y después de cerrar | listo para ejecutar |
+| `herramientas/leer-datastore.ps1` | decodifica la copia del DataStore que guarda el protocolo del criterio 13; no muestra la huella de la contraseña | probado con un archivo de muestra |
 | `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | completo: un `.md` por criterio con sus capturas |
 | [Capturas](capturas.md) | las 32 capturas de ilustración del capítulo, con el bloque de pictogramas propios | actualizado el 6-10 |
 | `capturas-2026-10/` | esas capturas | se crea al sacarlas |
