@@ -1,0 +1,23 @@
+﻿== commit medido: git log --oneline -1 -- app ==
+25099d3 Modo edicion con contrasena
+== hora del telefono ==
+Tue Nov  3 15:18:52 -03 2026
+== modo avion: settings global airplane_mode_on (1 = activado) ==
+1
+== modo avion: cmd connectivity airplane-mode ==
+enabled
+== Wi-Fi: cmd wifi status ==
+Wifi is disabled
+Wifi scanning is always available
+== Bluetooth: settings global bluetooth_on (0 = apagado) ==
+0
+== red activa: dumpsys connectivity (solo red por defecto y redes conectadas) ==
+Active default network: none
+== prueba de salida: ping a 8.8.8.8 ==
+connect: Network is unreachable
+== motor de voz: settings secure tts_default_synth ==
+com.samsung.SMT
+== build instalada: version y si es de depuracion ==
+    versionCode=2 minSdk=26 targetSdk=35
+    versionName=1.1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA TEST_ONLY ]

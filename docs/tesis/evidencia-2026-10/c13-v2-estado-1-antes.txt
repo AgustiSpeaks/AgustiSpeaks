@@ -1,0 +1,46 @@
+﻿== hora del telefono ==
+Tue Nov  3 15:23:16 -03 2026
+== proceso de la app: pidof ==
+2597
+== archivos de la app: DataStore y fotos, con fecha ==
+files/datastore:
+total 10
+drwx------ 2 u0_a392 u0_a392 3452 2026-11-03 15:23 .
+drwxrwx--x 4 u0_a392 u0_a392 3452 2026-11-03 15:20 ..
+-rw------- 1 u0_a392 u0_a392 1519 2026-11-03 15:23 agusti_settings.preferences_pb
+
+files/pictogifts:
+total 494
+drwx------ 2 u0_a392 u0_a392   3452 2026-11-03 15:23 .
+drwxrwx--x 4 u0_a392 u0_a392   3452 2026-11-03 15:20 ..
+-rw------- 1 u0_a392 u0_a392  73327 2026-11-03 15:22 0663ff79-47eb-4656-968c-010694433a9e.jpg
+-rw------- 1 u0_a392 u0_a392 224692 2026-11-03 15:23 1e4638c2-4c50-4292-9df5-331094bda473.jpg
+-rw------- 1 u0_a392 u0_a392 199261 2026-11-03 15:12 9c34b68f-4232-4b4b-96ec-1961b87f3949.jpg
+== DataStore decodificado (leer-datastore.ps1) ==
+26 claves en c13-v2-datastore-1-antes.pb (1519 bytes)
+av_clothing = sweater   [string]
+av_clothing_color = 74c0fc   [string]
+av_eyebrows = normal   [string]
+av_eyes = normal   [string]
+av_gender = NEUTRO   [string]
+av_hair_color = 2c1b18   [string]
+av_hair_style = classic   [string]
+av_kind = ROBOT   [string]
+av_mouth = smile   [string]
+av_pants_color = 3f5d75   [string]
+av_robot_accessory = antenna   [string]
+av_robot_color = 6c5ce7   [string]
+av_robot_eyes = round   [string]
+av_robot_face = plate   [string]
+av_robot_mouth = grille   [string]
+av_shoe_color = 3a3a44   [string]
+av_skin = f1c27d   [string]
+custom_pictograms = [{"id":"propio:b3be3031-e517-4010-b4bd-a21e06772a9c","categoria":"bebidas","texto":"Huesillo","foto":"9c34b68f-4232-4b4b-96ec-1961b87f3949.jpg"},{"id":"propio:04ce93b0-f00b-4375-a8a5-2df218deb4bc","categoria":"bebidas","texto":"Leche","foto":"0663ff79-47eb-4656-968c-010694433a9e.jpg"},{"id":"propio:dbace0e4-74f0-417e-b492-08145ea17206","categoria":"juego","texto":"Test","foto":"1e4638c2-4c50-4292-9df5-331094bda473.jpg"}]   [string]
+customization = {"lugares":[],"categorias":[],"cambios":[]}   [string]
+dark_mode = true   [boolean]
+edit_password = (huella de la contrasena: no se muestra)   [string]
+favorites = [{"id":"texto:yo quiero agua","frase":"Yo Quiero Agua"}]   [string]
+recents = ["Test","Huesillo","Agua","Yo Quiero Agua","Yo Quiero","Yo","Vaso huesillo","Auto Aquí Casa Baño","Auto Aquí Casa","Auto Aquí","Auto","Aquí Auto Plaza Tienda Adentro Plaza","Aquí Auto Plaza Tienda Adentro","Aquí Auto Plaza Tienda","Aquí Auto Plaza","Aquí Auto","Aquí"]   [string]
+text_size = GRANDE   [string]
+voice_rate = 0.910424232   [float]
+voice_volume = 0.9988536   [float]

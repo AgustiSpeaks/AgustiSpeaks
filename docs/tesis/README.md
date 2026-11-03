@@ -12,12 +12,13 @@ hechas sobre el código actual; el plan que lo rige es
 |---|---|---|
 | [Encargo del 5-10-2026](ENCARGO-2026-10-05.md) | plan de evidencia, reglas de trabajo y los 16 criterios con sus umbrales | vigente |
 | [Estado al 5-10-2026](estado-2026-10-05.md) | relevamiento del código: pictogramas propios, permisos, respaldo, pruebas, cifras | etapa 1, completo |
-| [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | completa: los 16 criterios medidos al 11-10 |
+| [Bitácora de octubre](bitacora-2026-10.md) | los 16 criterios, uno por fila, con fecha, commit y evidencia de cada medición | completa: los 16 criterios medidos al 11-10; segundo intento del 11 y el 13 el 3-11 |
 | [Cifras estáticas](cifras-estaticas.md) | versiones de las bibliotecas y modelo de pose, leídos del código el 20-09 | **solo vigentes** las secciones 1 (versiones) y 2 (modelo de pose). Las cifras de vocabulario, reglas y archivos las reemplaza el relevamiento del 5-10 |
 | [Protocolo manual](protocolo-manual-2026-10.md) | criterios 11 a 16: pasos, qué tiene que pasar y qué captura guardar | ejecutado el 10-10 y el 11-10 |
-| [Protocolo de los criterios 11 y 13, segundo intento](protocolo-c11-c13-2026-10.md) | evidencia reproducible sobre la versión 1.1, en modo edición: grabación con audio, salidas de `adb`, capturas por `adb`, PID y DataStore antes y después de cerrar | listo para ejecutar |
-| `herramientas/leer-datastore.ps1` | decodifica la copia del DataStore que guarda el protocolo del criterio 13; no muestra la huella de la contraseña | probado con un archivo de muestra |
-| `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | completo: un `.md` por criterio con sus capturas |
+| [Protocolo de los criterios 11 y 13, segundo intento](protocolo-c11-c13-2026-10.md) | evidencia reproducible sobre la versión 1.1, en modo edición: grabación con audio, salidas de `adb`, capturas por `adb`, PID y DataStore antes y después de cerrar | ejecutado el 3-11: el 11 no cumple (10 de 12), el 13 cumple (6 de 6) |
+| [Resumen del segundo intento](resumen-c11-c13-v2.md) | criterios 11 y 13: qué cambió respecto del primer intento, qué queda respaldado y qué no, y las filas para la Tabla 15 | 3-11 |
+| `herramientas/leer-datastore.ps1` | decodifica la copia del DataStore que guarda el protocolo del criterio 13; no muestra la huella de la contraseña | probado con un archivo de muestra, y usado con el DataStore del teléfono el 3-11 |
+| `evidencia-2026-10/` | capturas y salidas que prueban los criterios 11 a 16 | completo: un `.md` por criterio con sus capturas. El segundo intento del 11 y el 13 lleva el prefijo `c11-v2-` y `c13-v2-`; la sesión cortada del 11 está en `c11-v2-intento-interrumpido/` |
 | [Capturas](capturas.md) | las 32 capturas de ilustración del capítulo, con el bloque de pictogramas propios | actualizado el 6-10 |
 | `capturas-2026-10/` | esas capturas | se crea al sacarlas |
 | `salidas-2026-10/` | salida de cada prueba automatizada | se crea la primera vez que corren las pruebas |
